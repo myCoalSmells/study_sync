@@ -9,12 +9,8 @@ function App() {
       <Header />
       <Router>
         <Routes>
-          <Route path="/chat" exact>
-            <h1> hello chat</h1>
-          </Route>
-          <Route path="/" exact>
-            <h1> I am home page</h1>
-          </Route>
+          <Route path="/chat" element={<h1>i am chat page</h1>}/>
+          <Route path="/" element={<h1>i am home page</h1>}/>
         </Routes>
       </Router>   
     </div>
