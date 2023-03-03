@@ -4,11 +4,11 @@
     align-items: center;
 }
 
-.headerlogo{
+.header__logo{
     height: 200px;
     object-fit: contain;
 }
 
-.headericon{
+.header__icon{
     padding: 20px;
 }

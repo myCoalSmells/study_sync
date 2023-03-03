@@ -9,10 +9,10 @@ function Header() {
   return (
     <div className = "header"> 
         <IconButton>
-            <AccountCircleIcon className="headericon" fontSize="large"/>
+            <AccountCircleIcon className="header__icon" fontSize="large"/>
         </IconButton>
         <img 
-            className="headerlogo"
+            className="header__logo"
             src="https://i.imgur.com/FdQfJuY.png" alt = "logo"
         />
         <IconButton>
