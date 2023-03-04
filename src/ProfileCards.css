@@ -1,0 +1,27 @@
+.card{
+    position: relative;
+    width: 600px;
+    padding: 20px;
+    max-width: 85vw;
+    height: 50vh;
+    border-radius: 20px;
+    background-size: cover;
+    background-position: center;
+}
+
+.card > h1{
+    position: absolute;
+    bottom: 10px;
+}
+
+
+
+.studentCards__container{
+    display:flex;
+    justify-content: center;
+    margin-top: 5vh;
+}
+
+.swipe{
+    position: absolute;
+}
