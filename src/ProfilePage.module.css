@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+.subcontainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 20px;
+}
+
+.title {
+    text-align: center;
+}
+
