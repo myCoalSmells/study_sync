@@ -7,11 +7,17 @@
 .subcontainer {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     margin: 20px;
 }
 
 .title {
-    text-align: center;
+    color: black;
+}
+
+.button {
+    background-color: blue;
+    color: white;
+    
 }
 

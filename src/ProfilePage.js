@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 
 import PPMod from "./ProfilePage.module.css";
+import Button from 'react-bootstrap/Button';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function ProfilePage() {
@@ -24,12 +26,15 @@ function ProfilePage() {
     return(
         <div className={PPMod.container}>
             <div className={PPMod.subcontainer}>
-                <p className={PPMod.title}>
+                <div>
+                    
+                </div>
+                <h1 className={PPMod.title}>
                     StudentName's Profile
-                </p>
-                <button>
+                </h1>
+                <Button className={PPMod.button}>
                     Edit Profile
-                </button>
+                </Button>
             </div>
             <p>
                 Classes: __ , __ , __ , ...
