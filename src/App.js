@@ -1,13 +1,13 @@
 import React from "react";
 import Header from './Header';
-import "./App.css";
+import APMod from "./App.module.css";
 import ProfileCards from "./ProfileCards";
 import ProfilePage from "./ProfilePage";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
+    <div className={APMod.App}>
       <Header />
       <Router>
         <Routes>

@@ -1,7 +1,7 @@
 //import React, { useEffect, useState } from "react";
 import React, { useState } from "react";
 import TinderCard from 'react-tinder-card';
-import "./ProfileCards.css";
+import PCMod from "./ProfileCards.module.css";
 
 function ProfileCards() {
   const [students, setStudents] = useState([
@@ -13,27 +13,42 @@ function ProfileCards() {
       contactInfo: ""  
     },
     {
-      name: 'Harry Hinman',
+      name: 'Bob Lee',
       pfp: "https://i.imgur.com/ZAcA6w9.jpeg",
       classMatch: "",
       availTime: "",
       contactInfo: ""
-    }
+    },
+    {
+      name: 'Michael Jordan',
+      pfp: "https://i.imgur.com/ZAcA6w9.jpeg",
+      classMatch: "",
+      availTime: "",
+      contactInfo: ""
+    },
+    {
+      name: 'Barack Obama',
+      pfp: "https://i.imgur.com/ZAcA6w9.jpeg",
+      classMatch: "",
+      availTime: "",
+      contactInfo: ""
+    },
+
   ]);
 
   return (
     <div>
       <h1>Student Cards</h1>
-      <div className="studentCards__container">
+      <div className={PCMod.studentCards__container}>
         {students.map(student => (
             <TinderCard
-            className="swipe"
-            key={student.name}
-            preventSwipe={['up', 'down']}
+              className={PCMod.swipe}
+              key={student.name}
+              preventSwipe={['up', 'down']}
             >
-            <div style={{ backgroundImage: `url(${student.pfp})` }} className="card">
-                <h1>{student.name}</h1>
-            </div>
+              <div style={{ backgroundImage: `url(${student.pfp})` }} className={PCMod.card}>
+                  <h1>{student.name}</h1>
+              </div>
             </TinderCard>
         ))}
         </div>
