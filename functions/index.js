@@ -43,25 +43,25 @@ exports.addStudent = functions.https.onRequest(async (req, res) => {
   });
 
   /// The functions below are not working yet; committing because of merge branches
-  exports.getAllStudents = functions.https.onRequest(async (req, res) => {
-    const snapshot = await firebaseApiOrigin.firestore().collection("students").get();
-    return snapshot.docs.map(doc => doc.data());
-  });
+//   exports.getAllStudents = functions.https.onRequest(async (req, res) => {
+//     const snapshot = await firebaseApiOrigin.firestore().collection("students").get();
+//     return snapshot.docs.map(doc => doc.data());
+//   });
 
-  const colRef = collection(db, 'students');
-  const db = getFirestore();
-  exports.getDocs(colRef)
-    .then(snapshot => {
-      // console.log(snapshot.docs)
-      let books = []
-      snapshot.docs.forEach(doc => {
-        books.push({ ...doc.data(), id: doc.id })
-      })
-      console.log(books)
-    })
-    .catch(err => {
-      console.log(err.message)
-    })
+//   const colRef = collection(db, 'students');
+//   const db = getFirestore();
+//   exports.getDocs(colRef)
+//     .then(snapshot => {
+//       // console.log(snapshot.docs)
+//       let books = []
+//       snapshot.docs.forEach(doc => {
+//         books.push({ ...doc.data(), id: doc.id })
+//       })
+//       console.log(books)
+//     })
+//     .catch(err => {
+//       console.log(err.message)
+//     })
 /**
  * get a document by collection - ID
  * 
