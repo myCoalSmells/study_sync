@@ -4,6 +4,7 @@ import APMod from "./App.module.css";
 import ProfileCards from "./ProfileCards";
 import ProfilePage from "./ProfilePage";
 import LoginPage from "./LoginPage";
+import FirebaseTest from "./FirebaseTest";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path="/profile" element={<h1><ProfilePage /></h1>}/>
           <Route path="/login" element={<h1><LoginPage /></h1>}/>
           <Route path="/" element={<h1><ProfileCards /></h1>}/>
+          <Route path="/fbtest" element={<h1><FirebaseTest /></h1>}/>
         </Routes>
       </Router>   
     </div>
