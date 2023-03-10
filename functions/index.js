@@ -1,5 +1,4 @@
 const functions = require("firebase-functions");
-
 const admin = require('firebase-admin');
 const { getFirestore } = require("firebase-admin/firestore");
 admin.initializeApp();
@@ -41,12 +40,16 @@ exports.addStudent = functions.https.onRequest(async (req, res) => {
     }
 
   });
+  
+  exports.getAllStudents = functions.https.onRequest(async (req, res)=> {
+
+    var snapshot = await admin.firestore().collection('students').get();
+    snapshot = snapshot.docs.map(doc => doc.data());
+    console.log(snapshot);
+    res.send(snapshot);
+  });
 
   /// The functions below are not working yet; committing because of merge branches
-//   exports.getAllStudents = functions.https.onRequest(async (req, res) => {
-//     const snapshot = await firebaseApiOrigin.firestore().collection("students").get();
-//     return snapshot.docs.map(doc => doc.data());
-//   });
 
 //   const colRef = collection(db, 'students');
 //   const db = getFirestore();
