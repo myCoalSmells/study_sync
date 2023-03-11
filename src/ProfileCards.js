@@ -7,37 +7,6 @@ import SwipeButtons from "./SwipeButtons";
 
 function ProfileCards() {
 
-  // const [students, setStudents] = useState([
-  //   {
-  //     name: 'Michael Liu',
-  //     pfp: "https://i.imgur.com/pkpvLJn.jpeg",
-  //     classMatch: "",
-  //     availTime: "",
-  //     contactInfo: ""  
-  //   },
-  //   {
-  //     name: 'Bob Lee',
-  //     pfp: "https://i.imgur.com/ZAcA6w9.jpeg",
-  //     classMatch: "",
-  //     availTime: "",
-  //     contactInfo: ""
-  //   },
-  //   {
-  //     name: 'Michael Jordan',
-  //     pfp: "https://i.imgur.com/ZAcA6w9.jpeg",
-  //     classMatch: "",
-  //     availTime: "",
-  //     contactInfo: ""
-  //   },
-  //   {
-  //     name: 'Barack Obama',
-  //     pfp: "https://i.imgur.com/ZAcA6w9.jpeg",
-  //     classMatch: "",
-  //     availTime: "",
-  //     contactInfo: ""
-  //   },
-
-  // ]);
   const [students, setStudents] = useState([]);
 
   useEffect(() => { 
@@ -50,12 +19,17 @@ function ProfileCards() {
     return unsub;
   }, []);
 
+  const onSwipe = (direction) => { //put matches and stuff edit firebase
+    console.log('You swiped: ' + direction)
+  }
+
   return (
     <div>
       <h1>Student Cards poo</h1>
       <div className={PCMod.studentCards__container}>
         {students.map(student => (
           <TinderCard
+            onSwipe={onSwipe}
             className={PCMod.swipe}
             key={student.name}
             preventSwipe={['up', 'down']}
