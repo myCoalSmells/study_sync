@@ -52,7 +52,7 @@ function ProfileCards() {
 
   return (
     <div>
-      <h1>Student Cards</h1>
+      <h1>Student Cards poo</h1>
       <div className={PCMod.studentCards__container}>
         {students.map(student => (
           <TinderCard
