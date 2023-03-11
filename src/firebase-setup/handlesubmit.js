@@ -1,4 +1,4 @@
-import { addDoc, collection } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
+import { addDoc, collection } from "firebase/firestore";
 import { firestore } from "../firebase-setup/firebase"
 
 const handleSubmit = (testdata) => {
