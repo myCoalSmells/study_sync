@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+.subcontainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 20px;
+}
+
+.title {
+    color: black;
+}
