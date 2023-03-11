@@ -34,35 +34,56 @@ export default function EditProfile() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        // check validity
+
+
+
+        // update student object inside the database
         Student.name = name;
         Student.availTime = availTime;
         Student.contactInfo = contactInfo;
         Student.pfp = pfp;
         Student.classMatch = classMatch;
+
+
         // code to update the Student object in your data file or database
-        return <Navigate to="/profile" />;
+        //return <Navigate to="/profile" />;
+
     };
 
     return(
         <div>
             
             <form onSubmit={handleSubmit} className={EPMod.container}>
-                <label htmlFor="pfp">Profile Picture:</label>
-                <input type="text" id="pfp" value={pfp} onChange={(e) => setPFP(e.target.value)} />
+                <div className={EPMod.subcontainer}>
+                    <label htmlFor="pfp">Profile Picture:</label>
+                    <input type="text" id="pfp" value={pfp} onChange={(e) => setPFP(e.target.value)} />
+                </div>
+                
+                <div className={EPMod.subcontainer}>
+                    <label htmlFor="name">Name:</label>
+                    <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} />
+                </div>
 
-                <label htmlFor="name">Name:</label>
-                <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} />
+                <div className={EPMod.subcontainer}>
+                    <label htmlFor="contactInfo">Contact Info:</label>
+                    <input type="text" id="contactInfo" value={contactInfo} onChange={(e) => setContactInfo(e.target.value)} />
+                </div>
+                
+                <div className={EPMod.subcontainer}>
+                    <label htmlFor="classMatch">Class Match:</label>
+                    <input type="text" id="classMatch" value={classMatch} onChange={(e) => setClassMatch(e.target.value)} />
+                </div>
+                
+                <div className={EPMod.subcontainer}>
+                    <label htmlFor="availTime">Available Times:</label>
+                    <input type="text" id="availTime" value={availTime} onChange={(e) => setAvailTime(e.target.value)} />
+                </div>
 
-                <label htmlFor="contactInfo">Contact Info:</label>
-                <input type="text" id="contactInfo" value={contactInfo} onChange={(e) => setContactInfo(e.target.value)} />
-
-                <label htmlFor="classMatch">Class Match:</label>
-                <input type="text" id="classMatch" value={classMatch} onChange={(e) => setClassMatch(e.target.value)} />
-
-                <label htmlFor="availTime">Available Times:</label>
-                <input type="text" id="availTime" value={availTime} onChange={(e) => setAvailTime(e.target.value)} />
-
-                <button type="submit">Update Profile</button>
+                <div className={EPMod.subcontainer}>
+                    <button type="submit">Update Profile</button>
+                </div>
+                
             </form>
             
         </div>
