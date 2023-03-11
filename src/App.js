@@ -12,18 +12,16 @@ import Advanced from "./Advanced";
 function App() {
   return (
     <div className={APMod.App}>
-      <Header />
-      <Router>
-        <Routes>
-          <Route path="/chat" element={<h1>I am chat page</h1>}/>
+      <Header />  
+      <Routes>
+        <Route path="/chat" element={<h1>I am chat page</h1>}/>
           <Route path="/profile" element={<h1><ProfilePage /></h1>}/>
           <Route path="/login" element={<h1><LoginPage /></h1>}/>
           <Route path="/logout" element={<h1><LogoutPage /></h1>}/>
           <Route path="/signup" element={<h1><SignupPage /></h1>}/>
           <Route path="/" element={<h1><ProfileCards /></h1>}/>
-          <Route path="/test" element={<h1><Advanced /></h1>}/>
-        </Routes>
-      </Router>   
+        <Route path="/test" element={<h1><Advanced /></h1>}/>
+      </Routes>
     </div>
   )
 }
