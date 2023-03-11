@@ -7,7 +7,7 @@
     border-radius: 20px;
     background-size: cover;
     background-position: center;
-    box-shadow: 0px 10px 53px 0px !important;
+    box-shadow: 0px 10px 30px 0px gray !important;
 }
 
 .card > h1{
@@ -15,7 +15,12 @@
     bottom: 10px;
 }
 
-
+.cardContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 
 .studentCards__container{
     display:flex;
