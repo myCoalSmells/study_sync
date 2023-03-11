@@ -7,6 +7,7 @@ import LoginPage from "./LoginPage";
 import LogoutPage from "./LogoutPage";
 import SignupPage from "./SignupPage";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Advanced from "./Advanced";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/logout" element={<h1><LogoutPage /></h1>}/>
           <Route path="/signup" element={<h1><SignupPage /></h1>}/>
           <Route path="/" element={<h1><ProfileCards /></h1>}/>
+          <Route path="/test" element={<h1><Advanced /></h1>}/>
         </Routes>
       </Router>   
     </div>
