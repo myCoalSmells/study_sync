@@ -5,6 +5,7 @@ import ProfileCards from "./ProfileCards";
 import ProfilePage from "./ProfilePage";
 import LoginPage from "./LoginPage";
 import LogoutPage from "./LogoutPage";
+import SignupPage from "./SignupPage";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/profile" element={<h1><ProfilePage /></h1>}/>
           <Route path="/login" element={<h1><LoginPage /></h1>}/>
           <Route path="/logout" element={<h1><LogoutPage /></h1>}/>
+          <Route path="/signup" element={<h1><SignupPage /></h1>}/>
           <Route path="/" element={<h1><ProfileCards /></h1>}/>
         </Routes>
       </Router>   
