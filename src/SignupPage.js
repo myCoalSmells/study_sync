@@ -3,6 +3,8 @@ import LPMod from "./LoginPage.module.css";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { collection, setDoc, doc } from "firebase/firestore";
 import { auth, firestore } from "./firebase-setup/firebase"
+import {Link} from "react-router-dom";
+
 
 export default function SignupPage() {
     const [username, setUsername] = useState("");
@@ -65,7 +67,10 @@ export default function SignupPage() {
                 />
             </label>
             <div className={LPMod.container}>
-                <button type="submit">Sign Up</button>
+            {/* NEED VALIDITY CHECK*/}
+                <Link to="/"> 
+                    <button type="submit">Sign Up</button>
+                </Link>
             </div>
             </form>
         </div>
