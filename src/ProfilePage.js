@@ -43,6 +43,9 @@ export default function ProfilePage() {
                 Classes: {Student.classMatch}
             </p>
             <p>
+                Contact: {Student.contactInfo}
+            </p>
+            <p>
                 Schedule: 
             </p>
             <div>
