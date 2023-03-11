@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 export default function EditProfile() {
     // for now, this is a temporary way to change data
     // change this to use firebase
+    // Student is the name of the object used in the displaying of the data
     let Student = {
         name: 'Michael Liu',
         pfp: "https://i.imgur.com/pkpvLJn.jpeg",
@@ -16,6 +17,8 @@ export default function EditProfile() {
         availTime: "0101001001110000101000101010",
         contactInfo: "myemail@yahoo.com"  
     };
+
+
 
     const [name, setName] = useState('');
     const [contactInfo, setContactInfo] = useState('');
@@ -40,8 +43,10 @@ export default function EditProfile() {
     const handleSubmit = (e) => {
         e.preventDefault();
         // check validity
+        
 
-        // update student object inside the database
+        // update student object inside the database (new data are in these variables)
+        // use effect above sets the variables.
         Student.name = name;
         Student.availTime = availTime;
         Student.contactInfo = contactInfo;
