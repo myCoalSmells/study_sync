@@ -1,10 +1,17 @@
 .container {
+    background-color: #f0f8ff;
+    padding: 40px;
+    font-family: Georgia;
+    color: blue;
     display: flex;
     flex-direction: column;
     margin: 20px;
 }
 
 .subcontainer {
+    background-color: #f0f8ff;
+    padding: 40px;
+    font-family: Georgia;
     display: flex;
     flex-direction: row;
     justify-content: space-between;

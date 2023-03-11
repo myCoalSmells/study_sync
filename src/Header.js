@@ -11,6 +11,7 @@ function Header() {
   const navigate = useNavigate();
 
   return (
+    <div style={{backgroundImage: 'url("https://i.imgur.com/PpZlIRy.jpeg")'}}>
     <div className="header">
       <head>
         <link
@@ -37,6 +38,7 @@ function Header() {
       <IconButton onClick={() => navigate('/inbox')}>
         <EmailIcon className="header__icon" fontSize="large" />
       </IconButton>
+    </div>
     </div>
   );
 }
