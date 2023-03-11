@@ -2,15 +2,61 @@
     display: flex;
     flex-direction: column;
     margin: 20px;
-}
-
-.subcontainer {
+  }
+  
+  .subcontainer {
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    margin: 20px;
-}
-
-.popup {
-    color: green
-}
+    flex-direction: column;
+    margin: 10px 0;
+  }
+  
+  .subcontainer label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .subcontainer input {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+  }
+  
+  .subcontainer input:focus {
+    outline: none;
+    border-color: #0077FF;
+  }
+  
+  .subcontainer input::placeholder {
+    color: #aaa;
+  }
+  
+  button[type="submit"] {
+    padding: 10px 16px;
+    border-radius: 4px;
+    border: none;
+    background-color: #0077FF;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #0066CC;
+  }
+  
+  .popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    background-color: #E6F9D8;
+    color: #00B140;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 20px;
+    opacity: 1;
+  }

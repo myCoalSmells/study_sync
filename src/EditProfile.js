@@ -53,7 +53,12 @@ export default function EditProfile() {
         Student.pfp = pfp;
         Student.classMatch = classMatch;
 
-        setShowPopup(true); // show the pop-up after the update is successful
+        // popup code
+        setShowPopup(true);
+        setTimeout(() => {
+            setShowPopup(false);
+        }, 2300);
+
 
     };
 
