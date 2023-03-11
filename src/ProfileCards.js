@@ -24,8 +24,8 @@ function ProfileCards() {
   }
 
   return (
-    <div>
-      <h1>Student Cards poo</h1>
+    <div className={PCMod.cardContainer}>
+      <h1>Your Study Syncs!</h1>
       <div className={PCMod.studentCards__container}>
         {students.map(student => (
           <TinderCard
@@ -41,8 +41,10 @@ function ProfileCards() {
         ))}
       </div>
       <SwipeButtons />
+      <h1>No more syncs 😿</h1>
     </div>
   );
+  
 }
 
 export default ProfileCards;
