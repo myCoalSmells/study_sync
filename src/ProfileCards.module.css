@@ -17,13 +17,15 @@
 
 .cardContainer {
     display: flex;
+    padding: 40px;
+    font-family: Georgia;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
 
 .studentCards__container{
-    display:flex;
+    display: flex;
     justify-content: center;
     margin-top: 5vh;
 }
