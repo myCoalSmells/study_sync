@@ -3,6 +3,8 @@ import React from "react";
 import PPMod from "./ProfilePage.module.css";
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {Link} from "react-router-dom";
+
 
 
 export default function ProfilePage() {
@@ -35,9 +37,12 @@ export default function ProfilePage() {
                 <h1 className={PPMod.title}>
                     {Student.name}'s Profile
                 </h1>
-                <Button variant="outline-primary">
-                    Edit Profile
-                </Button>
+                <Link to='/editprofile'>
+                    <Button variant="outline-primary">
+                        Edit Profile
+                    </Button>
+                </Link>
+
             </div>
             <p>
                 Classes: {Student.classMatch}

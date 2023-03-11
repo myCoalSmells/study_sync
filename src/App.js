@@ -15,7 +15,7 @@ function App() {
 
   return (
     <div className={APMod.App}>
-      {['/', '/profile', '/inbox'].includes(location.pathname) && <Header />}
+      {['/', '/profile', '/inbox', '/editprofile'].includes(location.pathname) && <Header />}
       <div className="app__wrapper">
         <Routes>
           <Route path="/inbox" element={<h1>I am inbox page</h1>}/>
