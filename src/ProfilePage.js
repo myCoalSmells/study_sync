@@ -3,7 +3,9 @@ import React from "react";
 import PPMod from "./ProfilePage.module.css";
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import { auth, firestore } from "./firebase-setup/firebase";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { doc, get, getDoc } from "firebase/firestore";
 
 export default function ProfilePage() {
 
@@ -12,6 +14,21 @@ export default function ProfilePage() {
         make sure to send the student's data through to 
         the EditProfilePage.
     */
+    
+    
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            const docRef = doc(firestore, "students", user.uid);
+            const docSnap = getDoc(docRef);
+            console.log(docRef.id);
+            console.log("logged in");
+        } else {
+            console.log("not logged in");
+        }
+    });
+
+
    const DAYS = 7;
    const WEEKS = 4;
 
