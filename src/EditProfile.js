@@ -23,10 +23,15 @@ export default function EditProfile() {
     const [availTime, setAvailTime] = useState('');
     const [pfp, setPFP] = useState('');
 
+    //popup
+    const [showPopup, setShowPopup] = useState(false);
+
     useEffect(() => {
         setName(Student.name);
         setContactInfo(Student.contactInfo);
         setClassMatch(Student.classMatch);
+        setAvailTime(Student.availTime);
+        setPFP(Student.pfp)
     }, []);
 
     // in here, add a function to update student object in the database, instead of Navigate
@@ -36,8 +41,6 @@ export default function EditProfile() {
         e.preventDefault();
         // check validity
 
-
-
         // update student object inside the database
         Student.name = name;
         Student.availTime = availTime;
@@ -45,9 +48,7 @@ export default function EditProfile() {
         Student.pfp = pfp;
         Student.classMatch = classMatch;
 
-
-        // code to update the Student object in your data file or database
-        //return <Navigate to="/profile" />;
+        setShowPopup(true); // show the pop-up after the update is successful
 
     };
 
@@ -85,6 +86,12 @@ export default function EditProfile() {
                 </div>
                 
             </form>
+
+            {showPopup && (
+                <div className={EPMod.popup}>
+                    <p>Profile updated successfully!</p>
+                </div>
+            )}
             
         </div>
     );  
