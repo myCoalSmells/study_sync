@@ -1,21 +1,11 @@
 import { collection, doc, query, onSnapshot } from "firebase/firestore";
-import database from "./firebase";
+import { db } from "./firebase";
 import React, { useEffect, useState } from "react";
 import TinderCard from 'react-tinder-card';
 import PCMod from "./ProfileCards.module.css";
+import SwipeButtons from "./SwipeButtons";
 
 function ProfileCards() {
-  const [students, setStudents] = useState([]);
-
-  useEffect(() => { 
-    const q = query(collection(database, "students"));
-    const unsub = onSnapshot(q, (querySnapshot) => {
-      setStudents(querySnapshot.docs.map(doc => doc.data()));
-    });
-
-    // Unsubscribe from listener when component unmounts
-    return unsub;
-  }, []);
 
   // const [students, setStudents] = useState([
   //   {
@@ -48,6 +38,17 @@ function ProfileCards() {
   //   },
 
   // ]);
+  const [students, setStudents] = useState([]);
+
+  useEffect(() => { 
+    const q = query(collection(db, "students"));
+    const unsub = onSnapshot(q, (querySnapshot) => {
+      setStudents(querySnapshot.docs.map(doc => doc.data()));
+    });
+
+    // Unsubscribe from listener when component unmounts
+    return unsub;
+  }, []);
 
   return (
     <div>
@@ -65,6 +66,7 @@ function ProfileCards() {
           </TinderCard>
         ))}
       </div>
+      <SwipeButtons />
     </div>
   );
 }
