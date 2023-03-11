@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // css modules
 import EPMod from "./EditProfile.module.css";
@@ -93,6 +93,12 @@ export default function EditProfile() {
 
                 <div className={EPMod.subcontainer}>
                     <button type="submit">Update Profile</button>
+                    
+                    <Link to='/profile'>
+                        <Button variant="outline-primary">
+                            Back to Profile
+                        </Button>
+                    </Link>
                 </div>
                 
             </form>
