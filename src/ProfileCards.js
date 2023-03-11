@@ -31,11 +31,11 @@ function ProfileCards() {
           <TinderCard
             onSwipe={onSwipe}
             className={PCMod.swipe}
-            key={student.name}
+            key={student.username}
             preventSwipe={['up', 'down']}
           >
             <div style={{ backgroundImage: `url(${student.pfp})` }} className={PCMod.card}>
-              <h1>{student.name}</h1>
+              <h1>{student.username}</h1>
             </div>
           </TinderCard>
         ))}
