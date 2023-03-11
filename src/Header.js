@@ -23,8 +23,8 @@ function Header() {
         <IconButton onClick={() => navigate('/profile')}>
           <AccountCircleIcon className="header__icon" fontSize="large" />
         </IconButton>
-        <IconButton onClick={() => navigate('/logout')}>
-          <LogoutIcon className="header__icon" fontSize="large" />
+        <IconButton onClick={() => navigate('/inbox')}>
+          <EmailIcon className="header__icon" fontSize="large" />
         </IconButton>
       </div>
       <Link to="/">
@@ -35,9 +35,9 @@ function Header() {
           onClick={() => navigate('/')}
         />
       </Link>
-      <IconButton onClick={() => navigate('/inbox')}>
-        <EmailIcon className="header__icon" fontSize="large" />
-      </IconButton>
+      <IconButton onClick={() => navigate('/logout')}>
+          <LogoutIcon className="header__icon" fontSize="large" />
+        </IconButton>
     </div>
     </div>
   );
