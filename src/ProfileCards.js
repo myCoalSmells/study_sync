@@ -64,7 +64,21 @@ function ProfileCards() {
 
   const onSwipe = async (direction, student) => {
     console.log(`You swiped ${direction} on ${student.username}`);
-  }
+  
+    const userDocRef = doc(firestore, "students", auth.currentUser.uid);
+    if (direction === "left") {
+      // Add student to dislikes list
+      const updatedDislikes = [...dislikes, student.key];
+      await setDoc(userDocRef, { dislikes: updatedDislikes }, { merge: true });
+      setDislikes(updatedDislikes);
+    } else if (direction === "right") {
+      // Add student to likes list
+      const updatedLikes = [...likes, student.key];
+      await setDoc(userDocRef, { likes: updatedLikes }, { merge: true });
+      setLikes(updatedLikes);
+    }
+  };
+  
 
   const getProfilePic = (student) => {
     if (student.pfp) {
