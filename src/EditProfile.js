@@ -74,23 +74,18 @@ export default function EditProfile() {
             setShowPopup(false);
         }, 2300);
 
+        // grabs current user from authenticator, and then updates documents through their uid
         const user = auth.currentUser     
         const docRef = doc(firestore, "students", user.uid);
         const docSnap = await getDoc(docRef);
-        setLikes(docRef.get())
-        setDislikes(docSnap.get("dislikes"));
-        setMatches(docSnap.get("matches"));
         let courses =  myCourses.map(course => course.name);
         let uid = user.uid;
-        setDoc(doc(firestore, "students", user.uid), {
+        await updateDoc(doc(firestore, "students", user.uid), {
                 username: name,
                 email: contactInfo,
                 pfp: pfp,
                 availTime: availTime,
                 classes: courses,
-                likes: likes,
-                dislikes: dislikes, 
-                matches: matches
         });
         console.log("Student profile updated!");
     };
