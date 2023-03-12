@@ -14,8 +14,41 @@ export default function ProfilePage() {
         make sure to send the student's data through to 
         the EditProfilePage.
     */
-   const DAYS = 7;
-   const WEEKS = 4;
+
+    // generate the schedule table
+    function generateTableRows() {
+        const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        const tableRows = [];
+        
+        for (let i = 0; i < daysOfWeek.length; i++) {
+            const day = daysOfWeek[i];
+            const availTimes = [];
+        
+            // populate availability times for current day
+            for (let j = 0; j < 4; j++) {
+            const index = i + (j * 7);
+            availTimes.push(Student.availTime[index]);
+            }
+        
+            // generate table row with availability times for current day
+            tableRows.push(
+            <tr key={day}>
+                <td className={styles.text}>{day}</td>
+                {availTimes.map((time, index) => (
+                <td key={index} className={`${styles.text} ${time ? styles.highlight : ''}`}>{time}</td>
+                ))}
+                <td></td>
+            </tr>
+            );
+        }
+    
+        return tableRows;
+    }
+    const styles = {
+        text: PPMod.text,
+        highlight: PPMod.highlight,
+    };
+
 
     // Temp Student Data Format
     // Extract firebase and put into this format?
@@ -53,41 +86,21 @@ export default function ProfilePage() {
             <p>
                 Schedule: 
             </p>
-            <div>
-                <Button variant="outline-secondary">Sun {Student.availTime[0]}</Button>
-                <Button variant="outline-secondary">Mon {Student.availTime[1]}</Button>
-                <Button variant="outline-secondary">Tue {Student.availTime[2]}</Button>
-                <Button variant="outline-secondary">Wed {Student.availTime[3]}</Button>
-                <Button variant="outline-secondary">Thu {Student.availTime[4]}</Button>
-                <Button variant="outline-secondary">Fri {Student.availTime[5]}</Button>
-                <Button variant="outline-secondary">Sat {Student.availTime[6]}</Button>
-            </div>
-            <div>
-                <Button variant="outline-secondary">Sun {Student.availTime[7]}</Button>
-                <Button variant="outline-secondary">Mon {Student.availTime[8]}</Button>
-                <Button variant="outline-secondary">Tue {Student.availTime[9]}</Button>
-                <Button variant="outline-secondary">Wed {Student.availTime[10]}</Button>
-                <Button variant="outline-secondary">Thu {Student.availTime[11]}</Button>
-                <Button variant="outline-secondary">Fri {Student.availTime[12]}</Button>
-                <Button variant="outline-secondary">Sat {Student.availTime[13]}</Button>
-            </div>
-            <div>
-                <Button variant="outline-secondary">Sun {Student.availTime[14]}</Button>
-                <Button variant="outline-secondary">Mon {Student.availTime[15]}</Button>
-                <Button variant="outline-secondary">Tue {Student.availTime[16]}</Button>
-                <Button variant="outline-secondary">Wed {Student.availTime[17]}</Button>
-                <Button variant="outline-secondary">Thu {Student.availTime[18]}</Button>
-                <Button variant="outline-secondary">Fri {Student.availTime[19]}</Button>
-                <Button variant="outline-secondary">Sat {Student.availTime[20]}</Button>
-            </div>
-            <div>
-                <Button variant="outline-secondary">Sun {Student.availTime[21]}</Button>
-                <Button variant="outline-secondary">Mon {Student.availTime[22]}</Button>
-                <Button variant="outline-secondary">Tue {Student.availTime[23]}</Button>
-                <Button variant="outline-secondary">Wed {Student.availTime[24]}</Button>
-                <Button variant="outline-secondary">Thu {Student.availTime[25]}</Button>
-                <Button variant="outline-secondary">Fri {Student.availTime[26]}</Button>
-                <Button variant="outline-secondary">Sat {Student.availTime[27]}</Button>
+            <div className={PPMod.container}>
+                <table>
+                    <thead>
+                        <tr>
+                            <th className={PPMod.text}>Day</th>
+                            <th className={PPMod.text}>Week 1</th>
+                            <th className={PPMod.text}>Week 2</th>
+                            <th className={PPMod.text}>Week 3</th>
+                            <th className={PPMod.text}>Week 4</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {generateTableRows()}
+                    </tbody>
+                </table>
             </div>
         </div>
     );

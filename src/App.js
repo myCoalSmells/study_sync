@@ -19,14 +19,14 @@ function App() {
       <div className="app__wrapper">
         <Routes>
           <Route path="/inbox" element={<h1>I am inbox page</h1>}/>
-        <Route path="/profile" element={<h1><ProfilePage /></h1>}/>
-        <Route path="/login" element={<h1><LoginPage /></h1>}/>
-        <Route path="/logout" element={<h1><LogoutPage /></h1>}/>
-        <Route path="/signup" element={<h1><SignupPage /></h1>}/>
-        <Route path="/" element={<h1><ProfileCards /></h1>}/>
+          <Route path="/profile" element={<h1><ProfilePage /></h1>}/>
+          <Route path="/login" element={<h1><LoginPage /></h1>}/>
+          <Route path="/logout" element={<h1><LogoutPage /></h1>}/>
+          <Route path="/signup" element={<h1><SignupPage /></h1>}/>
+          <Route path="/" element={<h1><ProfileCards /></h1>}/>
           <Route path="/test" element={<h1><Advanced /></h1>}/>
           <Route path="/editprofile" element={<h1><EditProfile /></h1>}/>
-      </Routes>
+        </Routes>
       </div>
     </div>
   )
