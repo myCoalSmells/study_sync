@@ -44,7 +44,7 @@ export default function ProfilePage() {
     })
     // generate the schedule table
     function generateTableRows() {
-        const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        const daysOfWeek = ['12-1 AM', '1-2 AM', '2-3 AM', '3-4 AM', '4-5 AM', '5-6 AM', '6-7 AM', '7-8 AM', '8-9 AM', '9-10 AM', '10-11 AM', '11-12 AM', '12-1 PM', '1-2 PM', '2-3 PM', '3-4 PM', '4-5 PM', '5-6 PM', '6-7 PM', '7-8 PM', '8-9 PM', '9-10 PM', '10-11 PM', '11-12 PM'];
         const tableRows = [];
         
         for (let i = 0; i < daysOfWeek.length; i++) {
@@ -52,7 +52,7 @@ export default function ProfilePage() {
             const availTimes = [];
         
             // populate availability times for current day
-            for (let j = 0; j < 4; j++) {
+            for (let j = 0; j < 7; j++) {
             const index = i + (j * 7);
             availTimes.push(availTime[index]);
             }
@@ -83,7 +83,7 @@ export default function ProfilePage() {
         name: 'Michael Liu',
         pfp: "https://i.imgur.com/pkpvLJn.jpeg",
         classMatch: "CS 35L, Math 33B, Physics 1C",
-        availTime: "0101001001110000101000101010",
+        availTime: "101010110100100110011100000110001010000101011000111101101011110111100101000101110111000000010001010111101100100110101101100001011100010000011101100001010100011010000100",
         contactInfo: "myemail@yahoo.com"  
     };
 
@@ -117,11 +117,14 @@ export default function ProfilePage() {
                     <table>
                         <thead>
                             <tr>
-                                <th className={PPMod.text}>Day</th>
-                                <th className={PPMod.text}>Week 1</th>
-                                <th className={PPMod.text}>Week 2</th>
-                                <th className={PPMod.text}>Week 3</th>
-                                <th className={PPMod.text}>Week 4</th>
+                                <th className={PPMod.text}>Time</th>
+                                <th className={PPMod.text}>Sun</th>
+                                <th className={PPMod.text}>Mon</th>
+                                <th className={PPMod.text}>Tue</th>
+                                <th className={PPMod.text}>Wed</th>
+                                <th className={PPMod.text}>Thu</th>
+                                <th className={PPMod.text}>Fri</th>
+                                <th className={PPMod.text}>Sat</th>
                             </tr>
                         </thead>
                         <tbody>

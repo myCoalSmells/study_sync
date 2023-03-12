@@ -1,0 +1,22 @@
+.inbox {
+    background-color: #f0f8ff;
+    padding: 40px;
+    font-family: Georgia;
+    font-style: italic;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 18px;
+}
+
+.container{
+    background-color: #f0f8ff;
+    font-family: Georgia;
+    font-style: italic;
+    color: red;
+    display: flex;
+    flex-direction: column;
+    text-decoration-line: underline;
+    align-items: center;
+    margin: 18px;
+}

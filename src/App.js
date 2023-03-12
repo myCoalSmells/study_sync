@@ -7,6 +7,7 @@ import LoginPage from "./LoginPage";
 import LogoutPage from "./LogoutPage";
 import SignupPage from "./SignupPage";
 import EditProfile from "./EditProfile";
+import Inbox from "./Inbox";
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import Advanced from "./Advanced";
 
@@ -18,7 +19,7 @@ function App() {
       {['/', '/profile', '/inbox', '/editprofile'].includes(location.pathname) && <Header />}
       <div className="app__wrapper">
         <Routes>
-          <Route path="/inbox" element={<h1>I am inbox page</h1>}/>
+          <Route path="/inbox" element={<h1><Inbox /></h1>}/>
           <Route path="/profile" element={<h1><ProfilePage /></h1>}/>
           <Route path="/login" element={<h1><LoginPage /></h1>}/>
           <Route path="/logout" element={<h1><LogoutPage /></h1>}/>
