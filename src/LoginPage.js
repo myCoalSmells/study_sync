@@ -43,6 +43,9 @@ export default function LoginPage() {
             <div className={LPMod.container}>
                 <button type="submit">Login</button>
             </div>
+            <div className={LPMod.container}>
+                <button type="submit">Forgot username or password?</button>
+            </div>
             <div className={LPMod.login}>
                 <h1>Don't have an account?</h1>
                 <Link to="/signup">
