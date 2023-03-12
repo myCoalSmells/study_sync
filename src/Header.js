@@ -39,7 +39,7 @@ function Header() {
           />
         </head>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          {username ? <p className="hello">Hello, {username}!</p> : null}
+        <div className="hello">{username ? <p>Hello, {username}</p> : null}</div>
           <IconButton onClick={() => navigate('/profile')}>
             <AccountCircleIcon className="header__icon" fontSize="large" />
           </IconButton>

@@ -1,18 +1,24 @@
-.header{
-    display:flex;
+.header {
+    position: relative;
+    display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.header__logo{
+  }
+  
+  .header__logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     height: 200px;
     object-fit: contain;
-}
-
-.header__icon{
+  }
+  
+  .header__icon {
     margin: 0 10px;
-}
-
-.hello{
+  }
+  
+  .hello {
     font-family: Georgia, 'Times New Roman', Times, serif;
-}
+  }
+  
