@@ -29,7 +29,7 @@ export default function SignupPage() {
             return;
         }
         e.preventDefault();
-        createUserWithEmailAndPassword(auth, email, password)
+        createUserWithEmailAndPassword(auth, email, password) //create the user
         .then(async (userCredential) => {
             console.log(userCredential);
             const user = auth.currentUser;
@@ -39,7 +39,10 @@ export default function SignupPage() {
                 email: email,
                 pfp: pic,
                 key: user.uid,
-                classes: courses
+                classes: courses,
+                likes: [""],
+                dislikes: [""],
+                matches: [""]
             });
             for (let i = 0; i < courses.length; i++){       //add the user's ID to the document for each course in the classes table
                 const docRef = doc(firestore, "classes", courses[i]);  
