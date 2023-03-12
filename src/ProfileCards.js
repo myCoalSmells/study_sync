@@ -17,6 +17,8 @@ function ProfileCards() {
   const [contactInfo, setContactInfo] = useState("");
   const [availTime, setAvailTime] = useState("");
   const [login, setLogin] = useState(false);
+  const [classes, setClasses] = useState([]);
+  
 
   onAuthStateChanged(auth, async (user) => {
     if (user) {
@@ -26,6 +28,7 @@ function ProfileCards() {
         setUsername(docSnap.get("username"));
         setClassMatch(docSnap.get("classMatch"));
         setContactInfo(docSnap.get("email"));
+        setClasses(docSnap.get("classes"));
         setAvailTime(docSnap.get("availTime"));
         setLogin(true);
       } else {
@@ -39,16 +42,26 @@ function ProfileCards() {
   });
 
   const [students, setStudents] = useState([]);
+
+
   useEffect(() => { 
     if (login){ // use the login state to determine if user is logged in or not
       console.log("logged in");
       const q = query(collection(db, "students"));
       const unsub = onSnapshot(q, (querySnapshot) => {
-        setStudents(querySnapshot.docs.map(doc => doc.data()).filter(student => student.username !== username)); // Filter out your own card
+        const filteredStudents = querySnapshot.docs.map(doc => doc.data())
+          .filter(student => student.username !== username) // Filter out your own card
+          .filter(student => student.classes.some(c => classes.includes(c))); // Filter by common classes
+        setStudents(filteredStudents);
       });
       return unsub;
     }
-  }, [username, login]); // Add login state to the dependency array
+  }, [username, login, classes]); // Add login state and classes to the dependency array
+  
+
+  
+  
+
 
   const onSwipe = (direction) => { //put matches and stuff edit firebase
     console.log('You swiped: ' + direction)
