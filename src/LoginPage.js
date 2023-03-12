@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import LPMod from "./LoginPage.module.css";
 import handleSubmit from "./firebase-setup/handlesubmit";
 import { useRef } from "react";
@@ -7,7 +7,7 @@ import { auth } from "./firebase-setup/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 export default function LoginPage() {
-
+    const nav = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -18,10 +18,12 @@ export default function LoginPage() {
         .then((userCredential) =>{
             console.log(userCredential);
             console.log("sign in!");
+            nav("/");
         })
         .catch((error) => {
             console.log(error);
             console.log("no sign in");
+            alert("email or password was wrong, try again")
         })
     }
     return (
@@ -29,7 +31,7 @@ export default function LoginPage() {
         <h1>Login to StudySync</h1>
         <form onSubmit={signIn}>
             <label>
-                <p>Username</p>
+                <p>Email</p>
                 <input type="text" 
                 onChange={(e) => setEmail(e.target.value)}/>
             </label>
