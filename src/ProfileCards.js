@@ -4,30 +4,51 @@ import React, { useEffect, useState } from "react";
 import TinderCard from 'react-tinder-card';
 import PCMod from "./ProfileCards.module.css";
 import SwipeButtons from "./SwipeButtons";
-import {auth} from "./firebase-setup/firebase";
+import { auth, firestore } from "./firebase-setup/firebase";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { get, getDoc } from "firebase/firestore";
 import { useNavigate } from 'react-router-dom';
 
 function ProfileCards() {
   const Nav = useNavigate();
-  const user = auth.currentUser;
+  const auth = getAuth();
+  const [username, setUsername] = useState("");
+  const [classMatch, setClassMatch] = useState("");
+  const [contactInfo, setContactInfo] = useState("");
+  const [availTime, setAvailTime] = useState("");
+  const [login, setLogin] = useState(false);
+
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      const docRef = doc(firestore, "students", user.uid);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        setUsername(docSnap.get("username"));
+        setClassMatch(docSnap.get("classMatch"));
+        setContactInfo(docSnap.get("email"));
+        setAvailTime(docSnap.get("availTime"));
+        setLogin(true);
+      } else {
+        console.log("Document could not be found.");
+      }
+    } else {
+      console.log("No one is logged in.");
+      setLogin(false); // set login state to false when user is not logged in
+      Nav('/login')
+    }
+  });
 
   const [students, setStudents] = useState([]);
   useEffect(() => { 
-    if (user){
+    if (login){ // use the login state to determine if user is logged in or not
       console.log("logged in");
+      const q = query(collection(db, "students"));
+      const unsub = onSnapshot(q, (querySnapshot) => {
+        setStudents(querySnapshot.docs.map(doc => doc.data()).filter(student => student.username !== username)); // Filter out your own card
+      });
+      return unsub;
     }
-    else{
-      console.log("not logged in");
-      Nav('/login')
-    }
-    const q = query(collection(db, "students"));
-    const unsub = onSnapshot(q, (querySnapshot) => {
-      setStudents(querySnapshot.docs.map(doc => doc.data()));
-    });
-
-    // Unsubscribe from listener when component unmounts
-    return unsub;
-  }, []);
+  }, [username, login]); // Add login state to the dependency array
 
   const onSwipe = (direction) => { //put matches and stuff edit firebase
     console.log('You swiped: ' + direction)
