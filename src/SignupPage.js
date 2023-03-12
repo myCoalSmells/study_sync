@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import LPMod from "./LoginPage.module.css";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { collection, setDoc, doc, getDoc } from "firebase/firestore";
+import { collection, setDoc, doc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
 import { auth, firestore } from "./firebase-setup/firebase"
 
 import { useNavigate } from 'react-router-dom';
+import { async } from '@firebase/util';
+import { type } from '@testing-library/user-event/dist/type';
 
 
 
@@ -20,7 +22,7 @@ export default function SignupPage() {
 
     //const colRef = collection(firestore, "students");
 
-    const signUp = (e) => {
+    const signUp = async (e) => {
         if (username.length === 0 || email.length === 0 || myCourses.length === 0 ||
             password.length === 0){
             alert("one or more empty fields");
@@ -28,23 +30,32 @@ export default function SignupPage() {
         }
         e.preventDefault();
         createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
+        .then(async (userCredential) => {
             console.log(userCredential);
             const user = auth.currentUser;
             let courses =  myCourses.map(course => course.name);
-            setDoc(doc(firestore, "students", user.uid), {
+            setDoc(doc(firestore, "students", user.uid), {      //add to the students collection
                 username: username,
                 email: email,
                 pfp: pic,
                 key: user.uid,
                 classes: courses
             });
-            // for (let i = 0; i < courses.length; i++){
-                
-            // }
-            //console.log(user.uid);
+            for (let i = 0; i < courses.length; i++){       //add the user's ID to the document for each course in the classes table
+                const docRef = doc(firestore, "classes", courses[i]);  
+                const docSnap = await getDoc(docRef)   
+                if (docSnap.exists()){
+                    await updateDoc(docRef, {
+                        students: arrayUnion(user.uid)
+                    });
+                }
+                else{
+                    await setDoc(docRef, {students: [user.uid]});
+                }
+            }
+            console.log(user.uid);
 
-            //alert("Success!");
+            alert("Success!");
             Nav("/");
         })
         .catch((error) => {
