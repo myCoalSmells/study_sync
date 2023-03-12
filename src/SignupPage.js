@@ -132,6 +132,7 @@ export default function SignupPage() {
             setCourse('');
             setCourses([...myCourses, {name: course.replace(/\s/g, "").toUpperCase()}]);}
             }> Add Class</button>
+            <button type="button" onClick = {() => setCourses([])}>Reset</button>
             <ol>
                 {myCourses.map(course => <li key={course.name}>{course.name}</li>)}
             </ol>
