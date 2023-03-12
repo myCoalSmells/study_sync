@@ -10,6 +10,7 @@ import { doc, get, getDoc } from "firebase/firestore";
 
 import Redbox from "./ProfilePageStuff/RedBox"
 import Greenbox from "./ProfilePageStuff/GreenBox"
+// import { black } from "colorette";
 
 
 
@@ -29,6 +30,7 @@ export default function ProfilePage() {
     const [availTime, setAvailTime] = useState("");
     const [login, setLogin] = useState(false);
     const [classes, setClasses] = useState("");
+    const [pfp, setPfp] = useState("");
 
 
     onAuthStateChanged(auth, async (user) => {
@@ -43,6 +45,7 @@ export default function ProfilePage() {
                 setDislikes(docSnap.get("dislikes") || []); // add dislikes field with empty array as default
                 setContactInfo(docSnap.get("email"));
                 setAvailTime(docSnap.get("availTime") || []);
+                setPfp(docSnap.get("pfp") || "https://i.pinimg.com/originals/1a/68/f7/1a68f758cd8b75d47e480722c3ad6791.png");
                 setLogin(true);
             } else {
                 console.log("Document could not be found.");
@@ -107,9 +110,17 @@ export default function ProfilePage() {
         return(
             <div className={PPMod.container}>
                 <div className={PPMod.subcontainer}>
-                    <div>
-                        
-                    </div>
+                <div style={{
+                    width: '125px',
+                    height: '125px',
+                    borderRadius: '50%',
+                    border: '2px solid blue',
+                    overflow: 'hidden'
+                    }}>
+                    <img src={pfp} alt="profile picture" style={{ width: '100%', height: '100%' }} />
+                </div>
+
+                    {/* insert pfp here */}
                     <h1 className={PPMod.title}>
                         {username}'s Profile
                     </h1>
