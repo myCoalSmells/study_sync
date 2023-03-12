@@ -22,10 +22,14 @@ export default function ProfilePage() {
     */
     const auth = getAuth();
     const [username, setUsername] = useState("");
-    const [classMatch, setClassMatch] = useState("");
+    const [matches, setMatches] = useState([]);
+    const [likes, setLikes] = useState([]);
+    const [dislikes, setDislikes] = useState([]);
     const [contactInfo, setContactInfo] = useState("");
     const [availTime, setAvailTime] = useState("");
     const [login, setLogin] = useState(false);
+    const [classes, setClasses] = useState([]);
+
 
     onAuthStateChanged(auth, async (user) => {
         if (user) {
@@ -33,7 +37,10 @@ export default function ProfilePage() {
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
                 setUsername(docSnap.get("username"));
-                setClassMatch(docSnap.get("classMatch"));
+                setMatches(docSnap.get("matches"));
+                setClasses(docSnap.get("classes"));
+                setLikes(docSnap.get("likes"));
+                setDislikes(docSnap.get("dislikes"));
                 setContactInfo(docSnap.get("email"));
                 setAvailTime(docSnap.get("availTime"));
                 setLogin(true);
@@ -91,7 +98,7 @@ export default function ProfilePage() {
     let Student = {
         name: 'Michael Liu',
         pfp: "https://i.imgur.com/pkpvLJn.jpeg",
-        classMatch: "CS 35L, Math 33B, Physics 1C",
+        classes: "CS 35L, Math 33B, Physics 1C",
         availTime: "000000111100000000011100000110001010000101011000111101101011110111100101000101110111000000010001010111101100100110101101100001011100010000011101100001010100011010000100",
         contactInfo: "myemail@yahoo.com"  
     };
@@ -114,7 +121,7 @@ export default function ProfilePage() {
     
                 </div>
                 <p>
-                    Classes: {classMatch}
+                    Classes: {classes.join(", ")}
                 </p>
                 <p>
                     Contact: {contactInfo}
