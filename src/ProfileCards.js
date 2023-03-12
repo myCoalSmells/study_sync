@@ -55,12 +55,15 @@ function ProfileCards() {
       const unsub = onSnapshot(q, (querySnapshot) => {
         const filteredStudents = querySnapshot.docs.map(doc => doc.data())
           .filter(student => student.username !== username) // Filter out your own card
-          .filter(student => student.classes.some(c => classes.includes(c))); // Filter by common classes
+          .filter(student => student.classes.some(c => classes.includes(c))) // Filter by common classes
+          .filter(student => !likes.includes(student.key)) // Filter out liked students
+          .filter(student => !dislikes.includes(student.key)) // Filter out disliked students
+          .filter(student => !matches.includes(student.key)); // Filter out matched students
         setStudents(filteredStudents);
       });
       return unsub;
     }
-  }, [username, login, classes]);
+  }, [username, login, classes, likes, dislikes, matches]);
 
   const onSwipe = async (direction, student) => {
     console.log(`You swiped ${direction} on ${student.username}`);
