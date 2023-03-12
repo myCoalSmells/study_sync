@@ -14,10 +14,41 @@ export default function ProfilePage() {
         make sure to send the student's data through to 
         the EditProfilePage.
     */
-   const DAYS = 7;
-   const WEEKS = 4;
 
-   
+    // generate the schedule table
+    function generateTableRows() {
+        const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        const tableRows = [];
+        
+        for (let i = 0; i < daysOfWeek.length; i++) {
+            const day = daysOfWeek[i];
+            const availTimes = [];
+        
+            // populate availability times for current day
+            for (let j = 0; j < 4; j++) {
+            const index = i + (j * 7);
+            availTimes.push(Student.availTime[index]);
+            }
+        
+            // generate table row with availability times for current day
+            tableRows.push(
+            <tr key={day}>
+                <td className={styles.text}>{day}</td>
+                {availTimes.map((time, index) => (
+                <td key={index} className={`${styles.text} ${time ? styles.highlight : ''}`}>{time}</td>
+                ))}
+                <td></td>
+            </tr>
+            );
+        }
+    
+        return tableRows;
+    }
+    const styles = {
+        text: PPMod.text,
+        highlight: PPMod.highlight,
+    };
+
 
     // Temp Student Data Format
     // Extract firebase and put into this format?
@@ -55,75 +86,22 @@ export default function ProfilePage() {
             <p>
                 Schedule: 
             </p>
-            <table>
-                <thead>
-                    <tr>
-                    <th className={PPMod.text}>Day</th>
-                    <th className={PPMod.text}>Week 1</th>
-                    <th className={PPMod.text}>Week 2</th>
-                    <th className={PPMod.text}>Week 3</th>
-                    <th className={PPMod.text}>Week 4</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                    <td className={PPMod.text}>Sun</td>
-                        <td className={PPMod.text}>{Student.availTime[0]}</td>
-                        <td className={PPMod.text}>{Student.availTime[7]}</td>
-                        <td className={PPMod.text}>{Student.availTime[14]}</td>
-                        <td className={PPMod.text}>{Student.availTime[21]}</td>
-                    <td></td>
-                    </tr>
-                    <tr>
-                    <td className={PPMod.text}>Mon</td>
-                        <td className={PPMod.text}>{Student.availTime[1]}</td>
-                        <td className={PPMod.text}>{Student.availTime[8]}</td>
-                        <td className={PPMod.text}>{Student.availTime[15]}</td>
-                        <td className={PPMod.text}>{Student.availTime[22]}</td>
-                    <td></td>
-                    </tr>
-                    <tr>
-                    <td className={PPMod.text}>Tue</td>
-                        <td className={PPMod.text}>{Student.availTime[2]}</td>
-                        <td className={PPMod.text}>{Student.availTime[9]}</td>
-                        <td className={PPMod.text}>{Student.availTime[16]}</td>
-                        <td className={PPMod.text}>{Student.availTime[23]}</td>
-                    <td></td>
-                    </tr>
-                    <tr>
-                    <td className={PPMod.text}>Wed</td>
-                        <td className={PPMod.text}>{Student.availTime[3]}</td>
-                        <td className={PPMod.text}>{Student.availTime[10]}</td>
-                        <td className={PPMod.text}>{Student.availTime[17]}</td>
-                        <td className={PPMod.text}>{Student.availTime[24]}</td>
-                    <td></td>
-                    </tr>
-                    <tr>
-                    <td className={PPMod.text}>Thu</td>
-                        <td className={PPMod.text}>{Student.availTime[4]}</td>
-                        <td className={PPMod.text}>{Student.availTime[11]}</td>
-                        <td className={PPMod.text}>{Student.availTime[18]}</td>
-                        <td className={PPMod.text}>{Student.availTime[25]}</td>
-                    <td></td>
-                    </tr>
-                    <tr>
-                    <td className={PPMod.text}>Fri</td>
-                        <td className={PPMod.text}>{Student.availTime[5]}</td>
-                        <td className={PPMod.text}>{Student.availTime[12]}</td>
-                        <td className={PPMod.text}>{Student.availTime[19]}</td>
-                        <td className={PPMod.text}>{Student.availTime[26]}</td>
-                    <td></td>
-                    </tr>
-                    <tr>
-                    <td className={PPMod.text}>Sat</td>
-                        <td className={PPMod.text}>{Student.availTime[6]}</td>
-                        <td className={PPMod.text}>{Student.availTime[13]}</td>
-                        <td className={PPMod.text}>{Student.availTime[20]}</td>
-                        <td className={PPMod.text}>{Student.availTime[27]}</td>
-                    <td></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div className={PPMod.container}>
+                <table>
+                    <thead>
+                        <tr>
+                            <th className={PPMod.text}>Day</th>
+                            <th className={PPMod.text}>Week 1</th>
+                            <th className={PPMod.text}>Week 2</th>
+                            <th className={PPMod.text}>Week 3</th>
+                            <th className={PPMod.text}>Week 4</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {generateTableRows()}
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 }
