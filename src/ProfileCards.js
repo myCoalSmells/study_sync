@@ -41,6 +41,10 @@ function ProfileCards() {
     }
   }
 
+  const getClasses = (student) => {
+    return student.classes || [];
+  }
+  
   return (
     <div className={PCMod.cardContainer}>
       <h1>Your Study Syncs!</h1>
@@ -53,7 +57,8 @@ function ProfileCards() {
             preventSwipe={['up', 'down']}
           >
             <div style={{ backgroundImage: `url(${getProfilePic(student)})` }} className={PCMod.card}>
-              <h1>{student.username}</h1>
+              <h1 className={PCMod.classes}>{student.username}</h1>
+              <p className={PCMod.classes}>Classes: {getClasses(student).join(", ")}</p>
             </div>
           </TinderCard>
         ))}
@@ -63,6 +68,9 @@ function ProfileCards() {
     </div>
   );
   
-}
+  }
+  
+  
+
 
 export default ProfileCards;
