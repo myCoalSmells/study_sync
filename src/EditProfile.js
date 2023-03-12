@@ -98,7 +98,7 @@ export default function EditProfile() {
                 
                 <div className={EPMod.subcontainer}>
                     <label htmlFor="availTime">Available Times:</label>
-                    <textarea value={availTime} readOnly={true} style={{fontSize: "16px"}}/>
+                    <textarea value={tempAvailTime} readOnly={true} style={{fontSize: "16px"}}/>
                 </div>
                 <div className={PPMod.container}>
                     <table>
