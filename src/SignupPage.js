@@ -6,28 +6,44 @@ import { auth, firestore } from "./firebase-setup/firebase"
 import {Link} from "react-router-dom";
 
 
+
 export default function SignupPage() {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [pic, setPic] = useState("");
-    const colRef = collection(firestore, "students");
+    const [course, setCourse] = useState("");
+    const [myCourses, setCourses] = useState([]);
+
+
+
+    //const colRef = collection(firestore, "students");
 
     const signUp = (e) => {
+        if (username.length === 0 || email.length === 0 || myCourses.length === 0 ||
+            password.length === 0){
+            alert("one or more empty fields");
+            return;
+        }
         e.preventDefault();
         createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
+            console.log(userCredential);
             const user = auth.currentUser;
+
             setDoc(doc(firestore, "students", user.uid), {
                 username: username,
                 email: email,
-                password: password,
                 pfp: pic,
-                key: user.uid
-            })
-            console.log(user.uid);
+                key: user.uid,
+                classes: myCourses.map(course => course.name)
+            });
+
+            //console.log(user.uid);
+            alert("Success!");
         })
         .catch((error) => {
+            alert("Invalid email and/or password");
             console.log(error);
         });
     };
@@ -66,12 +82,47 @@ export default function SignupPage() {
                 onChange={(e) => setPic(e.target.value)}
                 />
             </label>
+            <div>
+            </div>
+            <label>
+                <p>Classes</p>
+                <input value = {course}
+                onChange={e => setCourse(e.target.value)}
+                />
+            </label>
+            <button type="button" onClick = {()=>{
+            if (course === ""){
+                alert("Empty course name!");
+                return;
+            }
+            else if (!RegExp('[a-zA-Z]+\\s*[0-9]+[a-zA-Z]*').test(course)){
+                alert("Invalid course name: should be in the form [class][code] eg. COMSCI 35L");
+                return;
+            }
+            else if (myCourses.length >4){
+                alert("five courses max!!");
+                return;
+            }
+            else if (myCourses.some(pair => pair.name === course.replace(/\s/g, "").toUpperCase() )){
+                //if the value is in the array already
+                setCourse('');
+                return;
+            }
+            console.log(myCourses);
+
+            setCourse('');
+            setCourses([...myCourses, {name: course.replace(/\s/g, "").toUpperCase()}]);}
+            }> Add Class</button>
+            <ol>
+                {myCourses.map(course => <li key={course.name}>{course.name}</li>)}
+            </ol>
             <div className={LPMod.container}>
             {/* NEED VALIDITY CHECK*/}
                 <Link to="/"> 
                     <button type="submit">Sign Up</button>
                 </Link>
             </div>
+
             </form>
         </div>
     )
