@@ -14,10 +14,9 @@ export default function EditProfile() {
         name: 'Michael Liu',
         pfp: "https://i.imgur.com/pkpvLJn.jpeg",
         classMatch: "CS 35L, Math 33B, Physics 1C",
-        availTime: "0101001001110000101000101010",
+        availTime: "101001011010001111100101011001101101011110110010110101001101000011100110101000011000000110010101001100110010100000100101101101001011101110100000110001000111001000001001",
         contactInfo: "myemail@yahoo.com"  
     };
-
 
 
     const [name, setName] = useState('');
@@ -26,7 +25,7 @@ export default function EditProfile() {
     const [availTime, setAvailTime] = useState('');
     const [pfp, setPFP] = useState('');
 
-    //popup
+    //popup (separate from others)
     const [showPopup, setShowPopup] = useState(false);
 
     useEffect(() => {
@@ -44,7 +43,6 @@ export default function EditProfile() {
         e.preventDefault();
         // check validity
         
-
         // update student object inside the database (new data are in these variables)
         // use effect above sets the variables.
         Student.name = name;
@@ -58,8 +56,28 @@ export default function EditProfile() {
         setTimeout(() => {
             setShowPopup(false);
         }, 2300);
+    };
 
-
+    // handle checkbox
+    // const handleCheck = (e) => {
+    //     const availTimeArr = Student.availTime.split('');
+    //     if (e.target.checked === true) {
+    //         availTimeArr[index] = '0';
+    //     } else {
+    //         availTimeArr[index] = '1';
+    //     }
+    //     const updatedAvailTimeArr = availTimeArr.join('');
+    //     setAvailTime(updatedAvailTimeArr);
+    // }
+    const handleCheck = (isChecked, index, e) => {
+        const availTimeArr = availTime.split('');
+        if (isChecked) {
+          availTimeArr[index] = '1';
+        } else {
+          availTimeArr[index] = '0';
+        }
+        const updatedAvailTimeArr = availTimeArr.join('');
+        setAvailTime(updatedAvailTimeArr);
     };
 
     return(
@@ -89,6 +107,9 @@ export default function EditProfile() {
                 <div className={EPMod.subcontainer}>
                     <label htmlFor="availTime">Available Times:</label>
                     <input type="text" id="availTime" value={availTime} onChange={(e) => setAvailTime(e.target.value)} />
+
+                    <input type="checkbox" checked={availTime[0] === '1'} onChange={(e) => handleCheck(e.target.checked, 0)} />
+
                 </div>
 
                 <div className={EPMod.subcontainer}>
