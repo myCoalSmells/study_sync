@@ -23,24 +23,5 @@
 }
 
 .text {
-    text-align: center;
     color: black;
-}
-
-.red {
-    color: red;
-}
-
-.green {
-    color: green;
-}
-
-/* Red Box */
-td.red-box {
-    color: red;
-}
-
-/* Green Box */
-td.green-box {
-    color: green;
 }
