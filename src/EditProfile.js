@@ -18,8 +18,6 @@ export default function EditProfile() {
         contactInfo: "myemail@yahoo.com"  
     };
 
-
-
     const [name, setName] = useState('');
     const [contactInfo, setContactInfo] = useState('');
     const [classMatch, setClassMatch] = useState('');
@@ -59,6 +57,12 @@ export default function EditProfile() {
             setShowPopup(false);
         }, 2300);
 
+    };
+
+    // checkboxes
+    const checkChange = (e) => {
+        e.preventDefault();
+        console.log("Btton pressed");
 
     };
 
@@ -86,10 +90,57 @@ export default function EditProfile() {
                     <input type="text" id="classMatch" value={classMatch} onChange={(e) => setClassMatch(e.target.value)} />
                 </div>
                 
+
+
                 <div className={EPMod.subcontainer}>
                     <label htmlFor="availTime">Available Times:</label>
                     <input type="text" id="availTime" value={availTime} onChange={(e) => setAvailTime(e.target.value)} />
+                    
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>Week 1</th>
+                            <th>Week 2</th>
+                            <th>Week 3</th>
+                            <th>Week 4</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Sun</td>
+                                <td>
+                                <label>
+                                    <input type="checkbox" name="availTime[0]" value="1" checked={Student.availTime[0] === 1} onChange={checkChange()}/>
+                                    <span class="checkmark"></span>
+                                </label>
+                                </td>
+                                <td>
+                                <label>
+                                    <input type="checkbox" name="availTime[7]" value="1" />
+                                    <span class="checkmark"></span>
+                                </label>
+                                </td>
+                                <td>
+                                <label>
+                                    <input type="checkbox" name="availTime[14]" value="1" />
+                                    <span class="checkmark"></span>
+                                </label>
+                                </td>
+                                <td>
+                                <label>
+                                    <input type="checkbox" name="availTime[21]" value="1" />
+                                    <span class="checkmark"></span>
+                                </label>
+                                </td>
+                            </tr>
+                        
+                            
+                        </tbody>
+                    </table>
                 </div>
+
+
 
                 <div className={EPMod.subcontainer}>
                     <button type="submit">Update Profile</button>
