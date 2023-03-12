@@ -6,14 +6,19 @@ import EPMod from "./EditProfile.module.css";
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import { auth, firestore } from "./firebase-setup/firebase";
+import { doc, setDoc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
+import { updateProfile } from "firebase/auth";
+
 export default function EditProfile() {
     // for now, this is a temporary way to change data
     // change this to use firebase
     // Student is the name of the object used in the displaying of the data
+
     let Student = {
         name: 'Michael Liu',
         pfp: "https://i.imgur.com/pkpvLJn.jpeg",
-        classMatch: "CS 35L, Math 33B, Physics 1C",
+        classes: ["CS 35L", "Math 33B", "Physics 1C"],
         availTime: "0101001001110000101000101010",
         contactInfo: "myemail@yahoo.com"  
     };
@@ -22,9 +27,14 @@ export default function EditProfile() {
 
     const [name, setName] = useState('');
     const [contactInfo, setContactInfo] = useState('');
-    const [classMatch, setClassMatch] = useState('');
+    const [course, setCourse] = useState('');
+    const [myCourses, setMyCourses] = useState([]);
     const [availTime, setAvailTime] = useState('');
+    const [email, setEmail] = useState("");
     const [pfp, setPFP] = useState('');
+    const [likes, setLikes] = useState([]);
+    const [dislikes,setDislikes] = useState([]);
+    const [matches, setMatches] = useState([]);
 
     //popup
     const [showPopup, setShowPopup] = useState(false);
@@ -32,7 +42,7 @@ export default function EditProfile() {
     useEffect(() => {
         setName(Student.name);
         setContactInfo(Student.contactInfo);
-        setClassMatch(Student.classMatch);
+        setCourse(Student.classes);
         setAvailTime(Student.availTime);
         setPFP(Student.pfp)
     }, []);
@@ -40,7 +50,7 @@ export default function EditProfile() {
     // in here, add a function to update student object in the database, instead of Navigate
     // add validation for uder input (correct format)
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         // check validity
         
@@ -51,7 +61,7 @@ export default function EditProfile() {
         Student.availTime = availTime;
         Student.contactInfo = contactInfo;
         Student.pfp = pfp;
-        Student.classMatch = classMatch;
+        //Student.classMatch = classes;
 
         // popup code
         setShowPopup(true);
@@ -59,7 +69,25 @@ export default function EditProfile() {
             setShowPopup(false);
         }, 2300);
 
-
+        const user = auth.currentUser     
+        const docRef = doc(firestore, "students", user.uid);
+        const docSnap = await getDoc(docRef);
+        setLikes(docSnap.get("likes"));
+        setDislikes(docSnap.get("dislikes"));
+        setMatches(docSnap.get("matches"));
+        let courses =  myCourses.map(course => course.name);
+        let oldCourses = docSnap.get("courses");
+        setDoc(doc(firestore, "students", user.uid), {
+                username: name,
+                email: contactInfo,
+                pfp: pfp,
+                availTime: availTime,
+                classes: courses,
+                likes: likes,
+                dislikes: dislikes, 
+                matches: matches
+        });
+        console.log("Student profile updated!");
     };
 
     return(
@@ -82,13 +110,39 @@ export default function EditProfile() {
                 </div>
                 
                 <div className={EPMod.subcontainer}>
-                    <label htmlFor="classMatch">Class Match:</label>
-                    <input type="text" id="classMatch" value={classMatch} onChange={(e) => setClassMatch(e.target.value)} />
+                    <label htmlFor="courses">Courses</label>
+                    <input type="text" id="courses" value={course} onChange={(e) => setCourse(e.target.value)} />
                 </div>
                 
                 <div className={EPMod.subcontainer}>
                     <label htmlFor="availTime">Available Times:</label>
                     <input type="text" id="availTime" value={availTime} onChange={(e) => setAvailTime(e.target.value)} />
+                    <button type="button" onClick = {() => {
+                        if (course === "") {
+                            alert("Empty course name!");
+                        }
+                        else if (!RegExp('[a-zA-Z]+\\s*[0-9]+[a-zA-Z]*').test(course)){
+                            alert("Invalid course name: should be in the form [class][code] eg. COMSCI 35L");
+                            return;
+                        }
+                        else if (myCourses.length >4){
+                            alert("five courses max!!");
+                            return;
+                        }
+                        else if (myCourses.some(pair => pair.name === course.replace(/\s/g, "").toUpperCase() )){
+                            //if the value is in the array already
+                            setCourse('');
+                            return;
+                        }
+                        console.log(myCourses);
+
+                        setCourse('');
+                        setMyCourses([...myCourses, {name: course.replace(/\s/g, "").toUpperCase()}]);}
+                    }> Add Class</button>
+                    <button type="button" onClick = {() => setMyCourses([])}>Reset</button>
+                    <ol>
+                    {myCourses.map(course => <li key={course.name}>{course.name}</li>)}
+                    </ol>
                 </div>
 
                 <div className={EPMod.subcontainer}>
