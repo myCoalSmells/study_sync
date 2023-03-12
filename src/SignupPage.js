@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import LPMod from "./LoginPage.module.css";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { collection, setDoc, doc } from "firebase/firestore";
+import { collection, setDoc, doc, getDoc } from "firebase/firestore";
 import { auth, firestore } from "./firebase-setup/firebase"
-import {Link} from "react-router-dom";
+
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -14,7 +15,7 @@ export default function SignupPage() {
     const [pic, setPic] = useState("");
     const [course, setCourse] = useState("");
     const [myCourses, setCourses] = useState([]);
-
+    const Nav = useNavigate();
 
 
     //const colRef = collection(firestore, "students");
@@ -30,17 +31,21 @@ export default function SignupPage() {
         .then((userCredential) => {
             console.log(userCredential);
             const user = auth.currentUser;
-
+            let courses =  myCourses.map(course => course.name);
             setDoc(doc(firestore, "students", user.uid), {
                 username: username,
                 email: email,
                 pfp: pic,
                 key: user.uid,
-                classes: myCourses.map(course => course.name)
+                classes: courses
             });
-
+            // for (let i = 0; i < courses.length; i++){
+                
+            // }
             //console.log(user.uid);
-            alert("Success!");
+
+            //alert("Success!");
+            Nav("/");
         })
         .catch((error) => {
             alert("Invalid email and/or password");
@@ -118,9 +123,7 @@ export default function SignupPage() {
             </ol>
             <div className={LPMod.container}>
             {/* NEED VALIDITY CHECK*/}
-                <Link to="/"> 
-                    <button type="submit">Sign Up</button>
-                </Link>
+                <button type="submit">Sign Up</button>
             </div>
 
             </form>
