@@ -141,7 +141,7 @@ export default function ProfilePage() {
                     <h1 className={PPMod.title}>
                         Sign up or log in to view your profile.
                     </h1>
-                    <Link to='/signup'>
+                    <Link to='/login'>
                         <Button variant="outline-primary">
                             Log in
                         </Button>
