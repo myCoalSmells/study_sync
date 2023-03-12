@@ -7,8 +7,11 @@ import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { auth, firestore } from "./firebase-setup/firebase";
-import { doc, setDoc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
+import { doc, setDoc, getDoc, updateDoc, arrayUnion, deleteField } from "firebase/firestore";
 import { updateProfile } from "firebase/auth";
+import { async } from '@firebase/util';
+import { setDefaultEventParameters } from "firebase/analytics";
+
 
 export default function EditProfile() {
     // for now, this is a temporary way to change data
@@ -35,6 +38,8 @@ export default function EditProfile() {
     const [likes, setLikes] = useState([]);
     const [dislikes,setDislikes] = useState([]);
     const [matches, setMatches] = useState([]);
+    let [oldCourses, setOldCourses] = useState([]);
+    //let [students, setStudents] = useState([]);
 
     //popup
     const [showPopup, setShowPopup] = useState(false);
@@ -72,11 +77,11 @@ export default function EditProfile() {
         const user = auth.currentUser     
         const docRef = doc(firestore, "students", user.uid);
         const docSnap = await getDoc(docRef);
-        setLikes(docSnap.get("likes"));
+        setLikes(docRef.get())
         setDislikes(docSnap.get("dislikes"));
         setMatches(docSnap.get("matches"));
         let courses =  myCourses.map(course => course.name);
-        let oldCourses = docSnap.get("courses");
+        let uid = user.uid;
         setDoc(doc(firestore, "students", user.uid), {
                 username: name,
                 email: contactInfo,
