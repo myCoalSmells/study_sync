@@ -15,7 +15,7 @@ export default function EditProfile() {
         name: 'Michael Liu',
         pfp: "https://i.imgur.com/pkpvLJn.jpeg",
         classMatch: "CS 35L, Math 33B, Physics 1C",
-        availTime: "101001011010001111100101011001101101011110110010110101001101000011100110101000011000000110010101001100110010100000100101101101001011101110100000110001000111001000001001",
+        availTime: "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
         contactInfo: "myemail@yahoo.com"  
     };
 
@@ -69,6 +69,7 @@ export default function EditProfile() {
         }
         const updatedAvailTimeArr = availTimeArr.join('');
         setAvailTime(updatedAvailTimeArr);
+        console.log(index, " is pressed");
     };
 
     // generate the schedule table
@@ -76,24 +77,28 @@ export default function EditProfile() {
         const times = ['12-1 AM', '1-2 AM', '2-3 AM', '3-4 AM', '4-5 AM', '5-6 AM', '6-7 AM', '7-8 AM', '8-9 AM', '9-10 AM', '10-11 AM', '11-12 AM', '12-1 PM', '1-2 PM', '2-3 PM', '3-4 PM', '4-5 PM', '5-6 PM', '6-7 PM', '7-8 PM', '8-9 PM', '9-10 PM', '10-11 PM', '11-12 PM'];
         const tableRows = [];
         
-        for (let i = 0; i < times.length; i++) {
+        // hours
+        for (let i = 0; i < 24; i++) {
             const day = times[i];
             const availTimes = [];
         
-            // populate availability times for current day
+            // days
+            const checkIndex = i;
             for (let j = 0; j < 7; j++) {
-                const index = i + (j * 7);
+                const index = j + (i * 7);
                 availTimes.push(availTime[index]);
             }
         
             // generate table row with availability times for current day
+
             tableRows.push(
                 <tr key={day}>
                     <td className={styles.text}>{day}</td>
-                    {availTimes.map((time, index) => (
-                        <input type="checkbox" checked={availTime[index] === '1'} onChange={(e) => handleCheck(e.target.checked, index)} />
-                    ))}
-                    <td></td>
+                        {availTimes.map((time, index) => (
+                            <td key={index}>
+                                <input type="checkbox" checked={time === '1'} onChange={(e) => handleCheck(e.target.checked, index)} />
+                            </td>
+                        ))}
                 </tr>
             );
         }
@@ -131,10 +136,7 @@ export default function EditProfile() {
                 
                 <div className={EPMod.subcontainer}>
                     <label htmlFor="availTime">Available Times:</label>
-                    <textarea value={availTime} readOnly='true' style={{fontSize: "16px"}}/>
-
-                    <input type="checkbox" checked={availTime[0] === '1'} onChange={(e) => handleCheck(e.target.checked, 0)} />
-
+                    <textarea value={availTime} readOnly={true} style={{fontSize: "16px"}}/>
                 </div>
                 <div className={PPMod.container}>
                     <table>
