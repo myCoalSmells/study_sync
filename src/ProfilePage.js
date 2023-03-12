@@ -38,7 +38,7 @@ export default function ProfilePage() {
             <tr key={day}>
                 <td className={styles.text}>{day}</td>
                 {availTimes.map((time, index) => (
-                <td key={index} className={`${styles.text} ${time ? styles.highlight : ''}`}>{time}</td>
+                    <td key={index} className={`${styles.text} ${time ? styles.highlight : ''}`}>{time === '0' ? <span className={PPMod.red}>X</span> : <span className={PPMod.green}>✓</span>}</td>
                 ))}
                 <td></td>
             </tr>
