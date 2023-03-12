@@ -3,16 +3,16 @@ import Card from "react-bootstrap/Card";
 import { db } from "./firebase";
 import Button from 'react-bootstrap/Button';
 import IMod from "./Inbox.module.css";
- import { auth, firestore } from "./firebase-setup/firebase";
- import { getAuth, onAuthStateChanged } from "firebase/auth";
- import { get, getDoc } from "firebase/firestore";
- import { collection, doc, query, onSnapshot, setDoc } from "firebase/firestore";
- import { useNavigate } from 'react-router-dom';
-
+import { auth, firestore } from "./firebase-setup/firebase";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { get, getDoc } from "firebase/firestore";
+import { collection, doc, query, onSnapshot, setDoc } from "firebase/firestore";
+import { useNavigate } from 'react-router-dom';
   
 function Inbox() {
   const Nav = useNavigate();
   const auth = getAuth();
+  const [key, setKey] = useState("");
   const [username, setUsername] = useState("");
   const [students, setStudents] = useState([]);
   const [inboxMatches, setInboxMatches] = useState([]);
@@ -35,6 +35,7 @@ function Inbox() {
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
           setUsername(docSnap.get("username"));
+          setKey(docSnap.get("key"));
           setMatches(docSnap.get("matches") || []);
           setClasses(docSnap.get("classes") || []);
           setLikes(docSnap.get("likes") || []);
@@ -63,7 +64,7 @@ function Inbox() {
       });
       return unsub;
     }
-  });
+  }, [username, login, classes]);
 
 
   const getDislikes = (student) => {
@@ -79,14 +80,14 @@ function Inbox() {
   }
 
   const getInboxMatches = (student) => {
-    var isMatch = true;
-    if (student.username === username)
-        user = student;
+    let isMatch = true;
+    // if (student.username === username)
+    //     user = student;
     for (let student1 in students) {
-        if (student.username === student1.username)
-            break;
+        if (username === student1.username)
+            continue;
         for (let i = 0; i < getDislikes(student1).length; i++) {
-            if (getDislikes(student1)[i] === student.username) {
+            if (getDislikes(student1)[i] === key) {
                 isMatch = false;
                 break;
             }
@@ -94,7 +95,7 @@ function Inbox() {
         if (isMatch === false)
             break;
         for (let j = 0; j < getDislikes(student).length; j++) {
-            if (getDislikes(student)[j] === student1.username) {
+            if (dislikes[j] === student1.key) {
                 isMatch = false;
                 break;
             }
@@ -102,12 +103,10 @@ function Inbox() {
         if (isMatch === false)
             break;
         for (let k = 0; k < getMatches(student).length; k++) {
-            if (getMatches(student)[k] === student1.username){
-                if (!inboxMatches.some(m => m.username === student.username)) {
-                  // Add message to inboxMatches if it hasn't been read yet
-                  setInboxMatches(inboxMatches => [...inboxMatches, student]);
-                  setNewNum(newNum => newNum + 1); // Increment new message count
-                }
+            if (matches[k] === student1.key){
+                // Add message to inboxMatches if it hasn't been read yet
+                inboxMatches = [...inboxMatches, student1];
+                setNewNum(newNum => newNum + 1); // Increment new message count
                 break;
               }
         }
@@ -119,10 +118,7 @@ function Inbox() {
         return (
             <div className={IMod.inbox}>
                 <h1>INBOX</h1>
-                <div className={IMod.container}>
-                    <h1>({newNum} new)</h1>
-                </div>
-                <Button onClick={handleMarkAllAsRead}>Mark All As Read</Button>
+                <h1>You have no new matches at this time.</h1>
             </div>
         );
     }
