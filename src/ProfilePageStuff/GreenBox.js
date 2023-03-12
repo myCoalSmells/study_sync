@@ -2,8 +2,8 @@ import React from 'react';
 
 function GreenBox() {
   const boxStyle = {
-    backgroundColor: 'green',
-    width: '50px',
+    backgroundColor: '#006400',
+    width: '100px',
     height: '50px',
   };
 

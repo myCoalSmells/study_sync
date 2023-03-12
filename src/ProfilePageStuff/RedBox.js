@@ -2,8 +2,8 @@ import React from 'react';
 
 function RedBox() {
   const boxStyle = {
-    backgroundColor: 'red',
-    width: '50px',
+    backgroundColor: '#dc143c',
+    width: '100px',
     height: '50px',
   };
 
