@@ -23,6 +23,14 @@ function ProfileCards() {
     console.log('You swiped: ' + direction)
   }
 
+  const getProfilePic = (student) => {
+    if (student.pfp) {
+      return student.pfp;
+    } else {
+      return "https://i.pinimg.com/originals/1a/68/f7/1a68f758cd8b75d47e480722c3ad6791.png";
+    }
+  }
+
   return (
     <div className={PCMod.cardContainer}>
       <h1>Your Study Syncs!</h1>
@@ -34,7 +42,7 @@ function ProfileCards() {
             key={student.username}
             preventSwipe={['up', 'down']}
           >
-            <div style={{ backgroundImage: `url(${student.pfp})` }} className={PCMod.card}>
+            <div style={{ backgroundImage: `url(${getProfilePic(student)})` }} className={PCMod.card}>
               <h1>{student.username}</h1>
             </div>
           </TinderCard>
