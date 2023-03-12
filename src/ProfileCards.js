@@ -1,4 +1,4 @@
-import { collection, doc, query, onSnapshot } from "firebase/firestore";
+import { collection, doc, query, onSnapshot, setDoc } from "firebase/firestore";
 import { db } from "./firebase";
 import React, { useEffect, useState } from "react";
 import TinderCard from 'react-tinder-card';
@@ -9,43 +9,47 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { get, getDoc } from "firebase/firestore";
 import { useNavigate } from 'react-router-dom';
 
+
 function ProfileCards() {
   const Nav = useNavigate();
   const auth = getAuth();
   const [username, setUsername] = useState("");
-  const [classMatch, setClassMatch] = useState("");
   const [contactInfo, setContactInfo] = useState("");
   const [availTime, setAvailTime] = useState("");
   const [login, setLogin] = useState(false);
-  const [classes, setClasses] = useState([]);
-  
-
-  onAuthStateChanged(auth, async (user) => {
-    if (user) {
-      const docRef = doc(firestore, "students", user.uid);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        setUsername(docSnap.get("username"));
-        setClassMatch(docSnap.get("classMatch"));
-        setContactInfo(docSnap.get("email"));
-        setClasses(docSnap.get("classes"));
-        setAvailTime(docSnap.get("availTime"));
-        setLogin(true);
-      } else {
-        console.log("Document could not be found.");
-      }
-    } else {
-      console.log("No one is logged in.");
-      setLogin(false); // set login state to false when user is not logged in
-      Nav('/login')
-    }
-  });
-
+  const [classes, setClasses] = useState("");
+  const [matches, setMatches] = useState([]);
+  const [likes, setLikes] = useState([]);
+  const [dislikes, setDislikes] = useState([]);
   const [students, setStudents] = useState([]);
 
+  useEffect(() => {
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const docRef = doc(firestore, "students", user.uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          setUsername(docSnap.get("username"));
+          setMatches(docSnap.get("matches") || []);
+          setClasses(docSnap.get("classes") || []);
+          setLikes(docSnap.get("likes") || []);
+          setDislikes(docSnap.get("dislikes") || []);
+          setContactInfo(docSnap.get("email"));
+          setAvailTime(docSnap.get("availTime") || []);
+          setLogin(true);
+        } else {
+          console.log("Document could not be found.");
+        }
+      } else {
+        console.log("No one is logged in.");
+        setLogin(false); // set login state to false when user is not logged in
+        Nav('/login')
+      }
+    });
+  }, [auth, Nav]);
 
   useEffect(() => { 
-    if (login){ // use the login state to determine if user is logged in or not
+    if (login){
       console.log("logged in");
       const q = query(collection(db, "students"));
       const unsub = onSnapshot(q, (querySnapshot) => {
@@ -56,15 +60,10 @@ function ProfileCards() {
       });
       return unsub;
     }
-  }, [username, login, classes]); // Add login state and classes to the dependency array
-  
+  }, [username, login, classes]);
 
-  
-  
-
-
-  const onSwipe = (direction) => { //put matches and stuff edit firebase
-    console.log('You swiped: ' + direction)
+  const onSwipe = async (direction, student) => {
+    console.log(`You swiped ${direction} on ${student.username}`);
   }
 
   const getProfilePic = (student) => {
@@ -85,7 +84,7 @@ function ProfileCards() {
       <div className={PCMod.studentCards__container}>
         {students.map(student => (
           <TinderCard
-            onSwipe={onSwipe}
+            onSwipe={(direction) => onSwipe(direction, student)}
             className={PCMod.swipe}
             key={student.username}
             preventSwipe={['up', 'down']}

@@ -28,7 +28,7 @@ export default function ProfilePage() {
     const [contactInfo, setContactInfo] = useState("");
     const [availTime, setAvailTime] = useState("");
     const [login, setLogin] = useState(false);
-    const [classes, setClasses] = useState([]);
+    const [classes, setClasses] = useState("");
 
 
     onAuthStateChanged(auth, async (user) => {
@@ -37,12 +37,12 @@ export default function ProfilePage() {
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
                 setUsername(docSnap.get("username"));
-                setMatches(docSnap.get("matches"));
+                setMatches(docSnap.get("matches") || []);
                 setClasses(docSnap.get("classes"));
-                setLikes(docSnap.get("likes"));
-                setDislikes(docSnap.get("dislikes"));
+                setLikes(docSnap.get("likes") || []); // add likes field with empty array as default
+                setDislikes(docSnap.get("dislikes") || []); // add dislikes field with empty array as default
                 setContactInfo(docSnap.get("email"));
-                setAvailTime(docSnap.get("availTime"));
+                setAvailTime(docSnap.get("availTime") || []);
                 setLogin(true);
             } else {
                 console.log("Document could not be found.");
