@@ -7,8 +7,11 @@ import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { auth, firestore } from "./firebase-setup/firebase";
-import { doc, setDoc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
+import { doc, setDoc, getDoc, updateDoc, arrayUnion, deleteField } from "firebase/firestore";
 import { updateProfile } from "firebase/auth";
+import { async } from '@firebase/util';
+import { setDefaultEventParameters } from "firebase/analytics";
+
 
 export default function EditProfile() {
     // for now, this is a temporary way to change data
@@ -35,6 +38,8 @@ export default function EditProfile() {
     const [likes, setLikes] = useState([]);
     const [dislikes,setDislikes] = useState([]);
     const [matches, setMatches] = useState([]);
+    let [oldCourses, setOldCourses] = useState([]);
+    //let [students, setStudents] = useState([]);
 
     //popup
     const [showPopup, setShowPopup] = useState(false);
@@ -69,23 +74,18 @@ export default function EditProfile() {
             setShowPopup(false);
         }, 2300);
 
+        // grabs current user from authenticator, and then updates documents through their uid
         const user = auth.currentUser     
         const docRef = doc(firestore, "students", user.uid);
         const docSnap = await getDoc(docRef);
-        setLikes(docSnap.get("likes"));
-        setDislikes(docSnap.get("dislikes"));
-        setMatches(docSnap.get("matches"));
         let courses =  myCourses.map(course => course.name);
-        let oldCourses = docSnap.get("courses");
-        setDoc(doc(firestore, "students", user.uid), {
+        let uid = user.uid;
+        await updateDoc(doc(firestore, "students", user.uid), {
                 username: name,
                 email: contactInfo,
                 pfp: pfp,
                 availTime: availTime,
                 classes: courses,
-                likes: likes,
-                dislikes: dislikes, 
-                matches: matches
         });
         console.log("Student profile updated!");
     };
