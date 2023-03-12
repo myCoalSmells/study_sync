@@ -4,12 +4,22 @@ import React, { useEffect, useState } from "react";
 import TinderCard from 'react-tinder-card';
 import PCMod from "./ProfileCards.module.css";
 import SwipeButtons from "./SwipeButtons";
+import {auth} from "./firebase-setup/firebase";
+import { useNavigate } from 'react-router-dom';
 
 function ProfileCards() {
+  const Nav = useNavigate();
+  const user = auth.currentUser;
 
   const [students, setStudents] = useState([]);
-
   useEffect(() => { 
+    if (user){
+      console.log("logged in");
+    }
+    else{
+      console.log("not logged in");
+      Nav('/login')
+    }
     const q = query(collection(db, "students"));
     const unsub = onSnapshot(q, (querySnapshot) => {
       setStudents(querySnapshot.docs.map(doc => doc.data()));
