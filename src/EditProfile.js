@@ -62,7 +62,7 @@ export default function EditProfile() {
 
     // checkbox check
     const handleCheck = (isChecked, index, e) => {
-        const availTimeArr = availTime.split('');
+        const availTimeArr = tempAvailTime.split('');
         if (isChecked) {
           availTimeArr[index] = '1';
         } else {
