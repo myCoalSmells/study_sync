@@ -8,6 +8,9 @@ import { auth, firestore } from "./firebase-setup/firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { doc, get, getDoc } from "firebase/firestore";
 
+import Redbox from "./ProfilePageStuff/RedBox"
+import Greenbox from "./ProfilePageStuff/GreenBox"
+
 
 
 export default function ProfilePage() {
@@ -62,7 +65,9 @@ export default function ProfilePage() {
             <tr key={day}>
                 <td className={styles.text}>{day}</td>
                 {availTimes.map((time, index) => (
-                    <td key={index} className={`${styles.text} ${time ? styles.highlight : ''}`}>{time === '0' ? <span className={PPMod.red}>X</span> : <span className={PPMod.green}>✓</span>}</td>
+                    <td key={index} className={`${styles.text} ${time ? styles.highlight : ''}`}>
+                        {time === '0' ? <Redbox/> : <Greenbox/>}
+                    </td>
                 ))}
                 <td></td>
             </tr>
@@ -75,7 +80,11 @@ export default function ProfilePage() {
         text: PPMod.text,
         highlight: PPMod.highlight,
     };
-
+    const boxStyle = {
+        backgroundColor: 'red',
+        width: '50px',
+        height: '50px',
+    };
 
     // Temp Student Data Format
     // Extract firebase and put into this format?
@@ -83,7 +92,7 @@ export default function ProfilePage() {
         name: 'Michael Liu',
         pfp: "https://i.imgur.com/pkpvLJn.jpeg",
         classMatch: "CS 35L, Math 33B, Physics 1C",
-        availTime: "101010110100100110011100000110001010000101011000111101101011110111100101000101110111000000010001010111101100100110101101100001011100010000011101100001010100011010000100",
+        availTime: "000000111100000000011100000110001010000101011000111101101011110111100101000101110111000000010001010111101100100110101101100001011100010000011101100001010100011010000100",
         contactInfo: "myemail@yahoo.com"  
     };
 
