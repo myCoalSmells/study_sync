@@ -33,7 +33,7 @@ export default function EditProfile() {
 
     const [name, setName] = useState(Student.name);
     const [contactInfo, setContactInfo] = useState(Student.contactInfo);
-    const [classMatch, setClassMatch] = useState(Student.classMatch);
+    const [classMatch, setClassMatch] = useState(Student.classes);
     const [availTime, setAvailTime] = useState(Student.availTime);
     const [tempAvailTime, setTempAvailTime] = useState(Student.availTime)
     const [pfp, setPFP] = useState(Student.pfp);
@@ -131,8 +131,9 @@ export default function EditProfile() {
                 
                 <div className={EPMod.subcontainer}>
                     <label htmlFor="courses">Courses</label>
-                    <input value={myCourses} readOnly={true} />
-                    <input type="text" id="courses" value='' onChange={(e) => setCourse(e.target.value)} />
+                    <input value={classMatch} readOnly={true} />
+                    <input type="text" id="courses" placeholder="CS 35L" onChange={(e) => setCourse(e.target.value)} />
+
                     <button type="button" onClick = {() => {
                         if (course === "") {
                             alert("Empty course name!");
