@@ -4,7 +4,8 @@ import LPMod from "./LoginPage.module.css";
 import handleSubmit from "./firebase-setup/handlesubmit";
 import { useRef } from "react";
 import { auth } from "./firebase-setup/firebase";
-import { signInWithEmailAndPassword, setPersistence, browserLocalPersistence } from "firebase/auth";
+import { signInWithEmailAndPassword, setPersistence, browserLocalPersistence, sendPasswordResetEmail,
+confirmPasswordReset } from "firebase/auth";
 
 
 export default function LoginPage() {
@@ -36,6 +37,30 @@ export default function LoginPage() {
             alert("email or password was wrong, try again")
         });
     }
+    const forgotUsernameOrPassword = (e) => {
+
+        e.preventDefault()
+        setPersistence(auth, browserLocalPersistence)
+        .then(()=>
+        {
+        sendPasswordResetEmail(auth, email)
+        .then((userCredential) =>{
+            console.log(userCredential);
+            console.log("reset password email sent");
+            nav("/");
+        })
+        .catch((error) => {
+            console.log(error);
+            console.log("email not sent");
+            alert("invalid email")
+        })
+        })
+        .catch((error) => {
+            console.log(error);
+            console.log("email not sent");
+            alert("invalid email")
+        });
+    }
     return (
         <div className={LPMod.login}>
         <h1>Login to StudySync</h1>
@@ -55,16 +80,16 @@ export default function LoginPage() {
             <div className={LPMod.container}>
                 <button type="submit">Login</button>
             </div>
-            <div className={LPMod.container}>
+            </form>
+            <form onSubmit={forgotUsernameOrPassword}>
                 <button type="submit">Forgot username or password?</button>
-            </div>
+            </form>
             <div className={LPMod.login}>
                 <h1>Don't have an account?</h1>
                 <Link to="/signup">
                 <button type="submit">Sign Up</button>
                 </Link>
             </div>
-            </form>
         </div>
     )
 }
