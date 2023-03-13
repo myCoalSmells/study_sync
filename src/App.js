@@ -7,6 +7,7 @@ import LoginPage from "./LoginPage";
 import LogoutPage from "./LogoutPage";
 import SignupPage from "./SignupPage";
 import EditProfile from "./EditProfile";
+import ViewProfile from "./ViewProfile";
 import Inbox from "./Inbox";
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import Advanced from "./Advanced";
@@ -21,6 +22,7 @@ function App() {
         <Routes>
           <Route path="/inbox" element={<h1><Inbox /></h1>}/>
           <Route path="/profile" element={<h1><ProfilePage /></h1>}/>
+          <Route path="/profile/:userId" element={<h1><ViewProfile /></h1>}/>
           <Route path="/login" element={<h1><LoginPage /></h1>}/>
           <Route path="/logout" element={<h1><LogoutPage /></h1>}/>
           <Route path="/signup" element={<h1><SignupPage /></h1>}/>
