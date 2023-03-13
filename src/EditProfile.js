@@ -59,7 +59,7 @@ export default function EditProfile() {
         //setName(Student.name);
         setContactInfo(Student.contactInfo);
         //setCourse(Student.classes);
-        setAvailTime(Student.availTime);
+        //setAvailTime(Student.availTime);
         setPFP(Student.pfp)
     }, []);
 
@@ -71,6 +71,7 @@ export default function EditProfile() {
             setName(docSnap.get("username"));
             setPFP(docSnap.get("pfp"));
             setEmail(docSnap.get("email"));
+            setTempAvailTime(docSnap.get("availTime"));
             const mCourses = docSnap.get("classes");
             if (mCourses.length) {
                 setViewCourses(mCourses[0]);
@@ -104,7 +105,7 @@ export default function EditProfile() {
                 username: name,
                 email: contactInfo,
                 pfp: pfp,
-                availTime: availTime,
+                availTime: tempAvailTime,
                 classes: courses,
         });
 
