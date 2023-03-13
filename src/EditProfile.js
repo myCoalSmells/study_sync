@@ -26,7 +26,7 @@ export default function EditProfile() {
         name: 'Michael Liu',
         pfp: "https://i.imgur.com/pkpvLJn.jpeg",
         classes: ["CS 35L", "Math 33B", "Physics 1C"],
-        availTime: "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        availTime: "000110001000010011011100010111111010000010010000101011111101101000100010100101001110111001011000101011111010011010001101110011011001110000011000011101010000010000111101",
         contactInfo: "myemail@yahoo.com"  
     };
 
@@ -110,6 +110,20 @@ export default function EditProfile() {
         setTempAvailTime(updatedAvailTimeArr);
     };
 
+    // box highlight
+    const boxCheck = (index, green) => {
+        const availTimeArr = tempAvailTime.split('');
+        if (green) {
+          availTimeArr[index] = '0';
+        } else {
+          availTimeArr[index] = '1';
+        }
+        const updatedAvailTimeArr = availTimeArr.join('');
+        setTempAvailTime(updatedAvailTimeArr);
+
+        console.log(index, green);
+    };
+
     return(
         <div>
             
@@ -183,251 +197,253 @@ export default function EditProfile() {
                         <tbody>
                             <tr>
                                 <td className={PPMod.text}>12-1 AM</td>
-                                <td><input type="checkbox" checked={tempAvailTime[0] === '1'} onChange={(e) => handleCheck(e.target.checked, 0)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[1] === '1'} onChange={(e) => handleCheck(e.target.checked, 1)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[2] === '1'} onChange={(e) => handleCheck(e.target.checked, 2)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[3] === '1'} onChange={(e) => handleCheck(e.target.checked, 3)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[4] === '1'} onChange={(e) => handleCheck(e.target.checked, 4)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[5] === '1'} onChange={(e) => handleCheck(e.target.checked, 5)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[6] === '1'} onChange={(e) => handleCheck(e.target.checked, 6)} /></td>
+                                <td><button className={tempAvailTime[0] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(0, tempAvailTime[0] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[1] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(1, tempAvailTime[1] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[2] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(2, tempAvailTime[2] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[3] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(3, tempAvailTime[3] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[4] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(4, tempAvailTime[4] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[5] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(5, tempAvailTime[5] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[6] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(6, tempAvailTime[6] === '1' ? true : false)}></button></td>
                                 <td></td>
                             </tr>
                             <tr>
                                 <td className={PPMod.text}>1-2 AM</td>
-                                <td><input type="checkbox" checked={tempAvailTime[7] === '1'} onChange={(e) => handleCheck(e.target.checked, 7)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[8] === '1'} onChange={(e) => handleCheck(e.target.checked, 8)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[9] === '1'} onChange={(e) => handleCheck(e.target.checked, 9)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[10] === '1'} onChange={(e) => handleCheck(e.target.checked, 10)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[11] === '1'} onChange={(e) => handleCheck(e.target.checked, 11)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[12] === '1'} onChange={(e) => handleCheck(e.target.checked, 12)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[13] === '1'} onChange={(e) => handleCheck(e.target.checked, 13)} /></td>
+                                <td><button className={tempAvailTime[7] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(7, tempAvailTime[7] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[8] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(8, tempAvailTime[8] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[9] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(9, tempAvailTime[9] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[10] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(10, tempAvailTime[10] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[11] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(11, tempAvailTime[11] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[12] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(12, tempAvailTime[12] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[13] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(13, tempAvailTime[13] === '1' ? true : false)}></button></td>
                                 <td></td>
                             </tr>
                             <tr>
                                 <td className={PPMod.text}>2-3 AM</td>
-                                <td><input type="checkbox" checked={tempAvailTime[14] === '1'} onChange={(e) => handleCheck(e.target.checked, 14)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[15] === '1'} onChange={(e) => handleCheck(e.target.checked, 15)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[16] === '1'} onChange={(e) => handleCheck(e.target.checked, 16)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[17] === '1'} onChange={(e) => handleCheck(e.target.checked, 17)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[18] === '1'} onChange={(e) => handleCheck(e.target.checked, 18)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[19] === '1'} onChange={(e) => handleCheck(e.target.checked, 19)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[20] === '1'} onChange={(e) => handleCheck(e.target.checked, 20)} /></td>
+                                <td><button className={tempAvailTime[14] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(14, tempAvailTime[14] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[15] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(15, tempAvailTime[15] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[16] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(16, tempAvailTime[16] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[17] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(17, tempAvailTime[17] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[18] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(18, tempAvailTime[18] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[19] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(19, tempAvailTime[19] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[20] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(20, tempAvailTime[20] === '1' ? true : false)}></button></td>
                                 <td></td>
                             </tr>
                             <tr>
                                 <td className={PPMod.text}>3-4 AM</td>
-                                <td><input type="checkbox" checked={tempAvailTime[21] === '1'} onChange={(e) => handleCheck(e.target.checked, 21)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[22] === '1'} onChange={(e) => handleCheck(e.target.checked, 22)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[23] === '1'} onChange={(e) => handleCheck(e.target.checked, 23)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[24] === '1'} onChange={(e) => handleCheck(e.target.checked, 24)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[25] === '1'} onChange={(e) => handleCheck(e.target.checked, 25)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[26] === '1'} onChange={(e) => handleCheck(e.target.checked, 26)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[27] === '1'} onChange={(e) => handleCheck(e.target.checked, 27)} /></td>
+                                <td><button className={tempAvailTime[21] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(21, tempAvailTime[21] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[22] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(22, tempAvailTime[22] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[23] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(23, tempAvailTime[23] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[24] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(24, tempAvailTime[24] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[25] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(25, tempAvailTime[25] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[26] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(26, tempAvailTime[26] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[27] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(27, tempAvailTime[27] === '1' ? true : false)}></button></td>
                                 <td></td>
                             </tr>
                             <tr>
                                 <td className={PPMod.text}>4-5 AM</td>
-                                <td><input type="checkbox" checked={tempAvailTime[28] === '1'} onChange={(e) => handleCheck(e.target.checked, 28)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[29] === '1'} onChange={(e) => handleCheck(e.target.checked, 29)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[30] === '1'} onChange={(e) => handleCheck(e.target.checked, 30)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[31] === '1'} onChange={(e) => handleCheck(e.target.checked, 31)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[32] === '1'} onChange={(e) => handleCheck(e.target.checked, 32)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[33] === '1'} onChange={(e) => handleCheck(e.target.checked, 33)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[34] === '1'} onChange={(e) => handleCheck(e.target.checked, 34)} /></td>
+                                <td><button className={tempAvailTime[28] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(28, tempAvailTime[28] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[29] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(29, tempAvailTime[29] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[30] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(30, tempAvailTime[30] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[31] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(31, tempAvailTime[31] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[32] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(32, tempAvailTime[32] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[33] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(33, tempAvailTime[33] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[34] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(34, tempAvailTime[34] === '1' ? true : false)}></button></td>
                                 <td></td>
                             </tr>
                             <tr>
                                 <td className={PPMod.text}>5-6 AM</td>
-                                <td><input type="checkbox" checked={tempAvailTime[35] === '1'} onChange={(e) => handleCheck(e.target.checked, 35)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[36] === '1'} onChange={(e) => handleCheck(e.target.checked, 36)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[37] === '1'} onChange={(e) => handleCheck(e.target.checked, 37)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[38] === '1'} onChange={(e) => handleCheck(e.target.checked, 38)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[39] === '1'} onChange={(e) => handleCheck(e.target.checked, 39)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[40] === '1'} onChange={(e) => handleCheck(e.target.checked, 40)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[41] === '1'} onChange={(e) => handleCheck(e.target.checked, 41)} /></td>
+                                <td><button className={tempAvailTime[35] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(35, tempAvailTime[35] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[36] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(36, tempAvailTime[36] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[37] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(37, tempAvailTime[37] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[38] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(38, tempAvailTime[38] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[39] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(39, tempAvailTime[39] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[40] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(40, tempAvailTime[40] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[41] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(41, tempAvailTime[41] === '1' ? true : false)}></button></td>
                                 <td></td>
                             </tr>
                             <tr>
                                 <td className={PPMod.text}>6-7 AM</td>
-                                <td><input type="checkbox" checked={tempAvailTime[42] === '1'} onChange={(e) => handleCheck(e.target.checked, 42)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[43] === '1'} onChange={(e) => handleCheck(e.target.checked, 43)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[44] === '1'} onChange={(e) => handleCheck(e.target.checked, 44)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[45] === '1'} onChange={(e) => handleCheck(e.target.checked, 45)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[46] === '1'} onChange={(e) => handleCheck(e.target.checked, 46)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[47] === '1'} onChange={(e) => handleCheck(e.target.checked, 47)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[48] === '1'} onChange={(e) => handleCheck(e.target.checked, 48)} /></td>
+                                <td><button className={tempAvailTime[42] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(42, tempAvailTime[42] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[43] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(43, tempAvailTime[43] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[44] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(44, tempAvailTime[44] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[45] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(45, tempAvailTime[45] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[46] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(46, tempAvailTime[46] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[47] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(47, tempAvailTime[47] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[48] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(48, tempAvailTime[48] === '1' ? true : false)}></button></td>
+
                                 <td></td>
                             </tr>
                             <tr>
                                 <td className={PPMod.text}>7-8 AM</td>
-                                <td><input type="checkbox" checked={tempAvailTime[49] === '1'} onChange={(e) => handleCheck(e.target.checked, 49)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[50] === '1'} onChange={(e) => handleCheck(e.target.checked, 50)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[51] === '1'} onChange={(e) => handleCheck(e.target.checked, 51)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[52] === '1'} onChange={(e) => handleCheck(e.target.checked, 52)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[53] === '1'} onChange={(e) => handleCheck(e.target.checked, 53)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[54] === '1'} onChange={(e) => handleCheck(e.target.checked, 54)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[55] === '1'} onChange={(e) => handleCheck(e.target.checked, 55)} /></td>
+                                <td><button className={tempAvailTime[49] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(49, tempAvailTime[49] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[50] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(50, tempAvailTime[50] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[51] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(51, tempAvailTime[51] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[52] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(52, tempAvailTime[52] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[53] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(53, tempAvailTime[53] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[54] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(54, tempAvailTime[54] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[55] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(55, tempAvailTime[55] === '1' ? true : false)}></button></td>
                             </tr>
                             <tr>
                                 <td className={PPMod.text}>8-9 AM</td>
-                                <td><input type="checkbox" checked={tempAvailTime[56] === '1'} onChange={(e) => handleCheck(e.target.checked, 56)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[57] === '1'} onChange={(e) => handleCheck(e.target.checked, 57)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[58] === '1'} onChange={(e) => handleCheck(e.target.checked, 58)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[59] === '1'} onChange={(e) => handleCheck(e.target.checked, 59)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[60] === '1'} onChange={(e) => handleCheck(e.target.checked, 60)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[61] === '1'} onChange={(e) => handleCheck(e.target.checked, 61)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[62] === '1'} onChange={(e) => handleCheck(e.target.checked, 62)} /></td>
+                                <td><button className={tempAvailTime[56] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(56, tempAvailTime[56] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[57] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(57, tempAvailTime[57] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[58] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(58, tempAvailTime[58] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[59] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(59, tempAvailTime[59] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[60] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(60, tempAvailTime[60] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[61] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(61, tempAvailTime[61] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[62] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(62, tempAvailTime[62] === '1' ? true : false)}></button></td>
                             </tr>
                             <tr>
                                 <td className={PPMod.text}>9-10 AM</td>
-                                <td><input type="checkbox" checked={tempAvailTime[63] === '1'} onChange={(e) => handleCheck(e.target.checked, 63)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[64] === '1'} onChange={(e) => handleCheck(e.target.checked, 64)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[65] === '1'} onChange={(e) => handleCheck(e.target.checked, 65)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[66] === '1'} onChange={(e) => handleCheck(e.target.checked, 66)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[67] === '1'} onChange={(e) => handleCheck(e.target.checked, 67)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[68] === '1'} onChange={(e) => handleCheck(e.target.checked, 68)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[69] === '1'} onChange={(e) => handleCheck(e.target.checked, 69)} /></td>
+                                <td><button className={tempAvailTime[63] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(63, tempAvailTime[63] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[64] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(64, tempAvailTime[64] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[65] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(65, tempAvailTime[65] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[66] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(66, tempAvailTime[66] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[67] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(67, tempAvailTime[67] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[68] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(68, tempAvailTime[68] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[69] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(69, tempAvailTime[69] === '1' ? true : false)}></button></td>
                             </tr>
                             <tr>
                                 <td className={PPMod.text}>10-11 AM</td>
-                                <td><input type="checkbox" checked={tempAvailTime[70] === '1'} onChange={(e) => handleCheck(e.target.checked, 70)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[71] === '1'} onChange={(e) => handleCheck(e.target.checked, 71)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[72] === '1'} onChange={(e) => handleCheck(e.target.checked, 72)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[73] === '1'} onChange={(e) => handleCheck(e.target.checked, 73)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[74] === '1'} onChange={(e) => handleCheck(e.target.checked, 74)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[75] === '1'} onChange={(e) => handleCheck(e.target.checked, 75)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[76] === '1'} onChange={(e) => handleCheck(e.target.checked, 76)} /></td>
+                                <td><button className={tempAvailTime[70] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(70, tempAvailTime[70] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[71] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(71, tempAvailTime[71] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[72] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(72, tempAvailTime[72] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[73] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(73, tempAvailTime[73] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[74] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(74, tempAvailTime[74] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[75] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(75, tempAvailTime[75] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[76] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(76, tempAvailTime[76] === '1' ? true : false)}></button></td>
                                 <td></td>
                             </tr>
                             <tr>
                                 <td className={PPMod.text}>11 AM - 12 PM</td>
-                                <td><input type="checkbox" checked={tempAvailTime[77] === '1'} onChange={(e) => handleCheck(e.target.checked, 77)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[78] === '1'} onChange={(e) => handleCheck(e.target.checked, 78)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[79] === '1'} onChange={(e) => handleCheck(e.target.checked, 79)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[80] === '1'} onChange={(e) => handleCheck(e.target.checked, 80)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[81] === '1'} onChange={(e) => handleCheck(e.target.checked, 81)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[82] === '1'} onChange={(e) => handleCheck(e.target.checked, 82)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[83] === '1'} onChange={(e) => handleCheck(e.target.checked, 83)} /></td>
+                                <td><button className={tempAvailTime[77] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(77, tempAvailTime[77] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[78] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(78, tempAvailTime[78] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[79] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(79, tempAvailTime[79] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[80] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(80, tempAvailTime[80] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[81] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(81, tempAvailTime[81] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[82] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(82, tempAvailTime[82] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[83] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(83, tempAvailTime[83] === '1' ? true : false)}></button></td>
                             </tr>
                             <tr>
                                 <td className={PPMod.text}>12-1 PM</td>
-                                <td><input type="checkbox" checked={tempAvailTime[84] === '1'} onChange={(e) => handleCheck(e.target.checked, 84)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[85] === '1'} onChange={(e) => handleCheck(e.target.checked, 85)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[86] === '1'} onChange={(e) => handleCheck(e.target.checked, 86)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[87] === '1'} onChange={(e) => handleCheck(e.target.checked, 87)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[88] === '1'} onChange={(e) => handleCheck(e.target.checked, 88)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[89] === '1'} onChange={(e) => handleCheck(e.target.checked, 89)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[90] === '1'} onChange={(e) => handleCheck(e.target.checked, 90)} /></td>
+                                <td><button className={tempAvailTime[84] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(84, tempAvailTime[84] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[85] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(85, tempAvailTime[85] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[86] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(86, tempAvailTime[86] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[87] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(87, tempAvailTime[87] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[88] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(88, tempAvailTime[88] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[89] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(89, tempAvailTime[89] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[90] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(90, tempAvailTime[90] === '1' ? true : false)}></button></td>
                             </tr>
                             <tr>
                                 <td className={PPMod.text}>1-2 PM</td>
-                                <td><input type="checkbox" checked={tempAvailTime[91] === '1'} onChange={(e) => handleCheck(e.target.checked, 91)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[92] === '1'} onChange={(e) => handleCheck(e.target.checked, 92)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[93] === '1'} onChange={(e) => handleCheck(e.target.checked, 93)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[94] === '1'} onChange={(e) => handleCheck(e.target.checked, 94)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[95] === '1'} onChange={(e) => handleCheck(e.target.checked, 95)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[96] === '1'} onChange={(e) => handleCheck(e.target.checked, 96)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[97] === '1'} onChange={(e) => handleCheck(e.target.checked, 97)} /></td>
+                                <td><button className={tempAvailTime[91] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(91, tempAvailTime[91] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[92] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(92, tempAvailTime[92] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[93] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(93, tempAvailTime[93] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[94] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(94, tempAvailTime[94] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[95] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(95, tempAvailTime[95] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[96] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(96, tempAvailTime[96] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[97] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(97, tempAvailTime[97] === '1' ? true : false)}></button></td>
                             </tr>
                             <tr>
                                 <td className={PPMod.text}>2-3 PM</td>
-                                <td><input type="checkbox" checked={tempAvailTime[98] === '1'} onChange={(e) => handleCheck(e.target.checked, 98)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[99] === '1'} onChange={(e) => handleCheck(e.target.checked, 99)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[100] === '1'} onChange={(e) => handleCheck(e.target.checked, 100)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[101] === '1'} onChange={(e) => handleCheck(e.target.checked, 101)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[102] === '1'} onChange={(e) => handleCheck(e.target.checked, 102)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[103] === '1'} onChange={(e) => handleCheck(e.target.checked, 103)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[104] === '1'} onChange={(e) => handleCheck(e.target.checked, 104)} /></td>
+                                <td><button className={tempAvailTime[98] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(98, tempAvailTime[98] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[99] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(99, tempAvailTime[99] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[100] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(100, tempAvailTime[100] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[101] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(101, tempAvailTime[101] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[102] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(102, tempAvailTime[102] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[103] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(103, tempAvailTime[103] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[104] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(104, tempAvailTime[104] === '1' ? true : false)}></button></td>
                             </tr>
                             <tr>
                                 <td className={PPMod.text}>3-4 PM</td>
-                                <td><input type="checkbox" checked={tempAvailTime[105] === '1'} onChange={(e) => handleCheck(e.target.checked, 105)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[106] === '1'} onChange={(e) => handleCheck(e.target.checked, 106)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[107] === '1'} onChange={(e) => handleCheck(e.target.checked, 107)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[108] === '1'} onChange={(e) => handleCheck(e.target.checked, 108)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[109] === '1'} onChange={(e) => handleCheck(e.target.checked, 109)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[110] === '1'} onChange={(e) => handleCheck(e.target.checked, 110)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[111] === '1'} onChange={(e) => handleCheck(e.target.checked, 111)} /></td>
+                                <td><button className={tempAvailTime[105] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(105, tempAvailTime[105] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[106] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(106, tempAvailTime[106] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[107] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(107, tempAvailTime[107] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[108] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(108, tempAvailTime[108] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[109] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(109, tempAvailTime[109] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[110] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(110, tempAvailTime[110] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[111] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(111, tempAvailTime[111] === '1' ? true : false)}></button></td>
+
                             </tr>
                             <tr>
                                 <td className={PPMod.text}>4-5 PM</td>
-                                <td><input type="checkbox" checked={tempAvailTime[112] === '1'} onChange={(e) => handleCheck(e.target.checked, 112)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[113] === '1'} onChange={(e) => handleCheck(e.target.checked, 113)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[114] === '1'} onChange={(e) => handleCheck(e.target.checked, 114)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[115] === '1'} onChange={(e) => handleCheck(e.target.checked, 115)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[116] === '1'} onChange={(e) => handleCheck(e.target.checked, 116)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[117] === '1'} onChange={(e) => handleCheck(e.target.checked, 117)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[118] === '1'} onChange={(e) => handleCheck(e.target.checked, 118)} /></td>
+                                <td><button className={tempAvailTime[112] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(112, tempAvailTime[112] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[113] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(113, tempAvailTime[113] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[114] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(114, tempAvailTime[114] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[115] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(115, tempAvailTime[115] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[116] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(116, tempAvailTime[116] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[117] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(117, tempAvailTime[117] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[118] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(118, tempAvailTime[118] === '1' ? true : false)}></button></td>
                             </tr>
                             <tr>
                                 <td className={PPMod.text}>5-6 PM</td>
-                                <td><input type="checkbox" checked={tempAvailTime[119] === '1'} onChange={(e) => handleCheck(e.target.checked, 119)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[120] === '1'} onChange={(e) => handleCheck(e.target.checked, 120)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[121] === '1'} onChange={(e) => handleCheck(e.target.checked, 121)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[122] === '1'} onChange={(e) => handleCheck(e.target.checked, 122)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[123] === '1'} onChange={(e) => handleCheck(e.target.checked, 123)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[124] === '1'} onChange={(e) => handleCheck(e.target.checked, 124)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[125] === '1'} onChange={(e) => handleCheck(e.target.checked, 125)} /></td>
+                                <td><button className={tempAvailTime[119] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(119, tempAvailTime[119] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[120] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(120, tempAvailTime[120] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[121] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(121, tempAvailTime[121] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[122] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(122, tempAvailTime[122] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[123] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(123, tempAvailTime[123] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[124] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(124, tempAvailTime[124] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[125] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(125, tempAvailTime[125] === '1' ? true : false)}></button></td>
                             </tr>
                             <tr>
                                 <td className={PPMod.text}>6-7 PM</td>
-                                <td><input type="checkbox" checked={tempAvailTime[126] === '1'} onChange={(e) => handleCheck(e.target.checked, 126)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[127] === '1'} onChange={(e) => handleCheck(e.target.checked, 127)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[128] === '1'} onChange={(e) => handleCheck(e.target.checked, 128)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[129] === '1'} onChange={(e) => handleCheck(e.target.checked, 129)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[130] === '1'} onChange={(e) => handleCheck(e.target.checked, 130)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[131] === '1'} onChange={(e) => handleCheck(e.target.checked, 131)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[132] === '1'} onChange={(e) => handleCheck(e.target.checked, 132)} /></td>
+                                <td><button className={tempAvailTime[126] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(126, tempAvailTime[126] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[127] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(127, tempAvailTime[127] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[128] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(128, tempAvailTime[128] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[129] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(129, tempAvailTime[129] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[130] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(130, tempAvailTime[130] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[131] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(131, tempAvailTime[131] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[132] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(132, tempAvailTime[132] === '1' ? true : false)}></button></td>
                             </tr>
                             <tr>
                                 <td className={PPMod.text}>7-8 PM</td>
-                                <td><input type="checkbox" checked={tempAvailTime[133] === '1'} onChange={(e) => handleCheck(e.target.checked, 133)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[134] === '1'} onChange={(e) => handleCheck(e.target.checked, 134)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[135] === '1'} onChange={(e) => handleCheck(e.target.checked, 135)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[136] === '1'} onChange={(e) => handleCheck(e.target.checked, 136)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[137] === '1'} onChange={(e) => handleCheck(e.target.checked, 137)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[138] === '1'} onChange={(e) => handleCheck(e.target.checked, 138)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[139] === '1'} onChange={(e) => handleCheck(e.target.checked, 139)} /></td>
+                                <td><button className={tempAvailTime[133] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(133, tempAvailTime[133] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[134] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(134, tempAvailTime[134] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[135] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(135, tempAvailTime[135] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[136] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(136, tempAvailTime[136] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[137] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(137, tempAvailTime[137] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[138] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(138, tempAvailTime[138] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[139] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(139, tempAvailTime[139] === '1' ? true : false)}></button></td>
                             </tr>
                             <tr>
                                 <td className={PPMod.text}>8-9 PM</td>
-                                <td><input type="checkbox" checked={tempAvailTime[140] === '1'} onChange={(e) => handleCheck(e.target.checked, 140)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[141] === '1'} onChange={(e) => handleCheck(e.target.checked, 141)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[142] === '1'} onChange={(e) => handleCheck(e.target.checked, 142)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[143] === '1'} onChange={(e) => handleCheck(e.target.checked, 143)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[144] === '1'} onChange={(e) => handleCheck(e.target.checked, 144)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[145] === '1'} onChange={(e) => handleCheck(e.target.checked, 145)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[146] === '1'} onChange={(e) => handleCheck(e.target.checked, 146)} /></td>
+                                <td><button className={tempAvailTime[140] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(140, tempAvailTime[140] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[141] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(141, tempAvailTime[141] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[142] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(142, tempAvailTime[142] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[143] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(143, tempAvailTime[143] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[144] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(144, tempAvailTime[144] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[145] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(145, tempAvailTime[145] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[146] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(146, tempAvailTime[146] === '1' ? true : false)}></button></td>
                             </tr>
                             <tr>
                                 <td className={PPMod.text}>9-10 PM</td>
-                                <td><input type="checkbox" checked={tempAvailTime[147] === '1'} onChange={(e) => handleCheck(e.target.checked, 147)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[148] === '1'} onChange={(e) => handleCheck(e.target.checked, 148)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[149] === '1'} onChange={(e) => handleCheck(e.target.checked, 149)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[150] === '1'} onChange={(e) => handleCheck(e.target.checked, 150)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[151] === '1'} onChange={(e) => handleCheck(e.target.checked, 151)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[152] === '1'} onChange={(e) => handleCheck(e.target.checked, 152)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[153] === '1'} onChange={(e) => handleCheck(e.target.checked, 153)} /></td>
+                                <td><button className={tempAvailTime[147] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(147, tempAvailTime[147] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[148] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(148, tempAvailTime[148] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[149] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(149, tempAvailTime[149] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[150] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(150, tempAvailTime[150] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[151] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(151, tempAvailTime[151] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[152] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(152, tempAvailTime[152] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[153] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(153, tempAvailTime[153] === '1' ? true : false)}></button></td>
                             </tr>
                             <tr>
                                 <td className={PPMod.text}>10-11 PM</td>
-                                <td><input type="checkbox" checked={tempAvailTime[154] === '1'} onChange={(e) => handleCheck(e.target.checked, 154)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[155] === '1'} onChange={(e) => handleCheck(e.target.checked, 155)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[156] === '1'} onChange={(e) => handleCheck(e.target.checked, 156)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[157] === '1'} onChange={(e) => handleCheck(e.target.checked, 157)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[158] === '1'} onChange={(e) => handleCheck(e.target.checked, 158)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[159] === '1'} onChange={(e) => handleCheck(e.target.checked, 159)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[160] === '1'} onChange={(e) => handleCheck(e.target.checked, 160)} /></td>
+                                <td><button className={tempAvailTime[154] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(154, tempAvailTime[154] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[155] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(155, tempAvailTime[155] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[156] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(156, tempAvailTime[156] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[157] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(157, tempAvailTime[157] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[158] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(158, tempAvailTime[158] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[159] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(159, tempAvailTime[159] === '1' ? true : false)}></button></td>
+                                <td><button className={tempAvailTime[160] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(160, tempAvailTime[160] === '1' ? true : false)}></button></td>
                             </tr>
                             <tr>
-                                <td className={PPMod.text}>11 PM - 12 AM</td>
-                                <td><input type="checkbox" checked={tempAvailTime[161] === '1'} onChange={(e) => handleCheck(e.target.checked, 161)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[162] === '1'} onChange={(e) => handleCheck(e.target.checked, 162)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[163] === '1'} onChange={(e) => handleCheck(e.target.checked, 163)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[164] === '1'} onChange={(e) => handleCheck(e.target.checked, 164)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[165] === '1'} onChange={(e) => handleCheck(e.target.checked, 165)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[166] === '1'} onChange={(e) => handleCheck(e.target.checked, 166)} /></td>
-                                <td><input type="checkbox" checked={tempAvailTime[167] === '1'} onChange={(e) => handleCheck(e.target.checked, 167)} /></td>
+                            <td className={PPMod.text}>11 PM - 12 AM</td>
+                            <td><button className={tempAvailTime[161] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(161, tempAvailTime[161] === '1' ? true : false)}></button></td>
+                            <td><button className={tempAvailTime[162] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(162, tempAvailTime[162] === '1' ? true : false)}></button></td>
+                            <td><button className={tempAvailTime[163] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(163, tempAvailTime[163] === '1' ? true : false)}></button></td>
+                            <td><button className={tempAvailTime[164] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(164, tempAvailTime[164] === '1' ? true : false)}></button></td>
+                            <td><button className={tempAvailTime[165] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(165, tempAvailTime[165] === '1' ? true : false)}></button></td>
+                            <td><button className={tempAvailTime[166] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(166, tempAvailTime[166] === '1' ? true : false)}></button></td>
+                            <td><button className={tempAvailTime[167] === '1' ? EPMod.green : EPMod.red} onClick={() => boxCheck(167, tempAvailTime[167] === '1' ? true : false)}></button></td>
                             </tr>
                         </tbody>
                     </table>

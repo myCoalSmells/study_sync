@@ -60,3 +60,15 @@
     margin-top: 20px;
     opacity: 1;
   }
+
+  .red {
+    background-color: red;
+    height: 50px;
+    width: 100px;
+  }
+
+  .green {
+    background-color: green;
+    height: 50px;
+    width: 100px;
+  }
