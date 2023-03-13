@@ -36,31 +36,33 @@ export default function ProfilePage() {
     const [pfp, setPfp] = useState("");
 
 
-    onAuthStateChanged(auth, async (user) => {
-        console.log(typeof(userId))
-        console.log(typeof(user.uid));
-        if (user) {
-            console.log("user is logged in");
-            const docRef = doc(firestore, "students", userId);
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, async (user) => {
+          if (user) {
+            console.log("call");
+            const docRef = doc(firestore, "students", user.uid);
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
-                setUsername(docSnap.get("username"));
-                setMatches(docSnap.get("matches") || []);
-                setClasses(docSnap.get("classes"));
-                setLikes(docSnap.get("likes") || []); // add likes field with empty array as default
-                setDislikes(docSnap.get("dislikes") || []); // add dislikes field with empty array as default
-                setContactInfo(docSnap.get("email"));
-                setAvailTime(docSnap.get("availTime") || []);
-                setPfp(docSnap.get("pfp") || "https://i.pinimg.com/originals/1a/68/f7/1a68f758cd8b75d47e480722c3ad6791.png");
-                setLogin(true);
+              setUsername(docSnap.get("username"));
+              setMatches(docSnap.get("matches") || []);
+              setClasses(docSnap.get("classes"));
+              setLikes(docSnap.get("likes") || []);
+              setDislikes(docSnap.get("dislikes") || []);
+              setContactInfo(docSnap.get("email"));
+              setAvailTime(docSnap.get("availTime") || []);
+              setPfp(docSnap.get("pfp") || "https://i.pinimg.com/originals/1a/68/f7/1a68f758cd8b75d47e480722c3ad6791.png");
+              setLogin(true);
             } else {
-                console.log("Document could not be found.");
+              console.log("Document could not be found.");
             }
-        } else {
-                console.log("No one is logged in.");
-        }
-        
-    })
+          } else {
+            console.log("No one is logged in.");
+          }
+        });
+        // Return a cleanup function to unsubscribe from the listener when the component unmounts
+        return unsubscribe;
+      }, []);
+      
     // generate the schedule table
     function generateTableRows() {
         const daysOfWeek = ['12-1 AM', '1-2 AM', '2-3 AM', '3-4 AM', '4-5 AM', '5-6 AM', '6-7 AM', '7-8 AM', '8-9 AM', '9-10 AM', '10-11 AM', '11-12 AM', '12-1 PM', '1-2 PM', '2-3 PM', '3-4 PM', '4-5 PM', '5-6 PM', '6-7 PM', '7-8 PM', '8-9 PM', '9-10 PM', '10-11 PM', '11-12 PM'];
