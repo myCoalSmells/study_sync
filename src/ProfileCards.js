@@ -104,6 +104,12 @@ function ProfileCards() {
   const getClasses = (student) => {
     return student.classes || [];
   }
+
+  const getSharedClasses = (student) => {
+    const studentClasses = student.classes || [];
+    const sharedClasses = studentClasses.filter(c => classes.includes(c));
+    return sharedClasses;
+  }
   
   return (
     <div className={PCMod.cardContainer}>
@@ -119,6 +125,7 @@ function ProfileCards() {
             <div style={{ backgroundImage: `url(${getProfilePic(student)})` }} className={PCMod.card}>
               <h1 className={PCMod.classes}>{student.username}</h1>
               <p className={PCMod.classes}>Classes: {getClasses(student).join(", ")}</p>
+              <p className={PCMod.sharedClasses}>Shared Classes: {getSharedClasses(student).join(", ")}</p>
             </div>
           </TinderCard>
         ))}

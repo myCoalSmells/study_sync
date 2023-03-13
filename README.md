@@ -1,3 +1,31 @@
+# Description of StudySync:
+
+StudySync is a social media web application made using ReactJS, node.js, and Firebase that matches students to study groups based on their schedules. Students are matched to others based on common courses they are currently taking and they can maintain and edit their own profiles, which include their email as a form of possible contact, a profile picture, their available times during the week, and the classes they are taking. Users are able to like and dislike other users via a swipe-left/swipe-right card mechanism on the main page and also view those users' profiles. An inbox feature displays new matches for a user in card style.
+
+# Features:
+
+* Create an account
+* Login
+* Profile cards (swipe right to like, swipe left to dislike)
+* Inbox notifying user of new matches
+* Create profile
+* Edit profile
+* View other users' profiles
+
+# How to run StudySync:
+
+1. Open your command line and clone the repository to your local machine:
+git clone https://github.com/myCoalSmells/study_sync
+
+2. npm start
+Runs the app in the development mode.
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+If this doesn't work, you can try: npm i react-scripts
+and/or: export NODE_OPTIONS=--openssl-legacy-provider
+and/or: npm install     (to install dependencies)
+
+You will be directed to the login page. If you do not have an account, you can make one by clicking on the Sign Up button which will take you to the account creation page.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
