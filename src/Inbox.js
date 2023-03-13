@@ -1,31 +1,19 @@
 import React, { useState, useEffect } from "react";
-import Card from "react-bootstrap/Card";
-import Button from 'react-bootstrap/Button';
-import IMod from "./Inbox.module.css";
-import { db } from "./firebase";
+import InboxMod from "./Inbox.module.css"
+import PPMod from "./ProfilePage.module.css";
 import { auth, firestore } from "./firebase-setup/firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { collection, doc, query, onSnapshot, setDoc, get, getDoc } from "firebase/firestore";
-import { useNavigate } from 'react-router-dom';
+import { doc,getDoc } from "firebase/firestore";
+import { Link, useNavigate } from 'react-router-dom';
+import { async } from "@firebase/util";
+
   
 function Inbox() {
   const Nav = useNavigate();
-  const auth = getAuth();
-  const [key, setKey] = useState("");
-  const [username, setUsername] = useState("");
-  const [students, setStudents] = useState([]);
-  const [inboxMatches, setInboxMatches] = useState([]);
-  const [likes, setLikes] = useState([]);
-  const [dislikes, setDislikes] = useState([]);
   const [matches, setMatches] = useState([])
   const [login, setLogin] = useState(false);
-  const [classes, setClasses] = useState([]);
-  const [postsSeen, setPostsSeen] = useState([]);
-  const [newNum, setNewNum] = useState(0);
-
-  const handleMarkAllAsRead = () => {
-    setNewNum(0); // set new message count to zero
-  }
+  const [matches_arr, setMatchesArr] = useState([]);
+  
 
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
@@ -33,13 +21,9 @@ function Inbox() {
         const docRef = doc(firestore, "students", user.uid);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-          setUsername(docSnap.get("username"));
-          setKey(docSnap.get("key"));
           setMatches(docSnap.get("matches") || []);
-          setClasses(docSnap.get("classes") || []);
-          setLikes(docSnap.get("likes") || []);
-          setDislikes(docSnap.get("dislikes") || []);
-          setLogin(true);
+          console.log("got matches");
+          console.log(matches);
         } else {
           console.log("Document could not be found.");
         }
@@ -51,92 +35,52 @@ function Inbox() {
     });
   }, [auth, Nav]);
 
-  useEffect(() => { 
-    if (login){
-      console.log("logged in");
-      const q = query(collection(db, "students"));
-      const unsub = onSnapshot(q, (querySnapshot) => {
-        const filteredStudents = querySnapshot.docs.map(doc => doc.data())
-          .filter(student => student.username !== username) // Filter out your own card
-          .filter(student => !dislikes.includes(student.key)) // Filter out disliked students
-          .filter(student => student.classes.some(c => classes.includes(c))); // Filter by common classes
-        setStudents(filteredStudents);
-      });
-      return unsub;
-    }
-  }, [username, login, classes]);
-
-
-  const getDislikes = (student) => {
-    return student.dislikes || [];
-  }
-
-  const getClasses = (student) => {
-    return student.classes || [];
-  }
-
-  const getMatches = (student) => {
-    return student.matches || [];
-  }
-
-  const getInboxMatches = () => {
-    let isMatch = true;
-    for (let student in students) {
-        if (username === student.username)
-            continue;
-        for (let i = 0; i < getDislikes(student).length; i++) {
-            if (getDislikes(student)[i] === key) {
-                isMatch = false;
-                break;
-            }
+  useEffect(() => {
+    console.log(matches);
+    async function createDivs() {
+      const matches_arr = [];
+      for (let i=1; i<matches.length; i++){
+        let id = matches[i];
+        if (!id){
+          return;
         }
-        if (isMatch === false)
-            break;
-        for (let j = 0; j < likes.length; j++) {
-            if (likes[j] === student.key){
-                // Add message to inboxMatches if it hasn't been read yet
-                inboxMatches = [...inboxMatches, student];
-                setNewNum(newNum => newNum + 1); // Increment new message count
-                break;
-              }
+        console.log(id);
+        const docRef = doc(firestore, "students", id);
+        const docSnap = await getDoc(docRef);
+        const _name = docSnap.get("username");
+        const _classes = docSnap.get("classes");
+        const _email = docSnap.get("email");
+        const _pfp = docSnap.get("pfp");
+        //const _profileLink = "/login/"+toString(id);
+        if (!_pfp){
+          _pfp = "https://i.pinimg.com/originals/1a/68/f7/1a68f758cd8b75d47e480722c3ad6791.png";
         }
+        let format = (
+          <div className={InboxMod.box}>
+            <div className={InboxMod["left-box"]} style={{ backgroundImage: `url(${_pfp})` }}></div>
+            <div className={InboxMod["center-box"]}>
+              <div className={InboxMod.field}>{_classes}</div>
+              <div className={InboxMod.field}>{_name}</div>
+              <div className={InboxMod.field}>{_email}</div>
+            </div>
+            <Link to={`/profile/${id}`}>
+            <button>View Profile</button>
+            </Link>
+            
+          </div>
+        )
+        matches_arr.push(format)
+      }
+      return matches_arr;
     }
-    return inboxMatches;
-  }
+    createDivs().then(setMatchesArr);
+  }, [matches]);
 
-    if (newNum == 0){
-        return (
-            <div className={IMod.inbox}>
-                <h1>INBOX</h1>
-                <h1>You have no new matches at this time.</h1>
-            </div>
-        );
-    }
-    else {
-        return (
-            <div className={IMod.inbox}>
-                <h1>INBOX</h1>
-                <div className={IMod.container}>
-                    <h1>({newNum} new)</h1>
-                </div>
-                <Button onClick={handleMarkAllAsRead}>Mark All As Read</Button>
-            <div className={IMod.inbox}>
-            {getInboxMatches().map(inboxMatch => (
-              <Card stype={{width: '20rem'}}>
-              <Card.Body>
-              <Card.Title>{inboxMatch.username}</Card.Title>
-              <Card.Subtitle>Email: {inboxMatch.email}</Card.Subtitle>
-              <img src={inboxMatch.pfp} width={300} height={300}/>
-              <Card.Text>Classes:</Card.Text>
-              <Card.Text>{getClasses(inboxMatch).join(", ")}</Card.Text>
-              <Button>View Profile</Button>
-              </Card.Body>
-            </Card>        
-            ))}
-            </div>
-            </div>
-        );
-    }
+  return(
+    <div className={PPMod.container}>
+      {matches_arr}
+    </div>
+  )
 }
 
 export default Inbox;
