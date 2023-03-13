@@ -1,44 +1,86 @@
-import React from "react";
-import Card from "react-bootstrap/Card";
-import IMod from "./Inbox.module.css";
+import React, { useState, useEffect } from "react";
+import InboxMod from "./Inbox.module.css"
+import PPMod from "./ProfilePage.module.css";
+import { auth, firestore } from "./firebase-setup/firebase";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { doc,getDoc } from "firebase/firestore";
+import { Link, useNavigate } from 'react-router-dom';
+import { async } from "@firebase/util";
+
   
-export default function Inbox() {
-    return (
-        <div className={IMod.inbox}>
-            <h1>INBOX</h1>
-            <div className={IMod.container}>
-                <h1>(3 new)</h1>
+function Inbox() {
+  const Nav = useNavigate();
+  const [matches, setMatches] = useState([])
+  const [login, setLogin] = useState(false);
+  const [matches_arr, setMatchesArr] = useState([]);
+  
+
+  useEffect(() => {
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const docRef = doc(firestore, "students", user.uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          setMatches(docSnap.get("matches") || []);
+          console.log("got matches");
+          console.log(matches);
+        } else {
+          console.log("Document could not be found.");
+        }
+      } else {
+        console.log("No one is logged in.");
+        setLogin(false); // set login state to false when user is not logged in
+        Nav('/login')
+      }
+    });
+  }, [auth, Nav]);
+
+  useEffect(() => {
+    console.log(matches);
+    async function createDivs() {
+      const matches_arr = [];
+      for (let i=1; i<matches.length; i++){
+        let id = matches[i];
+        if (!id){
+          return;
+        }
+        console.log(id);
+        const docRef = doc(firestore, "students", id);
+        const docSnap = await getDoc(docRef);
+        const _name = docSnap.get("username");
+        const _classes = docSnap.get("classes");
+        const _email = docSnap.get("email");
+        const _pfp = docSnap.get("pfp");
+        //const _profileLink = "/login/"+toString(id);
+        if (!_pfp){
+          _pfp = "https://i.pinimg.com/originals/1a/68/f7/1a68f758cd8b75d47e480722c3ad6791.png";
+        }
+        let format = (
+          <div className={InboxMod.box}>
+            <div className={InboxMod["left-box"]} style={{ backgroundImage: `url(${_pfp})` }}></div>
+            <div className={InboxMod["center-box"]}>
+              <div className={InboxMod.field}>{_classes}</div>
+              <div className={InboxMod.field}>{_name}</div>
+              <div className={InboxMod.field}>{_email}</div>
             </div>
-        <div className={IMod.inbox}>
-        <Card stype={{width: '20rem'}}>
-            <Card.Body>
-            <Card.Title>Bob Smith</Card.Title>
-            <Card.Subtitle>Email: bobsmith@gmail.com</Card.Subtitle>
-            <img src={"https://i.imgur.com/FRK6meX.png"} width={300} height={300}/>
-            <Card.Text>Matched Class(es): CS35L</Card.Text>
-            </Card.Body>
-        </Card>        
-        </div>
-        <div className={IMod.inbox}>
-        <Card stype={{width: '20rem'}}>
-            <Card.Body>
-            <Card.Title>Bob Smith</Card.Title>
-            <Card.Subtitle>Email: bobsmith@gmail.com</Card.Subtitle>
-            <img src={"https://i.imgur.com/FRK6meX.png"} width={300} height={300}/>
-            <Card.Text>Matched Class(es): CS35L</Card.Text>
-            </Card.Body>
-        </Card>
-        </div>
-        <div className={IMod.inbox}>
-        <Card stype={{width: '20rem'}}>
-            <Card.Body>
-            <Card.Title>Bob Smith</Card.Title>
-            <Card.Subtitle>Email: bobsmith@gmail.com</Card.Subtitle>
-            <img src={"https://i.imgur.com/FRK6meX.png"} width={300} height={300}/>
-            <Card.Text>Matched Class(es): CS35L</Card.Text>
-            </Card.Body>
-        </Card>
-        </div>
-        </div>
-    );
+            <Link to={`/profile/${id}`}>
+            <button>View Profile</button>
+            </Link>
+            
+          </div>
+        )
+        matches_arr.push(format)
+      }
+      return matches_arr;
+    }
+    createDivs().then(setMatchesArr);
+  }, [matches]);
+
+  return(
+    <div className={PPMod.container}>
+      {matches_arr}
+    </div>
+  )
 }
+
+export default Inbox;
