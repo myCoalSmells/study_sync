@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
-import { db } from "./firebase";
 import Button from 'react-bootstrap/Button';
 import IMod from "./Inbox.module.css";
+import { db } from "./firebase";
 import { auth, firestore } from "./firebase-setup/firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { get, getDoc } from "firebase/firestore";
-import { collection, doc, query, onSnapshot, setDoc } from "firebase/firestore";
+import { collection, doc, query, onSnapshot, setDoc, get, getDoc } from "firebase/firestore";
 import { useNavigate } from 'react-router-dom';
   
 function Inbox() {
@@ -21,8 +20,8 @@ function Inbox() {
   const [matches, setMatches] = useState([])
   const [login, setLogin] = useState(false);
   const [classes, setClasses] = useState([]);
+  const [postsSeen, setPostsSeen] = useState([]);
   const [newNum, setNewNum] = useState(0);
-  let user = "";
 
   const handleMarkAllAsRead = () => {
     setNewNum(0); // set new message count to zero
@@ -59,6 +58,7 @@ function Inbox() {
       const unsub = onSnapshot(q, (querySnapshot) => {
         const filteredStudents = querySnapshot.docs.map(doc => doc.data())
           .filter(student => student.username !== username) // Filter out your own card
+          .filter(student => !dislikes.includes(student.key)) // Filter out disliked students
           .filter(student => student.classes.some(c => classes.includes(c))); // Filter by common classes
         setStudents(filteredStudents);
       });
@@ -79,33 +79,23 @@ function Inbox() {
     return student.matches || [];
   }
 
-  const getInboxMatches = (student) => {
+  const getInboxMatches = () => {
     let isMatch = true;
-    // if (student.username === username)
-    //     user = student;
-    for (let student1 in students) {
-        if (username === student1.username)
+    for (let student in students) {
+        if (username === student.username)
             continue;
-        for (let i = 0; i < getDislikes(student1).length; i++) {
-            if (getDislikes(student1)[i] === key) {
+        for (let i = 0; i < getDislikes(student).length; i++) {
+            if (getDislikes(student)[i] === key) {
                 isMatch = false;
                 break;
             }
         }
         if (isMatch === false)
             break;
-        for (let j = 0; j < getDislikes(student).length; j++) {
-            if (dislikes[j] === student1.key) {
-                isMatch = false;
-                break;
-            }
-        }
-        if (isMatch === false)
-            break;
-        for (let k = 0; k < getMatches(student).length; k++) {
-            if (matches[k] === student1.key){
+        for (let j = 0; j < likes.length; j++) {
+            if (likes[j] === student.key){
                 // Add message to inboxMatches if it hasn't been read yet
-                inboxMatches = [...inboxMatches, student1];
+                inboxMatches = [...inboxMatches, student];
                 setNewNum(newNum => newNum + 1); // Increment new message count
                 break;
               }
@@ -131,7 +121,7 @@ function Inbox() {
                 </div>
                 <Button onClick={handleMarkAllAsRead}>Mark All As Read</Button>
             <div className={IMod.inbox}>
-            {getInboxMatches(user).map(inboxMatch => (
+            {getInboxMatches().map(inboxMatch => (
               <Card stype={{width: '20rem'}}>
               <Card.Body>
               <Card.Title>{inboxMatch.username}</Card.Title>
