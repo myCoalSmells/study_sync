@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { auth, firestore } from "./firebase-setup/firebase";
 import { doc, setDoc, getDoc, updateDoc, arrayUnion, deleteField } from "firebase/firestore";
-import { updateProfile } from "firebase/auth";
+import { updateProfile, onAuthStateChanged } from "firebase/auth";
 import { async } from '@firebase/util';
 import { setDefaultEventParameters } from "firebase/analytics";
 
@@ -31,7 +31,7 @@ export default function EditProfile() {
     };
 
 
-    const [name, setName] = useState(Student.name);
+    const [name, setName] = useState("");
     const [contactInfo, setContactInfo] = useState(Student.contactInfo);
     const [classMatch, setClassMatch] = useState(Student.classMatch);
     const [availTime, setAvailTime] = useState(Student.availTime);
@@ -42,27 +42,43 @@ export default function EditProfile() {
     //const [contactInfo, setContactInfo] = useState('');
     
     const [course, setCourse] = useState('');
-    const [myCourses, setMyCourses] = useState(Student.classes);
+    const [myCourses, setMyCourses] = useState([]);
     //const [availTime, setAvailTime] = useState('');
     const [email, setEmail] = useState("");
     //const [pfp, setPFP] = useState('');
     const [likes, setLikes] = useState([]);
     const [dislikes,setDislikes] = useState([]);
     const [matches, setMatches] = useState([]);
-    let [oldCourses, setOldCourses] = useState([]);
+    let [viewCourses, setViewCourses] = useState("");
     //let [students, setStudents] = useState([]);
 
     //popup
     const [showPopup, setShowPopup] = useState(false);
 
     useEffect(() => {
-        setName(Student.name);
+        //setName(Student.name);
         setContactInfo(Student.contactInfo);
-        setCourse(Student.classes);
+        //setCourse(Student.classes);
         setAvailTime(Student.availTime);
         setPFP(Student.pfp)
     }, []);
 
+
+    onAuthStateChanged(auth, async (user) => {
+        const docRef = doc(firestore, "students", user.uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            setName(docSnap.get("username"));
+            setPFP(docSnap.get("pfp"));
+            setEmail(docSnap.get("email"));
+            const mCourses = docSnap.get("classes");
+            if (mCourses.length) {
+                setViewCourses(mCourses[0]);
+            } else {
+                setViewCourses("EXAMPLE101");
+            }
+        }
+    });
     // in here, add a function to update student object in the database, instead of Navigate
     // add validation for uder input (correct format)
 
@@ -97,6 +113,8 @@ export default function EditProfile() {
         setTimeout(() => {
             setShowPopup(false);
         }, 2300);
+
+        console.log("Student profile updated!");
     };
 
     const handleCheck = (isChecked, index, e) => {
@@ -116,23 +134,22 @@ export default function EditProfile() {
             <form onSubmit={handleSubmit} className={EPMod.container}>
                 <div className={EPMod.subcontainer}>
                     <label htmlFor="pfp">Profile Picture:</label>
-                    <input type="text" id="pfp" value={pfp} onChange={(e) => setPFP(e.target.value)} />
+                    <input type="text" id="pfp" placeholder={pfp} onChange={(e) => setPFP(e.target.value)} />
                 </div>
                 
                 <div className={EPMod.subcontainer}>
                     <label htmlFor="name">Name:</label>
-                    <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} />
+                    <input type="text" id="name" placeholder={name} onChange={(e) => setName(e.target.value)} />
                 </div>
 
                 <div className={EPMod.subcontainer}>
                     <label htmlFor="contactInfo">Contact Info:</label>
-                    <input type="text" id="contactInfo" value={contactInfo} onChange={(e) => setContactInfo(e.target.value)} />
+                    <input type="text" id="contactInfo" placeholder={contactInfo} onChange={(e) => setContactInfo(e.target.value)} />
                 </div>
                 
                 <div className={EPMod.subcontainer}>
                     <label htmlFor="courses">Courses</label>
-                    <input value={myCourses} readOnly={true} />
-                    <input type="text" id="courses" value='' onChange={(e) => setCourse(e.target.value)} />
+                    <input type="text" id="courses" placeholder={viewCourses}  onChange={(e) => setCourse(e.target.value)} />
                     <button type="button" onClick = {() => {
                         if (course === "") {
                             alert("Empty course name!");
