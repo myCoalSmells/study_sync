@@ -55,16 +55,43 @@ function ProfileCards() {
       const unsub = onSnapshot(q, (querySnapshot) => {
         const filteredStudents = querySnapshot.docs.map(doc => doc.data())
           .filter(student => student.username !== username) // Filter out your own card
-          .filter(student => student.classes.some(c => classes.includes(c))); // Filter by common classes
+          .filter(student => student.classes && student.classes.some(c => classes.includes(c))) // Check if classes array exists before calling .some()
+          .filter(student => !likes.includes(student.key)) // Filter out liked students
+          .filter(student => !dislikes.includes(student.key)) // Filter out disliked students
+          .filter(student => !matches.includes(student.key)); // Filter out matched students
         setStudents(filteredStudents);
       });
       return unsub;
     }
-  }, [username, login, classes]);
+  }, [username, login, classes, likes, dislikes, matches]);
 
   const onSwipe = async (direction, student) => {
     console.log(`You swiped ${direction} on ${student.username}`);
-  }
+  
+    const userDocRef = doc(firestore, "students", auth.currentUser.uid);
+    if (direction === "left") {
+      // Add student to dislikes list
+      const updatedDislikes = [...dislikes, student.key];
+      await setDoc(userDocRef, { dislikes: updatedDislikes }, { merge: true });
+      setDislikes(updatedDislikes);
+    } else if (direction === "right") {
+      // Add student to likes list
+      const updatedLikes = [...likes, student.key];
+      await setDoc(userDocRef, { likes: updatedLikes }, { merge: true });
+      setLikes(updatedLikes);
+      if (student.likes.includes(auth.currentUser.uid)) { //if both like each other, match
+        console.log("matched!");
+        const otherStudentDocRef = doc(firestore, "students", student.key);
+        const otherStudentDoc = await getDoc(otherStudentDocRef);
+        const otherStudentMatches = otherStudentDoc.get("matches") || [];
+        const updatedMatches = [...matches, student.key];
+        await setDoc(userDocRef, { matches: updatedMatches }, { merge: true });
+        await setDoc(otherStudentDocRef, { matches: [...otherStudentMatches, auth.currentUser.uid] }, { merge: true });
+        setMatches(updatedMatches);
+      }
+    }
+  };
+  
 
   const getProfilePic = (student) => {
     if (student.pfp) {
