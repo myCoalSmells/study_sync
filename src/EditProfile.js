@@ -19,6 +19,9 @@ export default function EditProfile() {
     // change this to use firebase
     // Student is the name of the object used in the displaying of the data
 
+    // sample data structure
+    // put new user data into here
+
     let Student = {
         name: 'Michael Liu',
         pfp: "https://i.imgur.com/pkpvLJn.jpeg",
@@ -35,13 +38,14 @@ export default function EditProfile() {
     const [tempAvailTime, setTempAvailTime] = useState(Student.availTime)
     const [pfp, setPFP] = useState(Student.pfp);
 
-    const [name, setName] = useState('');
-    const [contactInfo, setContactInfo] = useState('');
+    //const [name, setName] = useState('');
+    //const [contactInfo, setContactInfo] = useState('');
+    
     const [course, setCourse] = useState('');
-    const [myCourses, setMyCourses] = useState([]);
-    const [availTime, setAvailTime] = useState('');
+    const [myCourses, setMyCourses] = useState(Student.classes);
+    //const [availTime, setAvailTime] = useState('');
     const [email, setEmail] = useState("");
-    const [pfp, setPFP] = useState('');
+    //const [pfp, setPFP] = useState('');
     const [likes, setLikes] = useState([]);
     const [dislikes,setDislikes] = useState([]);
     const [matches, setMatches] = useState([]);
@@ -74,13 +78,6 @@ export default function EditProfile() {
         Student.pfp = pfp;
         //Student.classMatch = classes;
 
-        // popup code
-        setShowPopup(true);
-        setTimeout(() => {
-            setShowPopup(false);
-        }, 2300);
-    };
-
         // grabs current user from authenticator, and then updates documents through their uid
         const user = auth.currentUser     
         const docRef = doc(firestore, "students", user.uid);
@@ -94,7 +91,14 @@ export default function EditProfile() {
                 availTime: availTime,
                 classes: courses,
         });
-        console.log("Student profile updated!");    // checkbox check
+
+        // popup code
+        setShowPopup(true);
+        setTimeout(() => {
+            setShowPopup(false);
+        }, 2300);
+    };
+
     const handleCheck = (isChecked, index, e) => {
         const availTimeArr = tempAvailTime.split('');
         if (isChecked) {
@@ -127,7 +131,34 @@ export default function EditProfile() {
                 
                 <div className={EPMod.subcontainer}>
                     <label htmlFor="courses">Courses</label>
-                    <input type="text" id="courses" value={course} onChange={(e) => setCourse(e.target.value)} />
+                    <input value={myCourses} readOnly={true} />
+                    <input type="text" id="courses" value='' onChange={(e) => setCourse(e.target.value)} />
+                    <button type="button" onClick = {() => {
+                        if (course === "") {
+                            alert("Empty course name!");
+                        }
+                        else if (!RegExp('[a-zA-Z]+\\s*[0-9]+[a-zA-Z]*').test(course)){
+                            alert("Invalid course name: should be in the form [class][code] eg. COMSCI 35L");
+                            return;
+                        }
+                        else if (myCourses.length >4){
+                            alert("five courses max!!");
+                            return;
+                        }
+                        else if (myCourses.some(pair => pair.name === course.replace(/\s/g, "").toUpperCase() )){
+                            //if the value is in the array already
+                            setCourse('');
+                            return;
+                        }
+                        console.log(myCourses);
+
+                        setCourse('');
+                        setMyCourses([...myCourses, {name: course.replace(/\s/g, "").toUpperCase()}]);}
+                    }> Add Class</button>
+                    <button type="button" onClick = {() => setMyCourses([])}>Reset</button>
+                    <ol>
+                    {myCourses.map(course => <li key={course.name}>{course.name}</li>)}
+                    </ol>
                 </div>
                 
                 <div className={EPMod.subcontainer}>
@@ -399,33 +430,9 @@ export default function EditProfile() {
                             </tr>
                         </tbody>
                     </table>
-                    <button type="button" onClick = {() => {
-                        if (course === "") {
-                            alert("Empty course name!");
-                        }
-                        else if (!RegExp('[a-zA-Z]+\\s*[0-9]+[a-zA-Z]*').test(course)){
-                            alert("Invalid course name: should be in the form [class][code] eg. COMSCI 35L");
-                            return;
-                        }
-                        else if (myCourses.length >4){
-                            alert("five courses max!!");
-                            return;
-                        }
-                        else if (myCourses.some(pair => pair.name === course.replace(/\s/g, "").toUpperCase() )){
-                            //if the value is in the array already
-                            setCourse('');
-                            return;
-                        }
-                        console.log(myCourses);
-
-                        setCourse('');
-                        setMyCourses([...myCourses, {name: course.replace(/\s/g, "").toUpperCase()}]);}
-                    }> Add Class</button>
-                    <button type="button" onClick = {() => setMyCourses([])}>Reset</button>
-                    <ol>
-                    {myCourses.map(course => <li key={course.name}>{course.name}</li>)}
-                    </ol>
+                    
                 </div>
+
 
                 <div className={EPMod.subcontainer}>
                     <button type="submit">Update Profile</button>
