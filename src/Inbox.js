@@ -48,7 +48,7 @@ function Inbox() {
         const docRef = doc(firestore, "students", id);
         const docSnap = await getDoc(docRef);
         const _name = docSnap.get("username");
-        const _classes = docSnap.get("classes").map(c => c + " ");
+        const _classes = docSnap.get("classes");
         const _email = docSnap.get("email");
         let _pfp = docSnap.get("pfp");
         //const _profileLink = "/login/"+toString(id);
@@ -59,7 +59,7 @@ function Inbox() {
           <div className={InboxMod.box}>
             <div className={InboxMod["left-box"]} style={{ backgroundImage: `url(${_pfp})` }}></div>
             <div className={InboxMod["center-box"]}>
-              <div className={InboxMod.field}>{_classes}</div>
+              <div className={InboxMod.field}>{_classes.join(", ")}</div>
               <div className={InboxMod.field}>{_name}</div>
               <div className={InboxMod.field}>{_email}</div>
             </div>
