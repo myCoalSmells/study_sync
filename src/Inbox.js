@@ -50,7 +50,7 @@ function Inbox() {
         const _name = docSnap.get("username");
         const _classes = docSnap.get("classes");
         const _email = docSnap.get("email");
-        const _pfp = docSnap.get("pfp");
+        let _pfp = docSnap.get("pfp");
         //const _profileLink = "/login/"+toString(id);
         if (!_pfp){
           _pfp = "https://i.pinimg.com/originals/1a/68/f7/1a68f758cd8b75d47e480722c3ad6791.png";
