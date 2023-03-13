@@ -97,11 +97,6 @@ export default function ProfilePage() {
         text: PPMod.text,
         highlight: PPMod.highlight,
     };
-    const boxStyle = {
-        backgroundColor: 'red',
-        width: '50px',
-        height: '50px',
-    };
 
     // Temp Student Data Format
     // Extract firebase and put into this format?
