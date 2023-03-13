@@ -48,7 +48,7 @@ function Inbox() {
         const docRef = doc(firestore, "students", id);
         const docSnap = await getDoc(docRef);
         const _name = docSnap.get("username");
-        const _classes = docSnap.get("classes");
+        const _classes = docSnap.get("classes").map(c => c + " ");
         const _email = docSnap.get("email");
         let _pfp = docSnap.get("pfp");
         //const _profileLink = "/login/"+toString(id);
