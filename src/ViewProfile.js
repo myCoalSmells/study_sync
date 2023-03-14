@@ -31,7 +31,21 @@ export default function ProfilePage() {
     const [login, setLogin] = useState(false);
     const [classes, setClasses] = useState([]);
     const [pfp, setPfp] = useState("");
+    const [userTime, setUserTime] = useState("");
 
+    function bitwiseAnd(str1, str2) {
+        let result = "";
+      
+        for (let i = 0; i < Math.min(str1.length, str2.length); i++) {
+          if (str1[i] === "1" && str2[i] === "1") {
+            result += "1";
+          } else {
+            result += "0";
+          }
+        }
+      
+        return result;
+      }
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -39,6 +53,8 @@ export default function ProfilePage() {
             console.log("call");
             const docRef = doc(firestore, "students", userId);
             const docSnap = await getDoc(docRef);
+            const docRefU = doc(firestore, "students", user.uid);
+            const docSnapU = await getDoc(docRefU);
             if (docSnap.exists()) {
               setUsername(docSnap.get("username"));
               setClasses(docSnap.get("classes"));
@@ -46,6 +62,9 @@ export default function ProfilePage() {
               setAvailTime(docSnap.get("availTime") || []);
               setPfp(docSnap.get("pfp") || "https://i.pinimg.com/originals/1a/68/f7/1a68f758cd8b75d47e480722c3ad6791.png");
               setLogin(true);
+              if (docSnapU.exists()) {
+                setUserTime(docSnapU.get("availTime"));
+              }
             } else {
               console.log("Document could not be found.");
             }
@@ -61,15 +80,17 @@ export default function ProfilePage() {
     function generateTableRows() {
         const daysOfWeek = ['12-1 AM', '1-2 AM', '2-3 AM', '3-4 AM', '4-5 AM', '5-6 AM', '6-7 AM', '7-8 AM', '8-9 AM', '9-10 AM', '10-11 AM', '11-12 AM', '12-1 PM', '1-2 PM', '2-3 PM', '3-4 PM', '4-5 PM', '5-6 PM', '6-7 PM', '7-8 PM', '8-9 PM', '9-10 PM', '10-11 PM', '11-12 PM'];
         const tableRows = [];
-        
+        const mergeTime = bitwiseAnd(availTime, userTime);
+        console.log(availTime.length);
+        console.log(userTime.length);
         for (let i = 0; i < daysOfWeek.length; i++) {
             const day = daysOfWeek[i];
             const availTimes = [];
         
             // populate availability times for current day
             for (let j = 0; j < 7; j++) {
-            const index = i + (j * 7);
-            availTimes.push(availTime[index]);
+            const index = (i * 7) + j;
+            availTimes.push(mergeTime[index]);
             }
         
             // generate table row with availability times for current day
@@ -129,7 +150,7 @@ export default function ProfilePage() {
                     Contact: {contactInfo}
                 </p>
                 <p>
-                    Schedule: 
+                    Shared Schedule: 
                 </p>
                 <div className={PPMod.container}>
                     <table>
