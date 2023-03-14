@@ -34,6 +34,7 @@ export default function SignupPage() {
             console.log(userCredential);
             const user = auth.currentUser;
             let courses =  myCourses.map(course => course.name);
+            let n = 0;
             setDoc(doc(firestore, "students", user.uid), {      //add to the students collection
                 username: username,
                 email: email,
@@ -42,7 +43,8 @@ export default function SignupPage() {
                 classes: courses,
                 likes: [""],
                 dislikes: [""],
-                matches: [""]
+                matches: [""],
+                availTime: String(n).padStart(167, "0")
             });
             for (let i = 0; i < courses.length; i++){       //add the user's ID to the document for each course in the classes table
                 const docRef = doc(firestore, "classes", courses[i]);  
@@ -109,7 +111,7 @@ export default function SignupPage() {
                 onChange={e => setCourse(e.target.value)}
                 />
             </label>
-            <button type="button" onClick = {()=>{
+            <button type="submit" onClick = {()=>{
             if (course === ""){
                 alert("Empty course name!");
                 return;
@@ -132,7 +134,7 @@ export default function SignupPage() {
             setCourse('');
             setCourses([...myCourses, {name: course.replace(/\s/g, "").toUpperCase()}]);}
             }> Add Class</button>
-            <button type="button" onClick = {() => setCourses([])}>Reset</button>
+            <button type="submit" onClick = {() => setCourses([])}>Reset</button>
             <ol>
                 {myCourses.map(course => <li key={course.name}>{course.name}</li>)}
             </ol>

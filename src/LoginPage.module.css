@@ -1,5 +1,6 @@
 .login {
     background-color: #f0f8ff;
+    border-radius: 25px;
     padding: 40px;
     font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
     font-style: italic;
@@ -47,6 +48,7 @@
     cursor: pointer;
     font-size: 16px;
     font-style: italic;
+    margin-bottom: 5px;
   }
 
 .container{
@@ -92,3 +94,4 @@
     font-size: 16px;
     margin-top: 10px;
   }
+  
