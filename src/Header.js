@@ -38,8 +38,8 @@ function Header() {
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
           />
         </head>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <div className="hello">{username ? <p>Hello, {username}</p> : null}</div>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+        <div className="hello">{username ? <p>Hello, {username}! 👋</p> : null}</div>
           <IconButton onClick={() => navigate('/profile')}>
             <AccountCircleIcon className="header__icon" fontSize="large" />
           </IconButton>
