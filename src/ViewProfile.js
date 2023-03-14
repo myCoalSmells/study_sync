@@ -132,11 +132,7 @@ export default function ProfilePage() {
                     <h1 className={PPMod.title}>
                         {username}'s Profile
                     </h1>
-                    <Link to='/editprofile'>
-                        <Button variant="outline-primary">
-                            Edit Profile
-                        </Button>
-                    </Link>
+
     
                 </div>
                 <p>
