@@ -16,6 +16,32 @@ function Inbox() {
   const [userId, setUserId] = useState("");
   const [availTime, setAvailTime] = useState("");
 
+  function bitwiseAnd(str1, str2) {
+    let result = "";
+  
+    for (let i = 0; i < Math.min(str1.length, str2.length); i++) {
+      if (str1[i] === "1" && str2[i] === "1") {
+        result += "1";
+      } else {
+        result += "0";
+      }
+    }
+  
+    return result;
+  }
+  function countMatchingDigits(str1, str2) {
+    let count = 0;
+  
+    for (let i = 0; i < Math.min(str1.length, str2.length); i++) {
+      if (str1[i] === str2[i]) {
+        count++;
+      }
+    }
+  
+    return count;
+  }
+  
+  
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
       if (user) {
@@ -100,36 +126,12 @@ function Inbox() {
         // janky bit string comparison implementation
         onAuthStateChanged(auth, async (user) => {
           const docRef = doc(firestore, "students", user.uid);
-          const docSnap = await getDoc(docRef);
           if (docSnap.exists()) {
               setAvailTime(docSnap.get("availTime"));
           }
         });
-        let bitwiseAnd = "";
-        if (availTime.length > _time.length) {
-          for (let i = 0; i < _time.length; i++) {
-            if (availTime[i] === _time[i]) {
-              bitwiseAnd = bitwiseAnd + "1";
-            } else {
-              bitwiseAnd = bitwiseAnd + "0";
-            }
-          }
-        } else {
-          for (let i = 0; i < availTime.length; i++) {
-            if (availTime[i] === _time[i]) {
-              bitwiseAnd = bitwiseAnd + "1";
-            } else { 
-              bitwiseAnd = bitwiseAnd + "0";
-            }
-          }
-        }
-        let mergeTime = 0;
-        for (let i = 0; i < bitwiseAnd.length; i++) {
-          if (bitwiseAnd[i]) {
-            mergeTime = mergeTime + 1;
-          }
-        }
-        let _similarity = mergeTime.toString() + " hours available";
+        const _similarity = countMatchingDigits(_time, availTime).toString() + " hours available";
+
 
         let format = (
           <div className={InboxMod.box}>
