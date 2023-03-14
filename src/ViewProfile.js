@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import PPMod from "./ProfilePage.module.css";
 import Button from 'react-bootstrap/Button';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from "react-router-dom";
 import { firestore } from "./firebase-setup/firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -101,7 +100,7 @@ export default function ProfilePage() {
 
     if (login === true){
         return(
-            <div>
+            <div className={PPMod.header}>
                 <Header />
             <div className={PPMod.container}>
 
