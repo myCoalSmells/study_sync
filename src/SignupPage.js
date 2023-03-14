@@ -44,7 +44,7 @@ export default function SignupPage() {
                 likes: [""],
                 dislikes: [""],
                 matches: [""],
-                availTime: String(n).padStart(167, "0")
+                availTime: String(n).padStart(168, "0")
             });
             for (let i = 0; i < courses.length; i++){       //add the user's ID to the document for each course in the classes table
                 const docRef = doc(firestore, "classes", courses[i]);  
