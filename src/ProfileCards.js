@@ -115,7 +115,10 @@ function ProfileCards() {
     <div className={PCMod.cardContainer}>
       <h1>Your Study Syncs!</h1>
       <div className={PCMod.studentCards__container}>
-        {students.map(student => (
+      {students.length === 0 ? (
+        <p>No more syncs</p>
+      ) : (
+        students.map(student => (
           <TinderCard
             onSwipe={(direction) => onSwipe(direction, student)}
             className={PCMod.swipe}
@@ -128,10 +131,10 @@ function ProfileCards() {
               <p className={PCMod.sharedClasses}>Shared Classes: {getSharedClasses(student).join(", ")}</p>
             </div>
           </TinderCard>
-        ))}
+        ))
+      )}
       </div>
-      <SwipeButtons />
-      <h1>No more syncs 😿</h1>
+      <p className={PCMod.footer}>swipe 👈 to dislike, swipe 👉 to like!</p>
     </div>
   );
   
