@@ -58,11 +58,11 @@ function Inbox() {
             <div className={InboxMod["left-box"]} style={{ backgroundImage: `url(${_pfp})` }}></div>
             <div className={InboxMod["center-box"]}>
               <div className={InboxMod.field}>{_name}</div>
-              <div className={InboxMod.field}>Classses:   {_classes.join(", ")}</div>
+              <div className={InboxMod.field}>Classes:   {_classes.join(", ")}</div>
               <div className={InboxMod.field}>{_email}</div>
             </div>
             <Link to={`/profile/${id}`}>
-            <button>View Profile</button>
+            <button className={InboxMod.options}>View Profile</button>
             </Link>
             
           </div>
