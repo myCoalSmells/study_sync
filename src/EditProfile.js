@@ -71,7 +71,9 @@ export default function EditProfile() {
                 setName(docSnap.get("username"));
                 setPFP(docSnap.get("pfp"));
                 setEmail(docSnap.get("email"));
-                setTempAvailTime(docSnap.get("availTime"));
+                let n = 0
+                setTempAvailTime(docSnap.get("availTime") || String(n).padStart(167, "0"));
+                console.log(tempAvailTime);
                 const mCourses = docSnap.get("classes");
                 if (mCourses.length) {
                     setViewCourses(mCourses[0]);
@@ -86,7 +88,7 @@ export default function EditProfile() {
         });
         return unsubscribe;
     }, []);
-    
+
     // in here, add a function to update student object in the database, instead of Navigate
     // add validation for uder input (correct format)
 
