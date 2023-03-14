@@ -40,7 +40,7 @@ export default function ProfilePage() {
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
           if (user) {
             console.log("call");
-            const docRef = doc(firestore, "students", user.uid);
+            const docRef = doc(firestore, "students", userId);
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
               setUsername(docSnap.get("username"));
