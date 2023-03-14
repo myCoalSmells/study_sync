@@ -36,7 +36,6 @@ function Inbox() {
   }, [auth, Nav]);
 
   useEffect(() => {
-    console.log(matches);
     async function createDivs() {
       const matches_arr = [];
       for (let i=1; i<matches.length; i++){
@@ -44,7 +43,6 @@ function Inbox() {
         if (!id){
           return;
         }
-        console.log(id);
         const docRef = doc(firestore, "students", id);
         const docSnap = await getDoc(docRef);
         const _name = docSnap.get("username");
@@ -59,8 +57,8 @@ function Inbox() {
           <div className={InboxMod.box}>
             <div className={InboxMod["left-box"]} style={{ backgroundImage: `url(${_pfp})` }}></div>
             <div className={InboxMod["center-box"]}>
-              <div className={InboxMod.field}>{_classes.join(", ")}</div>
               <div className={InboxMod.field}>{_name}</div>
+              <div className={InboxMod.field}>Classses:   {_classes.join(", ")}</div>
               <div className={InboxMod.field}>{_email}</div>
             </div>
             <Link to={`/profile/${id}`}>

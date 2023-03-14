@@ -27,12 +27,16 @@
   }
   
   .field {
+
     font-family: Georgia;
     font-style: italic;
-    font-size: 16px;
+    font-size: 25px;
     margin-top: 10px;
   }
-  
+  .hello p {
+    font-size: 30px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
   button {
     background-color: #FFA500;
     border: none;
@@ -49,4 +53,5 @@
   button:hover {
     background-color: #FF8C00;
   }
+
   
