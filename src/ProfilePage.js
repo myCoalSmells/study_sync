@@ -116,7 +116,7 @@ export default function ProfilePage() {
                     width: '125px',
                     height: '125px',
                     borderRadius: '50%',
-                    border: '2px solid blue',
+                    border: '2px solid #104bcb',
                     overflow: 'hidden'
                     }}>
                     <img src={pfp} alt="profile picture" style={{ width: '100%', height: '100%' }} />
@@ -127,7 +127,7 @@ export default function ProfilePage() {
                         {username}'s Profile
                     </h1>
                     <Link to='/editprofile'>
-                        <Button variant="outline-primary">
+                        <Button className={PPMod.editP} variant="outline-primary">
                             Edit Profile
                         </Button>
                     </Link>
