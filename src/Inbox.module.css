@@ -2,12 +2,14 @@
     border: 1px solid black;
     border-radius: 10px;
     box-shadow: 3px 3px 3px black;
-    background-color: #fff;
-    width: 100%;
+    width: 90%;
     display: flex;
     padding: 20px;
-    margin-bottom: 30px;
+    margin-bottom: 60px;
+    background-color: white;
     justify-content: space-between;
+    margin:auto;
+
   }
   
   .left-box {
@@ -21,6 +23,7 @@
   
   .center-box {
     margin-left: 20px;
+    width: 300px;
     justify-content: space-evenly;
     display: flex;
     flex-direction: column;
