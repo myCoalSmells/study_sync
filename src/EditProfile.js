@@ -531,7 +531,6 @@ export default function EditProfile() {
                         </Link>
                     </div>
                 </div>
-            )}
 
             {/* {showDeletePopup && (
                 <div className={EPMod.popup}>
