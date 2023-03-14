@@ -7,6 +7,7 @@ import {Link} from "react-router-dom";
 import { firestore } from "./firebase-setup/firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
+import Header from './Header';
 
 import Redbox from "./ProfilePageStuff/RedBox"
 import Greenbox from "./ProfilePageStuff/GreenBox"
@@ -100,7 +101,10 @@ export default function ProfilePage() {
 
     if (login === true){
         return(
+            <div>
+                <Header />
             <div className={PPMod.container}>
+
                 <div className={PPMod.subcontainer}>
                 <div style={{
                     width: '125px',
@@ -147,6 +151,7 @@ export default function ProfilePage() {
                         </tbody>
                     </table>
                 </div>
+            </div>
             </div>
         );
     } else {
