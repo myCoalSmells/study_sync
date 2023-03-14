@@ -44,8 +44,8 @@ and then try npm start again.
 5. On the homepage, the logout button is on the top right if you wish to log out. You will be redirected to a page indicating that you have logged out and allowing you to log back in if you wish.
 
 # Credits
-Michael Liu- @myCoalSmells
-Fateh Sandhu- @fatehss
-Harry Hinman- @harryhinman
-Joshua Kim- @jdkim5136
-Tiffany Tsou- @ttsou1
+* Michael Liu- @myCoalSmells
+* Fateh Sandhu- @fatehss
+* Harry Hinman- @harryhinman
+* Joshua Kim- @jdkim5136
+* Tiffany Tsou- @ttsou1
