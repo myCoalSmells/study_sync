@@ -32,7 +32,6 @@ export default function EditProfile() {
 
 
     const [name, setName] = useState("");
-    const [contactInfo, setContactInfo] = useState(Student.contactInfo);
     const [classMatch, setClassMatch] = useState(Student.classes);
     const [availTime, setAvailTime] = useState(Student.availTime);
     const [tempAvailTime, setTempAvailTime] = useState(Student.availTime)
@@ -44,7 +43,6 @@ export default function EditProfile() {
     const [course, setCourse] = useState('');
     const [myCourses, setMyCourses] = useState([]);
     //const [availTime, setAvailTime] = useState('');
-    const [email, setEmail] = useState("");
     //const [pfp, setPFP] = useState('');
     const [likes, setLikes] = useState([]);
     const [dislikes,setDislikes] = useState([]);
@@ -57,7 +55,6 @@ export default function EditProfile() {
 
     useEffect(() => {
         //setName(Student.name);
-        setContactInfo(Student.contactInfo);
         //setCourse(Student.classes);
         //setAvailTime(Student.availTime);
         setPFP(Student.pfp)
@@ -70,7 +67,6 @@ export default function EditProfile() {
             if (docSnap.exists()) {
                 setName(docSnap.get("username"));
                 setPFP(docSnap.get("pfp"));
-                setEmail(docSnap.get("email"));
                 let n = 0
                 setTempAvailTime(docSnap.get("availTime") || String(n).padStart(167, "0"));
                 console.log(tempAvailTime);
@@ -100,7 +96,6 @@ export default function EditProfile() {
         // use effect above sets the variables.
         Student.name = name;
         Student.availTime = tempAvailTime;
-        Student.contactInfo = contactInfo;
         Student.pfp = pfp;
         //Student.classMatch = classes;
 
@@ -117,7 +112,6 @@ export default function EditProfile() {
         }
         await updateDoc(doc(firestore, "students", user.uid), {
                 username: name,
-                email: contactInfo,
                 pfp: pfp,
                 availTime: tempAvailTime,
                 classes: courses,
@@ -171,11 +165,6 @@ export default function EditProfile() {
                     <input type="text" id="name" placeholder={name} onChange={(e) => setName(e.target.value)} />
                 </div>
 
-                <div className={EPMod.subcontainer}>
-                    <label htmlFor="contactInfo">Contact Info:</label>
-                    <input type="text" id="contactInfo" placeholder={contactInfo} onChange={(e) => setContactInfo(e.target.value)} />
-                </div>
-                
                 <div className={EPMod.subcontainer}>
                     <label htmlFor="courses">Courses</label>
                     <input type="text" id="courses" placeholder={viewCourses}  onChange={(e) => setCourse(e.target.value)} />
