@@ -37,3 +37,17 @@
   flex-direction: column; 
   align-items: flex-start;
 }
+
+.profile {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.profile p {
+  margin: 0;
+  padding-left: 1px;
+  font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 10x;
+  font-weight: bold;
+}

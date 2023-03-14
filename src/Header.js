@@ -40,12 +40,19 @@ function Header() {
         </head>
         <div className="leftbar">
         <div className="hello">{username ? <p>Hello, {username}! 👋</p> : null}</div>
-          <IconButton onClick={() => navigate('/profile')}>
-            <AccountCircleIcon className="header__icon" fontSize="large" />
-          </IconButton>
-          <IconButton onClick={() => navigate('/inbox')}>
-            <EmailIcon className="header__icon" fontSize="large" />
-          </IconButton>
+          <div className = "profile">
+            <IconButton onClick={() => navigate('/profile')}>
+              <AccountCircleIcon className="header__icon" fontSize="large" />
+            </IconButton>     
+            <p>Your Profile 🐻</p>       
+          </div>
+          <div className="profile">
+            <IconButton onClick={() => navigate('/inbox')}>
+              <EmailIcon className="header__icon" fontSize="large" />
+            </IconButton>  
+            <p>Your Matches! 💙</p>          
+          </div>
+
         </div>
         <Link to="/">
           <img
@@ -55,9 +62,13 @@ function Header() {
             onClick={() => navigate('/')}
           />
         </Link>
-        <IconButton onClick={() => navigate('/logout')}>
-          <LogoutIcon className="header__icon" fontSize="large" />
-        </IconButton>
+        <div className="profile">
+          <p>✌️ Sign out</p>
+          <IconButton onClick={() => navigate('/logout')}>
+            <LogoutIcon className="header__icon" fontSize="large" />
+          </IconButton>          
+        </div>
+
       </div>
     </div>
   );
