@@ -102,12 +102,18 @@ function Inbox() {
               <div className={InboxMod.field}>{_email}</div>
             </div>
             <div className={InboxMod.buttonBox}>
+            <div>
               <Link to={`/profile/${id}`}>
-              <button>View Profile</button>
-              </Link>
-              <button onClick={()=>
-              removeMatch(id)
-              }>Remove Match?</button>
+              <button className={InboxMod.options}>View Profile</button>
+              </Link>              
+            </div>
+            <div>
+                <button className={InboxMod.options} onClick={()=>
+                removeMatch(id)
+                }>Remove Match</button>              
+            </div>
+
+
             </div>
 
             
