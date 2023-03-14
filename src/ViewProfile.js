@@ -4,9 +4,9 @@ import PPMod from "./ProfilePage.module.css";
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from "react-router-dom";
-import { auth, firestore } from "./firebase-setup/firebase";
+import { firestore } from "./firebase-setup/firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { doc, get, getDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 
 import Redbox from "./ProfilePageStuff/RedBox"
 import Greenbox from "./ProfilePageStuff/GreenBox"
@@ -26,13 +26,10 @@ export default function ProfilePage() {
 
     const auth = getAuth();
     const [username, setUsername] = useState("");
-    const [matches, setMatches] = useState([]);
-    const [likes, setLikes] = useState([]);
-    const [dislikes, setDislikes] = useState([]);
     const [contactInfo, setContactInfo] = useState("");
     const [availTime, setAvailTime] = useState("");
     const [login, setLogin] = useState(false);
-    const [classes, setClasses] = useState("");
+    const [classes, setClasses] = useState([]);
     const [pfp, setPfp] = useState("");
 
 
@@ -44,10 +41,7 @@ export default function ProfilePage() {
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
               setUsername(docSnap.get("username"));
-              setMatches(docSnap.get("matches") || []);
               setClasses(docSnap.get("classes"));
-              setLikes(docSnap.get("likes") || []);
-              setDislikes(docSnap.get("dislikes") || []);
               setContactInfo(docSnap.get("email"));
               setAvailTime(docSnap.get("availTime") || []);
               setPfp(docSnap.get("pfp") || "https://i.pinimg.com/originals/1a/68/f7/1a68f758cd8b75d47e480722c3ad6791.png");
@@ -102,16 +96,6 @@ export default function ProfilePage() {
         backgroundColor: 'red',
         width: '50px',
         height: '50px',
-    };
-
-    // Temp Student Data Format
-    // Extract firebase and put into this format?
-    let Student = {
-        name: 'Michael Liu',
-        pfp: "https://i.imgur.com/pkpvLJn.jpeg",
-        classes: "CS 35L, Math 33B, Physics 1C",
-        availTime: "000000111100000000011100000110001010000101011000111101101011110111100101000101110111000000010001010111101100100110101101100001011100010000011101100001010100011010000100",
-        contactInfo: "myemail@yahoo.com"  
     };
 
     if (login === true){
