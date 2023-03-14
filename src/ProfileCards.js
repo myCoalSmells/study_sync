@@ -110,6 +110,17 @@ function ProfileCards() {
     const sharedClasses = studentClasses.filter(c => classes.includes(c));
     return sharedClasses;
   }
+
+  function countMatchingHours (str1, str2) {
+    let count = 0;
+    for (let i = 0; i < Math.min(str1.length, str2.length); i++) {
+      if (str1[i] === str2[i]) {
+        count++;
+      }
+    }
+  
+    return count;
+  }
   
   return (
     <div className={PCMod.cardContainer}>
@@ -127,8 +138,9 @@ function ProfileCards() {
           >
             <div style={{ backgroundImage: `url(${getProfilePic(student)})` }} className={PCMod.card}>
               <h1 className={PCMod.classes}>{student.username}</h1>
-              <p className={PCMod.classes}>Classes: {getClasses(student).join(", ")}</p>
+              {/* <p className={PCMod.classes}>Classes: {getClasses(student).join(", ")}</p> */}
               <p className={PCMod.sharedClasses}>Shared Classes: {getSharedClasses(student).join(", ")}</p>
+              <p className={PCMod.sharedClasses}>{countMatchingHours(availTime, student.availTime)} Shared Hours</p>
             </div>
           </TinderCard>
         ))
