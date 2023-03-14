@@ -189,7 +189,7 @@ export default function EditProfile() {
 
     return(
         <div style={{margin:"10px"}}>
-            
+
             <form onSubmit={handleSubmit} className={EPMod.container}>
                 <div className={EPMod.subcontainer}>
                     <label htmlFor="pfp">Profile Picture:</label>
@@ -230,14 +230,14 @@ export default function EditProfile() {
                     <Button type="button" onClick = {() => setMyCourses([])} variant="outline-primary" style={{ width: '100px' }}>Reset</Button>
                     </div>
                     
-                    <ol>
+                    <ol style={{ marginLeft: '50px' }}>
                     {myCourses.map(course => <li key={course.name}>{course}</li>)}
                     </ol>
                 </div>
                 
                 <div className={EPMod.subcontainer}>
                     <label htmlFor="availTime">Available Times:</label>
-                    <textarea value={tempAvailTime} readOnly={true} style={{fontSize: "16px"}}/>
+                    {/* <textarea value={tempAvailTime} readOnly={true} style={{fontSize: "16px"}}/> */}
                 </div>
                 
             </form>
