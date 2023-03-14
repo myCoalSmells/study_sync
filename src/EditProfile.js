@@ -152,7 +152,7 @@ export default function EditProfile() {
     };
 
     return(
-        <div>
+        <div style={{margin:"10px"}}>
             
             <form onSubmit={handleSubmit} className={EPMod.container}>
                 <div className={EPMod.subcontainer}>
@@ -168,7 +168,8 @@ export default function EditProfile() {
                 <div className={EPMod.subcontainer}>
                     <label htmlFor="courses">Courses</label>
                     <input type="text" id="courses" placeholder={viewCourses}  onChange={(e) => setCourse(e.target.value)} />
-                    <button type="button" onClick = {() => {
+                    <div style={{display:"flex", flexDirection:"row"}}>
+                    <Button type="button" onClick = {() => {
                         if (course === "") {
                             alert("Empty course name!");
                         }
@@ -189,8 +190,10 @@ export default function EditProfile() {
 
                         setCourse('');
                         setMyCourses([...myCourses, course.replace(/\s/g, "").toUpperCase()]);}
-                    }> Add Class</button>
-                    <button type="button" onClick = {() => setMyCourses([])}>Reset</button>
+                    } variant="outline-primary" style={{ width: '100px' }}> Add Class</Button>
+                    <Button type="button" onClick = {() => setMyCourses([])} variant="outline-primary" style={{ width: '100px' }}>Reset</Button>
+                    </div>
+                    
                     <ol>
                     {myCourses.map(course => <li key={course.name}>{course}</li>)}
                     </ol>
@@ -480,12 +483,14 @@ export default function EditProfile() {
                 </div>
 
                 <div className={EPMod.subcontainer}>
-                    <button type="submit" onClick={handleSubmit}>Update Profile</button>
-                    <Link to='/profile'>
-                        <Button variant="outline-primary">
-                            Back to Profile
-                        </Button>
-                    </Link>
+                    <div style={{display:"flex", flexDirection:"Row"}}>
+                        <Button type="submit" onClick={handleSubmit} variant="outline-primary" style={{ width: '100px' }}>Update Profile</Button>
+                        <Link to='/profile'>
+                            <Button variant="outline-primary">
+                                Back to Profile
+                            </Button>
+                        </Link>
+                    </div>
                 </div>
             
         </div>
