@@ -32,6 +32,7 @@ export default function EditProfile() {
 
 
     const [name, setName] = useState("");
+    const [localName, setLocal] = useState("");
     const [contactInfo, setContactInfo] = useState(Student.contactInfo);
     const [classMatch, setClassMatch] = useState(Student.classes);
     const [availTime, setAvailTime] = useState(Student.availTime);
@@ -69,7 +70,7 @@ export default function EditProfile() {
         const docRef = doc(firestore, "students", user.uid);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-            setName(docSnap.get("username"));
+            setLocal(docSnap.get("username"));
             setPFP(docSnap.get("pfp"));
             setEmail(docSnap.get("email"));
             setTempAvailTime(docSnap.get("availTime"));
@@ -156,7 +157,7 @@ export default function EditProfile() {
                     
                     <div className={EPMod.subcontainer}>
                         <label htmlFor="name">Name:</label>
-                        <input type="text" id="name" placeholder={name} onChange={(e) => setName(e.target.value)} />
+                        <input type="text" id="name" placeholder={localName} onChange={(e) => setName(e.target.value)} />
                     </div>
 
                     <div className={EPMod.subcontainer}>

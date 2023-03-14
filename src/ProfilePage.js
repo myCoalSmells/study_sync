@@ -73,7 +73,7 @@ export default function ProfilePage() {
         
             // populate availability times for current day
             for (let j = 0; j < 7; j++) {
-            const index = i + (j * 7);
+            const index = j + (i * 7);
             availTimes.push(availTime[index]);
             }
         
