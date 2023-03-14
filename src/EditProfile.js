@@ -200,6 +200,15 @@ export default function EditProfile() {
                     <label htmlFor="availTime">Available Times:</label>
                     <textarea value={tempAvailTime} readOnly={true} style={{fontSize: "16px"}}/>
                 </div>
+                
+            </form>
+
+            {showPopup && (
+                <div className={EPMod.popup}>
+                    <p>Profile updated successfully!</p>
+                </div>
+            )}
+
                 <div className={PPMod.container}>
                     <table>
                         <thead>
@@ -470,24 +479,14 @@ export default function EditProfile() {
                     
                 </div>
 
-
                 <div className={EPMod.subcontainer}>
-                    <button type="submit">Update Profile</button>
-                    
+                    <button type="submit" onClick={handleSubmit}>Update Profile</button>
                     <Link to='/profile'>
                         <Button variant="outline-primary">
                             Back to Profile
                         </Button>
                     </Link>
                 </div>
-                
-            </form>
-
-            {showPopup && (
-                <div className={EPMod.popup}>
-                    <p>Profile updated successfully!</p>
-                </div>
-            )}
             
         </div>
     );  
