@@ -26,6 +26,6 @@
   }
 
   
-  .background{
-    /* background-color: #CAE9FF; */
-  }
+.background{
+  /* background: linear-gradient(to bottom, #CAE9FF, white); */
+}

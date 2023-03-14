@@ -113,10 +113,10 @@ function ProfileCards() {
   
   return (
     <div className={PCMod.cardContainer}>
-      <h1>Your Study Syncs!</h1>
+      <p>Your Study Syncs! 🥳</p>
       <div className={PCMod.studentCards__container}>
       {students.length === 0 ? (
-        <p>No more syncs</p>
+        <p>Just kidding, it is empty here 🧸</p>
       ) : (
         students.map(student => (
           <TinderCard
