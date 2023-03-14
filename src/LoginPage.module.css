@@ -95,3 +95,14 @@
     margin-top: 10px;
   }
   
+  .classButtons button[type="button"]{
+    background-color: #1B4965;
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-style: italic;
+    margin-bottom: 5px;
+  }

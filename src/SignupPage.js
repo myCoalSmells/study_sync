@@ -111,7 +111,18 @@ export default function SignupPage() {
                 onChange={e => setCourse(e.target.value)}
                 />
             </label>
-            <button type="button" onClick = {()=>{
+            <button  style={{
+                    backgroundColor: "#1B4965",
+                    color: "#fff",
+                    border: "none",
+                    padding: "10px 16px",
+                    borderRadius: "4px",
+                    cursor: "pointer",
+                    fontSize: "16px",
+                    fontStyle: "italic",
+                    marginBottom: "5px"
+                }}
+                className = "classButtons" type="button" onClick = {()=>{
             if (course === ""){
                 alert("Empty course name!");
                 return;
@@ -134,7 +145,24 @@ export default function SignupPage() {
             setCourse('');
             setCourses([...myCourses, {name: course.replace(/\s/g, "").toUpperCase()}]);}
             }> Add Class</button>
-            <button type="button" onClick = {() => setCourses([])}>Reset</button>
+            <button
+                type="button"
+                onClick={() => setCourses([])}
+                variant="outline-primary"
+                style={{
+                    backgroundColor: "#1B4965",
+                    color: "#fff",
+                    border: "none",
+                    padding: "10px 16px",
+                    borderRadius: "4px",
+                    cursor: "pointer",
+                    fontSize: "16px",
+                    fontStyle: "italic",
+                }}
+                >
+                Reset
+                </button>
+
             <ol>
                 {myCourses.map(course => <li key={course.name}>{course.name}</li>)}
             </ol>
