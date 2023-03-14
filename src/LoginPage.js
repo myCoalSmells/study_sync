@@ -47,6 +47,7 @@ export default function LoginPage() {
         .then((userCredential) =>{
             console.log(userCredential);
             console.log("reset password email sent");
+            alert("An email has been sent with a link to reset your password.")
             nav("/");
         })
         .catch((error) => {
