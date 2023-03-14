@@ -1,7 +1,7 @@
 .container {
     background-color: #f0f8ff;
     padding: 40px;
-    font-family: Georgia;
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
     color: blue;
     display: flex;
     flex-direction: column;
@@ -11,7 +11,8 @@
 .subcontainer {
     background-color: #f0f8ff;
     padding: 40px;
-    font-family: Georgia;
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: bold;
     display: flex;
     flex-direction: row;
     justify-content: space-between;

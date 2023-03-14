@@ -1,13 +1,52 @@
 .login {
     background-color: #f0f8ff;
     padding: 40px;
-    font-family: Georgia;
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
     font-style: italic;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 18px;
-}
+  }
+  
+  .login h1 {
+    margin: 0;
+    font-size: 40px;
+    margin-bottom: 40px;
+    font-style: normal;
+  }
+  
+  .login form {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .login label {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+  
+  .login input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  .login button[type="submit"] {
+    background-color: #1B4965;
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
 
 .container{
     background-color: #f0f8ff;
@@ -17,3 +56,38 @@
     margin: 5vh;
 }
 
+.forgot-password {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .forgot-password button[type="submit"] {
+    background-color: transparent;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+  }
+  
+  .signup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .signup h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  .signup button[type="submit"] {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+  }

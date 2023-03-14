@@ -63,7 +63,7 @@ export default function LoginPage() {
     }
     return (
         <div className={LPMod.login}>
-        <h1>Login to StudySync</h1>
+        <h1>Login to StudySync! 😎</h1>
         <form onSubmit={signIn}>
             <label>
                 <p>Email</p>
@@ -81,9 +81,12 @@ export default function LoginPage() {
                 <button type="submit">Login</button>
             </div>
             </form>
-            <form onSubmit={forgotUsernameOrPassword}>
-                <button type="submit">Forgot username or password?</button>
-            </form>
+            <div className={LPMod.forgot-password}>
+                <form onSubmit={forgotUsernameOrPassword}>
+                    <button type="submit">Forgot username or password?</button>
+                </form>               
+            </div>
+
             <div className={LPMod.login}>
                 <h1>Don't have an account?</h1>
                 <Link to="/signup">
