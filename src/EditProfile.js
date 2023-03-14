@@ -56,7 +56,7 @@ export default function EditProfile() {
 
     //popup
     const [showPopup, setShowPopup] = useState(false);
-    // const [showDeletePopup, setShowDeletePopup] = useState(false);
+    const [showDeletePopup, setShowDeletePopup] = useState(false);
 
     useEffect(() => {
         //setName(Student.name);
@@ -66,28 +66,31 @@ export default function EditProfile() {
     }, []);
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, async (user) => {
-            const docRef = doc(firestore, "students", user.uid);
-            const docSnap = await getDoc(docRef);
-            if (docSnap.exists()) {
-                setName(docSnap.get("username"));
-                setEmail(docSnap.get("email"));
-                setPFP(docSnap.get("pfp"));
-                let n = 0
-                setTempAvailTime(docSnap.get("availTime") || String(n).padStart(167, "0"));
-                console.log(tempAvailTime);
-                const mCourses = docSnap.get("classes");
-                if (mCourses.length) {
-                    setViewCourses(mCourses[0]);
-                    //const courseIds =  mCourses.map(course => course.name)
-                    setMyCourses(mCourses);
-                    console.log(mCourses);
-                } else {
-                    setViewCourses("EXAMPLE101");
-                    setMyCourses([]);
+        if (user != null) {
+            const unsubscribe = onAuthStateChanged(auth, async (user) => {
+                const docRef = doc(firestore, "students", user.uid);
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    setName(docSnap.get("username"));
+                    setEmail(docSnap.get("email"));
+                    setPFP(docSnap.get("pfp"));
+                    let n = 0
+                    setTempAvailTime(docSnap.get("availTime") || String(n).padStart(167, "0"));
+                    console.log(tempAvailTime);
+                    const mCourses = docSnap.get("classes");
+                    if (mCourses.length) {
+                        setViewCourses(mCourses[0]);
+                        //const courseIds =  mCourses.map(course => course.name)
+                        setMyCourses(mCourses);
+                        console.log(mCourses);
+                    } else {
+                        setViewCourses("EXAMPLE101");
+                        setMyCourses([]);
+                    }
                 }
-            }
-        });
+            });
+        }
+        
         return unsubscribe;
     }, []);
 
@@ -171,19 +174,27 @@ export default function EditProfile() {
         })
     }
 
+    const deleteAccountAsk = () => {
+        setShowDeletePopup(true);
+   }
+
+   const deleteAccountCancel = () => {
+       setTimeout(() => {
+           setShowDeletePopup(false);
+       }, 500);
+  }
+
     const deleteAccount = () => {
-        // setShowDeletePopup(true);
-        deleteUser(auth.currentUser)
-        .then((userCredential) =>{
-            console.log(userCredential);
+        setShowDeletePopup(false);
+        auth.currentUser.delete()
+        .then(() =>{
             console.log("user has been deleted")
             alert("Your account has been deleted.");
             Nav("/");
         })
         .catch((error) => {
             console.log(error);
-            console.log("email not sent");
-            alert("There was an error in sending an email to change your password.")
+            alert("There was an error in deleting your account.")
         })
     }
 
@@ -523,7 +534,7 @@ export default function EditProfile() {
                         <Button type="submit" onClick={handleSubmit} variant="outline-primary" style={{ width: '100px' }}>Update Profile</Button>
 
                     <button type="button" onClick = {changePassword}>Change Password</button>
-                    {/* <button type="button" onClick = {deleteAccount}>Delete Account</button> */}
+                    <button type="button" onClick = {deleteAccountAsk}>Delete Account</button>
                         <Link to='/profile'>
                             <Button variant="outline-primary">
                                 Back to Profile
@@ -532,13 +543,13 @@ export default function EditProfile() {
                     </div>
                 </div>
 
-            {/* {showDeletePopup && (
+                {showDeletePopup && (
                 <div className={EPMod.popup}>
                     <p>Are you sure you want to delete your account?</p>
-                    <button>Yes</button>
-                    <button>No</button>
+                    <button onClick={deleteAccount}>Yes</button>
+                    <button onClick={deleteAccountCancel}>No</button>
                 </div>
-            )} */}
+            )}
             
         </div>
     );  
