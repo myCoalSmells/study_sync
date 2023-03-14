@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // css modules
 import EPMod from "./EditProfile.module.css";
@@ -8,6 +8,8 @@ import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { auth, firestore } from "./firebase-setup/firebase";
+import { setPersistence, browserLocalPersistence, sendPasswordResetEmail,
+    confirmPasswordReset, deleteUser } from "firebase/auth";
 import { doc, setDoc, getDoc, updateDoc, arrayUnion, deleteField } from "firebase/firestore";
 import { updateProfile, onAuthStateChanged } from "firebase/auth";
 import { async } from '@firebase/util';
@@ -32,10 +34,12 @@ export default function EditProfile() {
 
 
     const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
     const [classMatch, setClassMatch] = useState(Student.classes);
     const [availTime, setAvailTime] = useState(Student.availTime);
     const [tempAvailTime, setTempAvailTime] = useState(Student.availTime)
     const [pfp, setPFP] = useState(Student.pfp);
+    const Nav = useNavigate();
 
     //const [name, setName] = useState('');
     //const [contactInfo, setContactInfo] = useState('');
@@ -52,6 +56,7 @@ export default function EditProfile() {
 
     //popup
     const [showPopup, setShowPopup] = useState(false);
+    // const [showDeletePopup, setShowDeletePopup] = useState(false);
 
     useEffect(() => {
         //setName(Student.name);
@@ -66,6 +71,7 @@ export default function EditProfile() {
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
                 setName(docSnap.get("username"));
+                setEmail(docSnap.get("email"));
                 setPFP(docSnap.get("pfp"));
                 let n = 0
                 setTempAvailTime(docSnap.get("availTime") || String(n).padStart(167, "0"));
@@ -150,6 +156,36 @@ export default function EditProfile() {
 
         console.log(index, green);
     };
+
+    const changePassword = () => {
+        sendPasswordResetEmail(auth, email)
+        .then((userCredential) =>{
+            console.log(userCredential);
+            alert("An email has been sent with a link to change your password.");
+
+        })
+        .catch((error) => {
+            console.log(error);
+            console.log("email not sent");
+            alert("There was an error in sending an email to change your password.")
+        })
+    }
+
+    const deleteAccount = () => {
+        // setShowDeletePopup(true);
+        deleteUser(auth.currentUser)
+        .then((userCredential) =>{
+            console.log(userCredential);
+            console.log("user has been deleted")
+            alert("Your account has been deleted.");
+            Nav("/");
+        })
+        .catch((error) => {
+            console.log(error);
+            console.log("email not sent");
+            alert("There was an error in sending an email to change your password.")
+        })
+    }
 
     return(
         <div>
@@ -473,6 +509,9 @@ export default function EditProfile() {
 
                 <div className={EPMod.subcontainer}>
                     <button type="submit">Update Profile</button>
+
+                    <button type="button" onClick = {changePassword}>Change Password</button>
+                    {/* <button type="button" onClick = {deleteAccount}>Delete Account</button> */}
                     
                     <Link to='/profile'>
                         <Button variant="outline-primary">
@@ -488,6 +527,14 @@ export default function EditProfile() {
                     <p>Profile updated successfully!</p>
                 </div>
             )}
+
+            {/* {showDeletePopup && (
+                <div className={EPMod.popup}>
+                    <p>Are you sure you want to delete your account?</p>
+                    <button>Yes</button>
+                    <button>No</button>
+                </div>
+            )} */}
             
         </div>
     );  
