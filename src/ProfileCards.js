@@ -114,7 +114,7 @@ function ProfileCards() {
   function countMatchingHours (str1, str2) {
     let count = 0;
     for (let i = 0; i < Math.min(str1.length, str2.length); i++) {
-      if (str1[i] === str2[i]) {
+      if (str1[i] === "1" && str2[i] === "1") {
         count++;
       }
     }

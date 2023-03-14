@@ -33,7 +33,7 @@ function Inbox() {
     let count = 0;
   
     for (let i = 0; i < Math.min(str1.length, str2.length); i++) {
-      if (str1[i] === str2[i]) {
+      if (str1[i] === "1" && str2[i] === "1") {
         count++;
       }
     }
@@ -130,7 +130,7 @@ function Inbox() {
               setAvailTime(docSnap.get("availTime"));
           }
         });
-        const _similarity = countMatchingDigits(_time, availTime).toString() + " hours available";
+        const _similarity = countMatchingDigits(_time, availTime).toString() + " shared hours";
 
 
         let format = (
