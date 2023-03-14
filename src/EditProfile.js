@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { auth, firestore } from "./firebase-setup/firebase";
 import { setPersistence, browserLocalPersistence, sendPasswordResetEmail,
-    confirmPasswordReset, deleteUser } from "firebase/auth";
+    confirmPasswordReset} from "firebase/auth";
 import { doc, setDoc, getDoc, updateDoc, arrayUnion, deleteField } from "firebase/firestore";
 import { updateProfile, onAuthStateChanged } from "firebase/auth";
 import { async } from '@firebase/util';
@@ -66,9 +66,10 @@ export default function EditProfile() {
     }, []);
 
     useEffect(() => {
-        if (user != null) {
+        
             const unsubscribe = onAuthStateChanged(auth, async (user) => {
-                const docRef = doc(firestore, "students", user.uid);
+                if (user != null) {
+                    const docRef = doc(firestore, "students", user.uid);
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
                     setName(docSnap.get("username"));
@@ -88,8 +89,9 @@ export default function EditProfile() {
                         setMyCourses([]);
                     }
                 }
+                }
+                
             });
-        }
         
         return unsubscribe;
     }, []);
