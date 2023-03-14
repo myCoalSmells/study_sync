@@ -109,7 +109,7 @@ export default function SignupPage() {
                 onChange={e => setCourse(e.target.value)}
                 />
             </label>
-            <button type="button" onClick = {()=>{
+            <button type="submit" onClick = {()=>{
             if (course === ""){
                 alert("Empty course name!");
                 return;
@@ -132,7 +132,7 @@ export default function SignupPage() {
             setCourse('');
             setCourses([...myCourses, {name: course.replace(/\s/g, "").toUpperCase()}]);}
             }> Add Class</button>
-            <button type="button" onClick = {() => setCourses([])}>Reset</button>
+            <button type="submit" onClick = {() => setCourses([])}>Reset</button>
             <ol>
                 {myCourses.map(course => <li key={course.name}>{course.name}</li>)}
             </ol>
