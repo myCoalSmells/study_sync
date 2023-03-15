@@ -8,12 +8,10 @@ import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { auth, firestore } from "./firebase-setup/firebase";
-import { setPersistence, browserLocalPersistence, sendPasswordResetEmail,
-    confirmPasswordReset} from "firebase/auth";
-import { doc, setDoc, getDoc, updateDoc, arrayUnion, deleteField } from "firebase/firestore";
-import { updateProfile, onAuthStateChanged } from "firebase/auth";
-import { async } from '@firebase/util';
-import { setDefaultEventParameters } from "firebase/analytics";
+import { sendPasswordResetEmail} from "firebase/auth";
+import { doc, getDoc, updateDoc, arrayUnion, deleteField } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
+
 
 
 export default function EditProfile() {
@@ -35,8 +33,6 @@ export default function EditProfile() {
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
-    const [classMatch, setClassMatch] = useState(Student.classes);
-    const [availTime, setAvailTime] = useState(Student.availTime);
     const [tempAvailTime, setTempAvailTime] = useState(Student.availTime)
     const [pfp, setPFP] = useState(Student.pfp);
     const Nav = useNavigate();
@@ -46,11 +42,6 @@ export default function EditProfile() {
     
     const [course, setCourse] = useState('');
     const [myCourses, setMyCourses] = useState([]);
-    //const [availTime, setAvailTime] = useState('');
-    //const [pfp, setPFP] = useState('');
-    const [likes, setLikes] = useState([]);
-    const [dislikes,setDislikes] = useState([]);
-    const [matches, setMatches] = useState([]);
     let [viewCourses, setViewCourses] = useState("");
     //let [students, setStudents] = useState([]);
 
@@ -191,7 +182,7 @@ export default function EditProfile() {
 
                 <div className={EPMod.subcontainer}>
                     <label htmlFor="courses">Courses</label>
-                    <input type="text" id="courses" placeholder={viewCourses}  onChange={(e) => setCourse(e.target.value)} />
+                    <input type="text" id="courses" placeholder={viewCourses} value={course} onChange={(e) => setCourse(e.target.value)} />
                     <div style={{display:"flex", flexDirection:"Row", justifyContent:"center", padding:"10px"}}>
                     <Button type="button" onClick = {() => {
                             if (course === "" || course.length === 0) {
@@ -205,17 +196,18 @@ export default function EditProfile() {
                                 alert("five courses max!!");
                                 return;
                             }
-                            else if (myCourses.some(pair => pair.name === course.replace(/\s/g, "").toUpperCase() )){
+                            else if (myCourses.includes(course.replace(/\s/g, "").toUpperCase() )){
                                 //if the value is in the array already
+                                console.log("course already in array");
                                 setCourse('');
                                 return;
                             }
                             else{
                                 console.log(myCourses);
-
-                                setCourse('');
-                                console.log(typeof(course));
+                                console.log(course);
                                 console.log(course.length);
+                                console.log(course.replace(/\s/g, "").toUpperCase());
+                                console.log(myCourses[0]);
                                 setMyCourses([...myCourses, course.replace(/\s/g, "").toUpperCase()]);
 
                             }

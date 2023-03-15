@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import LPMod from "./LoginPage.module.css";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { collection, setDoc, doc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
+import { setDoc, doc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
 import { auth, firestore } from "./firebase-setup/firebase"
 
 import { useNavigate } from 'react-router-dom';
-import { async } from '@firebase/util';
-import { type } from '@testing-library/user-event/dist/type';
 
 
 
