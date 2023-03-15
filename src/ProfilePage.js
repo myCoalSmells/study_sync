@@ -104,74 +104,57 @@ export default function ProfilePage() {
         contactInfo: "myemail@yahoo.com"  
     };
 
-    if (login === true){
-        return(
-            <div className={PPMod.container}>
-                <div className={PPMod.subcontainer}>
-                <div style={{
-                    width: '125px',
-                    height: '125px',
-                    borderRadius: '50%',
-                    border: '2px solid #104bcb',
-                    overflow: 'hidden'
-                    }}>
-                    <img src={pfp} alt="profile picture" style={{ width: '100%', height: '100%' }} />
-                </div>
-    
-                    {/* insert pfp here */}
-                    <h1 className={PPMod.title}>
-                        {username}'s Profile
-                    </h1>
-                    <Link to='/editprofile'>
-                        <Button className={PPMod.editP} variant="outline-primary">
-                            Edit Profile
-                        </Button>
-                    </Link>
-                </div>
-                <p>
-                    Classes: {classes.join(", ")}
-                </p>
-                <p>
-                    Contact: {contactInfo}
-                </p>
-                <p>
-                    Schedule: 
-                </p>
-                <div className={PPMod.container}>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th className={PPMod.text}>Time</th>
-                                <th className={PPMod.text}>Sun</th>
-                                <th className={PPMod.text}>Mon</th>
-                                <th className={PPMod.text}>Tue</th>
-                                <th className={PPMod.text}>Wed</th>
-                                <th className={PPMod.text}>Thu</th>
-                                <th className={PPMod.text}>Fri</th>
-                                <th className={PPMod.text}>Sat</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {generateTableRows()}
-                        </tbody>
-                    </table>
-                </div>
+    return(
+        <div className={PPMod.container}>
+            <div className={PPMod.subcontainer}>
+            <div style={{
+                width: '125px',
+                height: '125px',
+                borderRadius: '50%',
+                border: '2px solid #104bcb',
+                overflow: 'hidden'
+                }}>
+                <img src={pfp} alt="profile picture" style={{ width: '100%', height: '100%' }} />
             </div>
-        );
-    } else {
-        return(
-            <div className={PPMod.container}>
-                <div className={PPMod.subcontainer}>
-                    <h1 className={PPMod.title}>
-                        Sign up or log in to view your profile.
-                    </h1>
-                    <Link to='/login'>
-                        <Button variant="outline-primary">
-                            Log in
-                        </Button>
-                    </Link>
-                </div>
+
+                {/* insert pfp here */}
+                <h1 className={PPMod.title}>
+                    {username}'s Profile
+                </h1>
+                <Link to='/editprofile'>
+                    <Button className={PPMod.editP} variant="outline-primary">
+                        Edit Profile
+                    </Button>
+                </Link>
             </div>
-        )
-    }
+            <p>
+                Classes: {login ? classes.join(", ") : Nav('/login')}
+            </p>
+            <p>
+                Contact: {contactInfo}
+            </p>
+            <p>
+                Schedule: 
+            </p>
+            <div className={PPMod.container}>
+                <table>
+                    <thead>
+                        <tr>
+                            <th className={PPMod.text}>Time</th>
+                            <th className={PPMod.text}>Sun</th>
+                            <th className={PPMod.text}>Mon</th>
+                            <th className={PPMod.text}>Tue</th>
+                            <th className={PPMod.text}>Wed</th>
+                            <th className={PPMod.text}>Thu</th>
+                            <th className={PPMod.text}>Fri</th>
+                            <th className={PPMod.text}>Sat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {generateTableRows()}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    );
 }
