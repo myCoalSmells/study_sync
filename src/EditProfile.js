@@ -181,7 +181,7 @@ export default function EditProfile() {
                 </div>
 
                 <div className={EPMod.subcontainer}>
-                    <label htmlFor="courses">Courses</label>
+                    <label htmlFor="courses">Courses:</label>
                     <input type="text" id="courses" placeholder={viewCourses} value={course} onChange={(e) => setCourse(e.target.value)} />
                     <div style={{display:"flex", flexDirection:"Row", justifyContent:"center", padding:"10px"}}>
                     <Button type="button" onClick = {() => {
