@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import PPMod from "./ProfilePage.module.css";
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import { auth, firestore } from "./firebase-setup/firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { doc, get, getDoc } from "firebase/firestore";
@@ -11,9 +11,8 @@ import { useEffect } from "react";
 
 import Redbox from "./ProfilePageStuff/RedBox"
 import Greenbox from "./ProfilePageStuff/GreenBox"
+import { Nav } from "react-bootstrap";
 // import { black } from "colorette";
-
-
 
 export default function ProfilePage() {
 
@@ -24,14 +23,12 @@ export default function ProfilePage() {
     */
     const auth = getAuth();
     const [username, setUsername] = useState("");
-    const [matches, setMatches] = useState([]);
-    const [likes, setLikes] = useState([]);
-    const [dislikes, setDislikes] = useState([]);
     const [contactInfo, setContactInfo] = useState("");
     const [availTime, setAvailTime] = useState("");
     const [login, setLogin] = useState(false);
     const [classes, setClasses] = useState("");
     const [pfp, setPfp] = useState("");
+    const Nav = useNavigate();
 
 
     useEffect(() => {
@@ -42,19 +39,18 @@ export default function ProfilePage() {
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
               setUsername(docSnap.get("username"));
-              setMatches(docSnap.get("matches") || []);
               setClasses(docSnap.get("classes"));
-              setLikes(docSnap.get("likes") || []);
-              setDislikes(docSnap.get("dislikes") || []);
               setContactInfo(docSnap.get("email"));
               setAvailTime(docSnap.get("availTime") || []);
               setPfp(docSnap.get("pfp") || "https://i.pinimg.com/originals/1a/68/f7/1a68f758cd8b75d47e480722c3ad6791.png");
               setLogin(true);
             } else {
               console.log("Document could not be found.");
+              Nav('/login');
             }
           } else {
             console.log("No one is logged in.");
+            Nav('/login');
           }
         });
       
@@ -121,7 +117,7 @@ export default function ProfilePage() {
                     }}>
                     <img src={pfp} alt="profile picture" style={{ width: '100%', height: '100%' }} />
                 </div>
-
+    
                     {/* insert pfp here */}
                     <h1 className={PPMod.title}>
                         {username}'s Profile
@@ -131,7 +127,6 @@ export default function ProfilePage() {
                             Edit Profile
                         </Button>
                     </Link>
-    
                 </div>
                 <p>
                     Classes: {classes.join(", ")}
