@@ -51,19 +51,19 @@ Viewing your matches:
 
 # Next Steps
 1. Implement some form of checking for when the classes are selected, such as choosing classes from a dropdown list instead of having to enter them manually. It could work like [subject][code]
-1a. The way that we would do this is by consulting the UCLA official course catalog and adding all the subjects to one dropdown menu. The course code could then be entered manually by the user. It is difficult to get all the course codes and put them into a dropdown menu since the courses at UCLA keep changing, moreover some courses start with and end with (sometimes multiple) letters, so we cannot just enforce an integer constraint to that part of the form
+1a. The way that we would do this is by consulting the UCLA official course catalog and adding all the subjects to one dropdown menu. The course code could then be entered manually by the user. It is difficult to get all the course codes and put them into a dropdown menu since the courses at UCLA keep changing, moreover some courses start with and end with (sometimes multiple) letters, so we cannot just enforce an integer constraint to that part of the form.
 2. Currently we only show the number of hours that another user’s schedule overlaps with the logged in user’s schedule on the profile cards. Ideally we would make it so that the user could somehow be able to view the overlap in schedule between them and a potential match before they make the decision to swipe. 
 3. Could implement a more efficient schedule display, where only a certain range of times are included, rather than the full 24 hours of time slots.
 4. Implement some kind of image hosting so that users don’t have to supply a url for an image hosted elsewhere for their profile picture.
 5. Make rendering cards a lot faster by organizing our data in a more efficient manner. This way our app can be more scalable.
 matching students by major and separating classes by quarter
 6. Implement a chat/messaging feature, as right now the app does not facilitate communication between users apart from revealing to each other their emails.
-7. general schedule that spans up to a whole month or entire quarter on top of a schedule over one week, so the user doesn't have to update their information weekly.
-8. have a more efficient swiping method, add like/dislike buttons (for people who don't want to swipe)
+7. General schedule that spans up to a whole month or entire quarter on top of a schedule over one week, so the user doesn't have to update their information weekly.
+8. Have a more efficient swiping method, add like and dislike buttons (for people who don't want to swipe)
 9. Notify users if they have new or unread matches (email, or chat messaging system from earlier).
 10. Create some kind of authentication system that only allows signup for students who are associated with UCLA, along with email verification.
 11. Potentially in the future we could abstract the database to contain collections pertaining to one educational institution each (currently it is only geared towards UCLA students), which would increase the scope of the project as well as reduce computation times for that scope. 
-12/ Currently, users can sign up with any email address, as long as there is an @ inside it. We want to fix this and make sure that the emails are valid, and not fake emails.
+12. Currently, users can sign up with any email address, as long as there is an @ inside it. We want to fix this and make sure that the emails are valid, and not fake emails.
 
 
 
