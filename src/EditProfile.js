@@ -56,7 +56,6 @@ export default function EditProfile() {
 
     //popup
     const [showPopup, setShowPopup] = useState(false);
-    const [showDeletePopup, setShowDeletePopup] = useState(false);
 
     useEffect(() => {
         //setName(Student.name);
@@ -68,8 +67,7 @@ export default function EditProfile() {
     useEffect(() => {
         
             const unsubscribe = onAuthStateChanged(auth, async (user) => {
-                if (user != null) {
-                    const docRef = doc(firestore, "students", user.uid);
+                const docRef = doc(firestore, "students", user.uid);
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
                     setName(docSnap.get("username"));
@@ -88,9 +86,7 @@ export default function EditProfile() {
                         setViewCourses("EXAMPLE101");
                         setMyCourses([]);
                     }
-                }
-                }
-                
+                }                
             });
         
         return unsubscribe;
@@ -173,30 +169,6 @@ export default function EditProfile() {
             console.log(error);
             console.log("email not sent");
             alert("There was an error in sending an email to change your password.")
-        })
-    }
-
-    const deleteAccountAsk = () => {
-        setShowDeletePopup(true);
-   }
-
-   const deleteAccountCancel = () => {
-       setTimeout(() => {
-           setShowDeletePopup(false);
-       }, 500);
-  }
-
-    const deleteAccount = () => {
-        setShowDeletePopup(false);
-        auth.currentUser.delete()
-        .then(() =>{
-            console.log("user has been deleted")
-            alert("Your account has been deleted.");
-            Nav("/");
-        })
-        .catch((error) => {
-            console.log(error);
-            alert("There was an error in deleting your account.")
         })
     }
 
@@ -536,7 +508,6 @@ export default function EditProfile() {
                         <Button type="submit" onClick={handleSubmit} variant="outline-primary" style={{ width: '100px' }}>Update Profile</Button>
 
                     <button type="button" onClick = {changePassword}>Change Password</button>
-                    <button type="button" onClick = {deleteAccountAsk}>Delete Account</button>
                         <Link to='/profile'>
                             <Button variant="outline-primary">
                                 Back to Profile
@@ -544,14 +515,6 @@ export default function EditProfile() {
                         </Link>
                     </div>
                 </div>
-
-                {showDeletePopup && (
-                <div className={EPMod.popup}>
-                    <p>Are you sure you want to delete your account?</p>
-                    <button onClick={deleteAccount}>Yes</button>
-                    <button onClick={deleteAccountCancel}>No</button>
-                </div>
-            )}
             
         </div>
     );  
