@@ -176,7 +176,7 @@ export default function EditProfile() {
     }
 
     return(
-        <div style={{margin:"10px"}}>
+        <div className={PPMod.container}>
 
             <form onSubmit={handleSubmit} className={EPMod.container}>
                 <div className={EPMod.subcontainer}>
