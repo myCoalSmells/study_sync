@@ -189,7 +189,7 @@ export default function EditProfile() {
                 <div className={EPMod.subcontainer}>
                     <label htmlFor="courses">Courses</label>
                     <input type="text" id="courses" placeholder={viewCourses}  onChange={(e) => setCourse(e.target.value)} />
-                    <div style={{display:"flex", flexDirection:"row"}}>
+                    <div style={{display:"flex", flexDirection:"Row", justifyContent:"center", padding:"10px"}}>
                     <Button type="button" onClick = {() => {
                         if (course === "") {
                             alert("Empty course name!");
@@ -503,7 +503,7 @@ export default function EditProfile() {
                 </div>
 
                 <div className={EPMod.subcontainer}>
-                    <div style={{display:"flex", flexDirection:"Row"}}>
+                    <div style={{display:"flex", flexDirection:"Row", justifyContent:"center", padding:"10px"}}>
                         <div>
                             <Button type="button" onClick={handleSubmit} variant="outline-primary">Update Profile</Button>
                         </div>
