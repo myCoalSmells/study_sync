@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     margin: 20px;
+    font-family: "OpenSans","Helvetica Neue", sans-serif;
   }
   
   .subcontainer {
@@ -11,6 +12,7 @@
   }
   
   .subcontainer label {
+    font-family: "OpenSans","Helvetica Neue", sans-serif;
     font-weight: bold;
     margin-bottom: 5px;
   }
@@ -68,11 +70,17 @@
   }
 
   .green {
-    background-color: green;
+    background-color: yellow;
     height: 50px;
     width: 100px;
   }
 
   .ol{
     margin-left: 100px;
+  }
+
+  .text{
+    font-family: "OpenSans","Helvetica Neue", sans-serif;
+    font: size 10px;
+    margin-left: 50px;
   }

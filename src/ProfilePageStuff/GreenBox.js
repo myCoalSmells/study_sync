@@ -2,7 +2,7 @@ import React from 'react';
 
 function GreenBox() {
   const boxStyle = {
-    backgroundColor: '#006400',
+    backgroundColor: 'yellow',
     width: '100px',
     height: '50px',
   };

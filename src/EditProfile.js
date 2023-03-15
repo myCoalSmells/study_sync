@@ -129,7 +129,7 @@ export default function EditProfile() {
         setTimeout(() => {
             setShowPopup(false);
         }, 2300);
-
+        console.log(name, pfp, tempAvailTime, courses)
         console.log("Student profile updated!");
     };
 
@@ -211,12 +211,12 @@ export default function EditProfile() {
 
                         setCourse('');
                         setMyCourses([...myCourses, course.replace(/\s/g, "").toUpperCase()]);}
-                    } variant="outline-primary" style={{ width: '100px' }}> Add Class</Button>
+                    } variant="outline-primary"> Add Class</Button>
                     <Button type="button" onClick = {() => setMyCourses([])} variant="outline-primary" style={{ width: '100px' }}>Reset</Button>
                     </div>
                     
-                    <ol style={{ marginLeft: '50px' }}>
-                    {myCourses.map(course => <li key={course.name}>{course}</li>)}
+                    <ol className={EPMod.text}>
+                        {myCourses.map(course => <li className={EPMod.text} key={course.name}>{course}</li>)}
                     </ol>
                 </div>
                 
@@ -224,7 +224,6 @@ export default function EditProfile() {
                     <label htmlFor="availTime">Available Times:</label>
                     {/* <textarea value={tempAvailTime} readOnly={true} style={{fontSize: "16px"}}/> */}
                 </div>
-                
             </form>
 
             {showPopup && (
@@ -505,9 +504,15 @@ export default function EditProfile() {
 
                 <div className={EPMod.subcontainer}>
                     <div style={{display:"flex", flexDirection:"Row"}}>
-                        <Button type="submit" onClick={handleSubmit} variant="outline-primary" style={{ width: '100px' }}>Update Profile</Button>
+                        <div>
+                            <Button type="button" onClick={handleSubmit} variant="outline-primary">Update Profile</Button>
+                        </div>
+                        
+                        <div>
+                            <Button type="button" onClick={changePassword} variant="outline-primary">Change Password</Button>
+                        </div>
 
-                    <button type="button" onClick = {changePassword}>Change Password</button>
+
                         <Link to='/profile'>
                             <Button variant="outline-primary">
                                 Back to Profile
