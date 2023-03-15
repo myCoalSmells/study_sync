@@ -140,7 +140,7 @@ function Inbox() {
             <div className={InboxMod["left-box"]} style={{ backgroundImage: `url(${_pfp})` }}></div>
             <div className={InboxMod["center-box"]}>
               <div className={InboxMod.field}>{_name}</div>
-              <div className={InboxMod.field}>Classses:   {_classes.join(", ")}</div>
+              <div className={InboxMod.field}>Classes:   {_classes.join(", ")}</div>
               <div className={InboxMod.field}>{_email}</div>
               <div className={InboxMod.field}>{_similarity}</div>
             </div>
