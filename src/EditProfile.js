@@ -194,26 +194,32 @@ export default function EditProfile() {
                     <input type="text" id="courses" placeholder={viewCourses}  onChange={(e) => setCourse(e.target.value)} />
                     <div style={{display:"flex", flexDirection:"Row", justifyContent:"center", padding:"10px"}}>
                     <Button type="button" onClick = {() => {
-                        if (course === "") {
-                            alert("Empty course name!");
-                        }
-                        else if (!RegExp('[a-zA-Z]+\\s*[0-9]+[a-zA-Z]*').test(course)){
-                            alert("Invalid course name: should be in the form [class][code] eg. COMSCI 35L");
-                            return;
-                        }
-                        else if (myCourses.length >4){
-                            alert("five courses max!!");
-                            return;
-                        }
-                        else if (myCourses.some(pair => pair.name === course.replace(/\s/g, "").toUpperCase() )){
-                            //if the value is in the array already
-                            setCourse('');
-                            return;
-                        }
-                        console.log(myCourses);
+                            if (course === "" || course.length === 0) {
+                                alert("Empty course name!");
+                            }
+                            else if (!RegExp('[a-zA-Z]+\\s*[0-9]+[a-zA-Z]*').test(course)){
+                                alert("Invalid course name: should be in the form [class][code] eg. COMSCI 35L");
+                                return;
+                            }
+                            else if (myCourses.length >4){
+                                alert("five courses max!!");
+                                return;
+                            }
+                            else if (myCourses.some(pair => pair.name === course.replace(/\s/g, "").toUpperCase() )){
+                                //if the value is in the array already
+                                setCourse('');
+                                return;
+                            }
+                            else{
+                                console.log(myCourses);
 
-                        setCourse('');
-                        setMyCourses([...myCourses, course.replace(/\s/g, "").toUpperCase()]);}
+                                setCourse('');
+                                console.log(typeof(course));
+                                console.log(course.length);
+                                setMyCourses([...myCourses, course.replace(/\s/g, "").toUpperCase()]);
+
+                            }
+                        }
                     } variant="outline-primary"> Add Class</Button>
                     <Button type="button" onClick = {() => setMyCourses([])} variant="outline-primary" style={{ width: '100px' }}>Reset</Button>
                     </div>
