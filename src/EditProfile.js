@@ -65,9 +65,9 @@ export default function EditProfile() {
     }, []);
 
     useEffect(() => {
-        
             const unsubscribe = onAuthStateChanged(auth, async (user) => {
-                const docRef = doc(firestore, "students", user.uid);
+                if (user != null) {
+                    const docRef = doc(firestore, "students", user.uid);
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
                     setName(docSnap.get("username"));
@@ -86,7 +86,10 @@ export default function EditProfile() {
                         setViewCourses("EXAMPLE101");
                         setMyCourses([]);
                     }
-                }                
+                }
+                }
+                else
+                    Nav('/login');       
             });
         
         return unsubscribe;
