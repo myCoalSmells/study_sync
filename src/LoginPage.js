@@ -40,17 +40,16 @@ export default function LoginPage() {
         .catch((error) => {
             console.log(error);
             console.log("no sign in");
-            alert("email or password was wrong, try again")
+            alert("Email or password was wrong, try again.")
         })
         })
         .catch((error) => {
             console.log(error);
             console.log("no sign in");
-            alert("email or password was wrong, try again")
+            alert("Email or password was wrong, try again.")
         });
     }
-    const forgotUsernameOrPassword = (e) => {
-
+    const forgotPassword = (e) => {
         e.preventDefault()
         setPersistence(auth, browserLocalPersistence)
         .then(()=>
@@ -65,13 +64,13 @@ export default function LoginPage() {
         .catch((error) => {
             console.log(error);
             console.log("email not sent");
-            alert("invalid email")
+            alert("Invalid email.")
         })
         })
         .catch((error) => {
             console.log(error);
             console.log("email not sent");
-            alert("invalid email")
+            alert("Invalid email.")
         });
     }
     return (
@@ -97,8 +96,8 @@ export default function LoginPage() {
             </div>
             </form>
             <div className={LPMod.forgot-password}>
-                <form onSubmit={forgotUsernameOrPassword}>
-                    <button type="submit">Forgot username or password?</button>
+                <form onSubmit={forgotPassword}>
+                    <button type="submit">Forgot password?</button>
                 </form>               
             </div>
 
