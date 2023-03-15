@@ -21,11 +21,12 @@ export default function SignupPage() {
     //const colRef = collection(firestore, "students");
 
     const signUp = async (e) => {
-        if (username.length === 0 || email.length === 0 || myCourses.length === 0 ||
-            password.length === 0){
-            alert("one or more empty fields");
-            return;
-        }
+        // if (username.length === 0 || email.length === 0 || myCourses.length === 0 ||
+        //     password.length === 0)
+        // {
+        //     alert("one or more empty fields");
+        //     // return;
+        // }
         e.preventDefault();
         createUserWithEmailAndPassword(auth, email, password) //create the user
         .then(async (userCredential) => {
@@ -62,7 +63,14 @@ export default function SignupPage() {
             Nav("/");
         })
         .catch((error) => {
-            alert("Invalid email and/or password");
+            if (username.length === 0 || email.length === 0 || myCourses.length === 0 ||
+                password.length === 0)
+            {
+                alert("One or more empty fields.");
+                // return;
+            }
+            else
+                alert("Invalid email and/or password.");
             console.log(error);
         });
     };
