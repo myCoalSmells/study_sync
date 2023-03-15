@@ -5,6 +5,9 @@ StudySync
 
 StudySync is a social media web application made using ReactJS, node.js, and Firebase that matches students to study groups based on their schedules. Students are matched to others based on common courses they are currently taking and they can maintain and edit their own profiles, which include their email as a form of possible contact, a profile picture, their available times during the week, and the classes they are taking. Users are able to like and dislike other users via a swipe-left/swipe-right card mechanism on the main page and also view those users' profiles. An inbox feature displays new matches for a user in card style.
 
+Other technologies used:
+react router v6, mui icons
+
 # Features:
 
 * Create an account
@@ -62,7 +65,7 @@ matching students by major and separating classes by quarter
 11. Potentially in the future we could abstract the database to contain collections pertaining to one educational institution each (currently it is only geared towards UCLA students), which would increase the scope of the project as well as reduce computation times for that scope. 
 12/ Currently, users can sign up with any email address, as long as there is an @ inside it. We want to fix this and make sure that the emails are valid, and not fake emails.
 
-# Challenges
+
 
 # Credits
 * Michael Liu- @myCoalSmells
