@@ -1,9 +1,10 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import LPMod from "./LoginPage.module.css";
 import handleSubmit from "./firebase-setup/handlesubmit";
 import { useRef } from "react";
 import { auth } from "./firebase-setup/firebase";
+import { getAuth } from "firebase/auth";
 import { signInWithEmailAndPassword, setPersistence, browserLocalPersistence, sendPasswordResetEmail,
 confirmPasswordReset } from "firebase/auth";
 
@@ -12,6 +13,17 @@ export default function LoginPage() {
     const nav = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const auth = getAuth();
+    const Nav = useNavigate();
+
+    useEffect(() => {
+          if (auth.currentUser != null) {
+            Nav('/');
+            alert('You are already logged in.');
+          } else {
+            return;
+          }
+        });
 
     const signIn = (e) => {
 
