@@ -125,7 +125,9 @@ function Inbox() {
 
         // janky bit string comparison implementation
         onAuthStateChanged(auth, async (user) => {
-          const docRef = doc(firestore, "students", user.uid);
+          if(user && user.uid){
+            const docRef = doc(firestore, "students", user.uid);
+          }
           if (docSnap.exists()) {
               setAvailTime(docSnap.get("availTime"));
           }
