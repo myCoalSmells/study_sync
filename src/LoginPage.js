@@ -64,7 +64,9 @@ export default function LoginPage() {
     }
     return (
         <div className={LPMod.login}>
-        <h1>Login to StudySync! 😎</h1>
+            <h1>
+                Login to StudySync! 😎
+            </h1>
         <form onSubmit={signIn}>
             <label>
                 <p>Email</p>

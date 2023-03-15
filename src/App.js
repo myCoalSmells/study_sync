@@ -18,6 +18,7 @@ function App() {
   return (
     <div className={APMod.App}>
       {['/', '/profile', '/inbox', '/editprofile'].includes(location.pathname) && <Header />}
+      {['/login', '/logout', '/signup'].includes(location.pathname) && <img style={{ display: "block", margin: "0 auto", width: "15%" }} src="https://i.imgur.com/IJaSEqJ.png"/>}
       <div className="app__wrapper">
         <Routes>
           <Route path="/inbox" element={<h1><Inbox /></h1>}/>
@@ -27,7 +28,6 @@ function App() {
           <Route path="/logout" element={<h1><LogoutPage /></h1>}/>
           <Route path="/signup" element={<h1><SignupPage /></h1>}/>
           <Route path="/" element={<h1><ProfileCards /></h1>}/>
-          <Route path="/test" element={<h1><Advanced /></h1>}/>
           <Route path="/editprofile" element={<h1><EditProfile /></h1>}/>
         </Routes>
       </div>
