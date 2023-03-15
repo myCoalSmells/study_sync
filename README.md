@@ -20,12 +20,12 @@ react router v6, mui icons
 * Edit profile - Ability to select a schedule by clicking on an interactive graph
 * View other users' profiles
 
-Home Screen
-![Screenshot from 2023-03-14 12-45-09](https://user-images.githubusercontent.com/104878259/225120088-f462d55e-1b7f-4d71-83d3-6de307f1feb8.png)
+Home Screen:
+<img width="903" alt="image" src="https://user-images.githubusercontent.com/63516607/225415911-e9735b7d-656c-43dc-aaf2-617fc0c40d20.png">
 Your Profile:
-![Screenshot from 2023-03-14 12-49-42](https://user-images.githubusercontent.com/104878259/225120411-507441ef-3da6-4b0d-988b-96d0d8737624.png)
+<img width="887" alt="image" src="https://user-images.githubusercontent.com/63516607/225415799-319c3fba-9b55-468f-9d6e-439a9f6ca5ab.png">
 Viewing your matches:
-![Screenshot from 2023-03-14 13-04-07](https://user-images.githubusercontent.com/104878259/225123613-f95d487e-4a57-449e-960e-ea95cbc35cf4.png)
+<img width="905" alt="image" src="https://user-images.githubusercontent.com/63516607/225415867-31bd78d5-3609-4987-adc9-d13fb122736f.png">
 
 # How to install and run StudySync:
 1. Clone the github repository to your local machine.
