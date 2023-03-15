@@ -3,7 +3,6 @@ import { db } from "./firebase";
 import React, { useEffect, useState } from "react";
 import TinderCard from 'react-tinder-card';
 import PCMod from "./ProfileCards.module.css";
-import SwipeButtons from "./SwipeButtons";
 import { auth, firestore } from "./firebase-setup/firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { get, getDoc } from "firebase/firestore";

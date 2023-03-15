@@ -10,7 +10,6 @@ import EditProfile from "./EditProfile";
 import ViewProfile from "./ViewProfile";
 import Inbox from "./Inbox";
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
-import Advanced from "./Advanced";
 
 function App() {
   const location = useLocation();
