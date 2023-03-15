@@ -1,8 +1,8 @@
 import React from 'react';
 
-function GreenBox() {
+function YellowBox() {
   const boxStyle = {
-    backgroundColor: 'green',
+    backgroundColor: 'yellow',
     width: '100px',
     height: '50px',
   };
@@ -12,4 +12,4 @@ function GreenBox() {
   );
 }
 
-export default GreenBox;
+export default YellowBox;

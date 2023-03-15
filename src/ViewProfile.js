@@ -10,6 +10,7 @@ import Header from './Header';
 
 import Redbox from "./ProfilePageStuff/RedBox"
 import Greenbox from "./ProfilePageStuff/GreenBox"
+import Yellowbox from "./ProfilePageStuff/YellowBox"
 // import { black } from "colorette";
 
 
@@ -99,7 +100,7 @@ export default function ProfilePage() {
                 <td className={styles.text}>{day}</td>
                 {availTimes.map((time, index) => (
                     <td key={index} className={`${styles.text} ${time ? styles.highlight : ''}`}>
-                        {time === '0' ? <Redbox/> : <Greenbox/>}
+                        {time === '0' ? <Redbox/> : <Yellowbox/>}
                     </td>
                 ))}
                 <td></td>
