@@ -21,25 +21,38 @@ react router v6, mui icons
 * View other users' profiles
 
 Home Screen:
+
 <img width="903" alt="image" src="https://user-images.githubusercontent.com/63516607/225415911-e9735b7d-656c-43dc-aaf2-617fc0c40d20.png">
 Your Profile:
+
 <img width="887" alt="image" src="https://user-images.githubusercontent.com/63516607/225415799-319c3fba-9b55-468f-9d6e-439a9f6ca5ab.png">
 Viewing your matches:
+
 <img width="905" alt="image" src="https://user-images.githubusercontent.com/63516607/225415867-31bd78d5-3609-4987-adc9-d13fb122736f.png">
 
 # How to install and run StudySync:
 1. Clone the github repository to your local machine.
-` git clone https://github.com/myCoalSmells/study_sync `
+`git clone https://github.com/myCoalSmells/study_sync`
 
-2. Run ` npm install ` to install all of our dependencies.
-  If you do not have node.js installed on your machine, install it first.
+2. Install Node.js:
+If you don't already have Node.js installed on your machine, you can download it from the [Node.js website](https://nodejs.org/). Follow the installation instructions for your operating system.
+
+3. Install all of our dependencies:
+`npm install`
  
-3. Run ` npm start `.
-  This should allow you to view the app at http://localhost:3000/ in your preferred browser.
+4. Run the app:
+`npm start`
+This will launch the app in your preferred browser at `http://localhost:3000/`. You should see the StudySync login page.
 
-  If this doesn't work, you can try ` npm i react-scripts `
-  and/or ` export NODE_OPTIONS=--openssl-legacy-provider `
-  and then try ` npm start ` again.
+If the app doesn't launch successfully, you can try the following:
+
+- Install react-scripts:
+`npm i react-scripts`
+- Set the NODE_OPTIONS environment variable to use the OpenSSL legacy provider:
+`export NODE_OPTIONS=--openssl-legacy-provider`
+
+
+Then try running the app again using the `npm start` command.
 
 # How to use StudySync:
 1. If you are not yet logged into the site, http://localhost:3000/ will take you to the login page where you can log in with your account. If you do not have an account, you can sign up via the signup button located on the bottom of the page. If you have forgotten your password, first enter your email into the "Email" field on the page and then use the Forgot Password link which will send you an email with a link redirecting you to reset your password.
