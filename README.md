@@ -22,13 +22,17 @@ react router v6, mui icons
 
 Home Screen:
 
-<img width="903" alt="image" src="https://user-images.githubusercontent.com/63516607/225415911-e9735b7d-656c-43dc-aaf2-617fc0c40d20.png">
+<img width="1439" alt="image" src="https://user-images.githubusercontent.com/63516607/225502716-f0e80e17-c387-4b32-9d4d-dd6a80a9ecb2.png">
 Your Profile:
 
-<img width="887" alt="image" src="https://user-images.githubusercontent.com/63516607/225415799-319c3fba-9b55-468f-9d6e-439a9f6ca5ab.png">
+<img width="1422" alt="image" src="https://user-images.githubusercontent.com/63516607/225502840-27c2900e-6121-435e-8500-a324ae3e8c74.png">
 Viewing your matches:
 
-<img width="905" alt="image" src="https://user-images.githubusercontent.com/63516607/225415867-31bd78d5-3609-4987-adc9-d13fb122736f.png">
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/63516607/225502966-2ff8844c-c1e9-4ebb-9acb-7e4a5d6de209.png">
+Login Screen:
+
+<img width="1415" alt="image" src="https://user-images.githubusercontent.com/63516607/225502350-a6c32783-554a-4cac-bcbb-dd39381c1477.png">
+
 
 # How to install and run StudySync:
 1. Clone the github repository to your local machine.
