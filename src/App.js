@@ -17,7 +17,7 @@ function App() {
   return (
     <div className={APMod.App}>
       {['/', '/profile', '/inbox', '/editprofile'].includes(location.pathname) && <Header />}
-      {['/login', '/logout', '/signup'].includes(location.pathname) && <img style={{ display: "block", margin: "0 auto", width: "30%", padding: "10px" }} src="https://i.imgur.com/sLuugr7.png"/>}
+      {['/login', '/logout', '/signup'].includes(location.pathname) && <img style={{ display: "block", margin: "0 auto", width: "15%", padding: "30px" }} src="https://i.imgur.com/jfamYbJ.png"/>}
       <div className="app__wrapper">
         <Routes>
           <Route path="/inbox" element={<h1><Inbox /></h1>}/>

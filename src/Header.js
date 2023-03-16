@@ -57,7 +57,7 @@ function Header() {
         <Link to="/">
           <img
             className="header__logo"
-            src="https://i.imgur.com/sLuugr7.png"
+            src="https://i.imgur.com/jfamYbJ.png"
             alt="logo"
             onClick={() => navigate('/')}
           />
