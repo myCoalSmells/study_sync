@@ -1,5 +1,5 @@
-# Project Title:
-StudySync
+# StudySync
+Use our app here! https://study-sync.netlify.app/
 
 # Description of StudySync:
 
